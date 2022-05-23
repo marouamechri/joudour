@@ -1,0 +1,50 @@
+.megamenu {
+    position: static;
+}
+
+.megamenu .dropdown-menu {
+    background: none;
+    border: none;
+    width: 100%;
+}
+
+body {
+    /* background: #eaafc8;
+    background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);
+    background: linear-gradient(to right, #eaafc8, #654ea3); */
+    min-height: 100vh;
+    margin-left: 50px !important;
+    margin-right: 50px;
+}
+
+code {
+    color: #745eb1;
+    background: #fff;
+    padding: 0.1rem 0.2rem;
+    border-radius: 0.2rem;
+}
+
+.text-uppercase {
+    letter-spacing: 0.08em;
+}
+
+#caintenermegamneu {
+    width: 500px;
+}
+
+#second_nav {
+    margin-right: 20%;
+    margin-left: 20%;
+    border-top: 0.1px solid grey;
+    border-bottom: 0.1px solid grey;
+    margin-top: 2em;
+    display: flex;
+    justify-content: end;
+}
+
+
+/* footer */
+
+.container-fluid-footer {
+    width: 100%;
+}
