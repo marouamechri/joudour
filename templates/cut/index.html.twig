@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cut index{% endblock %}
+
+{% block body %}
+    <h1>Cut index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CutValue</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cut in cuts %}
+            <tr>
+                <td>{{ cut.id }}</td>
+                <td>{{ cut.cutValue }}</td>
+                <td>
+                    <a href="{{ path('app_cut_show', {'id': cut.id}) }}">show</a>
+                    <a href="{{ path('app_cut_edit', {'id': cut.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cut_new') }}">Create new</a>
+{% endblock %}

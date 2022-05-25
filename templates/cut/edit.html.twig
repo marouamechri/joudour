@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cut{% endblock %}
+
+{% block body %}
+    <h1>Edit Cut</h1>
+
+    {{ include('cut/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_cut_index') }}">back to list</a>
+
+    {{ include('cut/_delete_form.html.twig') }}
+{% endblock %}

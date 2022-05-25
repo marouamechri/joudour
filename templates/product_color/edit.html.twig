@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ProductColor{% endblock %}
+
+{% block body %}
+    <h1>Edit ProductColor</h1>
+
+    {{ include('product_color/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_product_color_index') }}">back to list</a>
+
+    {{ include('product_color/_delete_form.html.twig') }}
+{% endblock %}

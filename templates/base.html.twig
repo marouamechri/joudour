@@ -8,6 +8,7 @@
 		</title>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>  
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 		<link
 		rel="stylesheet" href="{{ asset('css/menuPrincipal.css')}}"/>
@@ -48,14 +49,18 @@
 						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</form>
+					<div class="ms-2">
+						<a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping white"></i></a>
+					</div>
 				</div>
 			</div>
 		</nav>
 		{# div logo #}
+		
 		<div class='logo text-center mb-2 mt-2'><img src="{{ asset('img/logo.png')}}" width="300"/></div>
 		{# menu principal #}
 		<nav id='second_nav' class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
-			<a href="#" class="navbar-brand font-weight-bold d-block d-lg-none">MegaMenu</a>
+			<a href="#" class="navbar-brand font-weight-bold d-block d-lg-none">JOUDOUR</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -67,74 +72,54 @@
 						<div aria-labelledby="megamneu" class="dropdown-menu border-0 p-0 m-0">
 							<div class="container" id='caintenermegamneu'>
 								<div class="row bg-white rounded-0 m-0 shadow-sm">
-									<div class="col-lg-7 col-xl-8">
+									<div class="col-lg-12 col-xl-12">
 										<div class="p-4">
 											<div class="row">
 												<div class="col-lg-6 mb-4">
-													<h6 class="font-weight-bold text-uppercase">Heading one</h6>
+													<h6 class="font-weight-bold text-uppercase">Femme</h6>
 													<ul class="list-unstyled">
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0">Home</a>
+															<a href="" class="nav-link text-small pb-0 ">Robe</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">About</a>
+															<a href="" class="nav-link text-small pb-0 ">bas</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Help</a>
+															<a href="" class="nav-link text-small pb-0 ">Hauts</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Account</a>
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
 														</li>
 													</ul>
 												</div>
 												<div class="col-lg-6 mb-4">
-													<h6 class="font-weight-bold text-uppercase">Heading two</h6>
+													<h6 class="font-weight-bold text-uppercase">Homme</h6>
 													<ul class="list-unstyled">
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Home</a>
+															<a href="" class="nav-link text-small pb-0 ">Ensembles</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">About</a>
+															<a href="" class="nav-link text-small pb-0 ">Bas</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Help</a>
+															<a href="" class="nav-link text-small pb-0 ">Haut</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Account</a>
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
 														</li>
 													</ul>
 												</div>
 												<div class="col-lg-6 mb-4">
-													<h6 class="font-weight-bold text-uppercase">Heading three</h6>
+													<h6 class="font-weight-bold text-uppercase">Enfant</h6>
 													<ul class="list-unstyled">
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Home</a>
+															<a href="" class="nav-link text-small pb-0 ">Fille</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">About</a>
+															<a href="" class="nav-link text-small pb-0 ">Garçon</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Help</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Account</a>
-														</li>
-													</ul>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<h6 class="font-weight-bold text-uppercase">Heading four</h6>
-													<ul class="list-unstyled">
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Accueil</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">About</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Help</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Account</a>
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
 														</li>
 													</ul>
 												</div>
@@ -150,74 +135,45 @@
 						<div aria-labelledby="megamneu" class="dropdown-menu border-0 p-0 m-0">
 							<div class="container" id='caintenermegamneu'>
 								<div class="row bg-white rounded-0 m-0 shadow-sm">
-									<div class="col-lg-7 col-xl-8">
+									<div class="col-lg-12 col-xl-12">
 										<div class="p-4">
 											<div class="row">
 												<div class="col-lg-6 mb-4">
-													<h6 class="font-weight-bold text-uppercase">Heading one</h6>
+													<h6 class="font-weight-bold text-uppercase">Femme</h6>
 													<ul class="list-unstyled">
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0">Home</a>
+															<a href="" class="nav-link text-small pb-0">Robe mariée</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">About</a>
+															<a href="" class="nav-link text-small pb-0 ">Robe Soirée</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Help</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Account</a>
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
 														</li>
 													</ul>
 												</div>
 												<div class="col-lg-6 mb-4">
-													<h6 class="font-weight-bold text-uppercase">Heading two</h6>
+													<h6 class="font-weight-bold text-uppercase">Homme</h6>
 													<ul class="list-unstyled">
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Home</a>
+															<a href="" class="nav-link text-small pb-0 ">Ensembles</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">About</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Help</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Account</a>
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
 														</li>
 													</ul>
 												</div>
 												<div class="col-lg-6 mb-4">
-													<h6 class="font-weight-bold text-uppercase">Heading three</h6>
+													<h6 class="font-weight-bold text-uppercase">Enfant</h6>
 													<ul class="list-unstyled">
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Home</a>
+															<a href="" class="nav-link text-small pb-0 ">Fille</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">About</a>
+															<a href="" class="nav-link text-small pb-0 ">Garçon</a>
 														</li>
 														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Help</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Account</a>
-														</li>
-													</ul>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<h6 class="font-weight-bold text-uppercase">Heading four</h6>
-													<ul class="list-unstyled">
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Accueil</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">About</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Help</a>
-														</li>
-														<li class="nav-item">
-															<a href="" class="nav-link text-small pb-0 ">Account</a>
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
 														</li>
 													</ul>
 												</div>
@@ -272,39 +228,39 @@
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-12 col-ms-12 text-center">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2627.07360639283!2d2.416745615047427!3d48.81865701145862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e672fcbc7efa2f%3A0x8ba7fc57019657ed!2s12%20Rue%20de%20Paris%2C%2094220%20Charenton-le-Pont!5e0!3m2!1sfr!2sfr!4v1653341290217!5m2!1sfr!2sfr" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2627.07360639283!2d2.416745615047427!3d48.81865701145862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e672fcbc7efa2f%3A0x8ba7fc57019657ed!2s12%20Rue%20de%20Paris%2C%2094220%20Charenton-le-Pont!5e0!3m2!1sfr!2sfr!4v1653341290217!5m2!1sfr!2sfr" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 					</div>
-				
-			{# reseaux sociaux #}
-			<div class="container-fluide text-center">
-				<ul class="wrapper">
-					<li class="icon facebook">
-						<span class="tooltip">Facebook</span>
-						<span>
-							<i class="fab fa-facebook-f"></i>
-						</span>
-					</li>
-					<li class="icon twitter">
-						<span class="tooltip">Twitter</span>
-						<span>
-							<i class="fab fa-twitter"></i>
-						</span>
-					</li>
-					<li class="icon instagram">
-						<span class="tooltip">Instagram</span>
-						<span>
-							<i class="fab fa-instagram"></i>
-						</span>
-					</li>
-					<li class="icon youtube">
-						<span class="tooltip">Youtube</span>
-						<span>
-							<i class="fab fa-youtube"></i>
-						</span>
-					</li>
-				</ul>
-			</div>
-            </div>
+
+					{# reseaux sociaux #}
+					<div class="container-fluide text-center">
+						<ul class="wrapper">
+							<li class="icon facebook">
+								<span class="tooltip">Facebook</span>
+								<span>
+									<i class="fab fa-facebook-f"></i>
+								</span>
+							</li>
+							<li class="icon twitter">
+								<span class="tooltip">Twitter</span>
+								<span>
+									<i class="fab fa-twitter"></i>
+								</span>
+							</li>
+							<li class="icon instagram">
+								<span class="tooltip">Instagram</span>
+								<span>
+									<i class="fab fa-instagram"></i>
+								</span>
+							</li>
+							<li class="icon youtube">
+								<span class="tooltip">Youtube</span>
+								<span>
+									<i class="fab fa-youtube"></i>
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</footer>
 		{% block javascripts %}

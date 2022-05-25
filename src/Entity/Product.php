@@ -43,6 +43,9 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductColor::class)]
     private $productColors;
 
+    #[ORM\Column(type: 'string', length: 15)]
+    private $firstImage;
+
     public function __construct()
     {
         $this->productColors = new ArrayCollection();
@@ -175,6 +178,18 @@ class Product
                 $productColor->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFirstImage(): ?string
+    {
+        return $this->firstImage;
+    }
+
+    public function setFirstImage(string $firstImage): self
+    {
+        $this->firstImage = $firstImage;
 
         return $this;
     }
