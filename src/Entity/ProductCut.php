@@ -27,13 +27,15 @@ class ProductCut
     #[ORM\JoinColumn(nullable: false)]
     private $cut;
 
-    #[ORM\OneToMany(mappedBy: 'ProductCut', targetEntity: HistoriquePrices::class)]
+    #[ORM\OneToMany(mappedBy: 'productCut', targetEntity: HistoriquePrices::class, orphanRemoval: true)]
     private $historiquePrices;
 
     public function __construct()
     {
         $this->historiquePrices = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -105,4 +107,6 @@ class ProductCut
 
         return $this;
     }
+    
+    
 }

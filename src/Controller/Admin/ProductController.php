@@ -30,7 +30,32 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $image =$form->get('picture')->getData();
+            $image = $form->get('picture')->getData();
+            if ($image) {
+                //on génère un nouveau non du fichier 
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+              
+                //on copie le fichier dans le dossier img/upload
+                $image->move(
+                    $this->getParameter('images_directory_product'),
+                    $fichier
+                );
+                //on stocke le nom de l'image dans BDD
+                $product->setFirstImage($fichier);
+            }
+            if($product->getId())
+            {
+               
+                $product->setModifiedAt(new \DateTime());
+            }else{
+                 $product->setCreatedAt(new \DateTime());
+            }
+
+            
+            
+            //on recuper le checkbox valided
+            //$checked = $form->get('actionProduit')->getData();
+
             $productRepository->add($product, true);
 
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
@@ -71,7 +96,7 @@ class ProductController extends AbstractController
     #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
             $productRepository->remove($product, true);
         }
 

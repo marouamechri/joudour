@@ -3,41 +3,42 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
-    <h1>Product index</h1>
+    <h1>Liste des produits</h1>
 
-    <table class="table">
+    <table  class="table table-striped text-center">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>NameProduct</th>
-                <th>DescriptionProduct</th>
-                <th>AmountHTVA</th>
-                <th>CreatedAt</th>
-                <th>ModifiedAt</th>
-                <th>Lease</th>
-                <th>Sale</th>
-                <th>actions</th>
+                <th scope="col">nom</th>
+                <th scope="col">prix HTVA</th>
+                <th scope="col">Créer</th>
+                <th scope="col">Modifier </th>
+                <th scope="col">Action</th>
+                <th scope="col">photo</th>
+                <th scope="col">Active</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
         {% for product in products %}
             <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.nameProduct }}</td>
-                <td>{{ product.descriptionProduct }}</td>
+                <td scope="row">{{ product.nameProduct }}</td>
                 <td>{{ product.amountHTVA }}</td>
                 <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ product.modifiedAt ? product.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ product.lease ? 'Yes' : 'No' }}</td>
-                <td>{{ product.sale ? 'Yes' : 'No' }}</td>
+                <td>{{ product.action }}</td> 
+                <td><img  class="imgCol" src="{{asset('/upload/images/product/' ~ product.firstImage)}}"><td>
+                <td>{{ product.active }}</td>
                 <td>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+
+                    <td><a href="{{ path('app_product_show', {'id': product.id}) }}">Consulter</a></td>
+                    <td><a href="{{ path('app_product_edit', {'id': product.id}) }}">Modifier</a></td>
+                    <td><a href="{{ path('app_product_color_new', {'id': product.id}) }}">ajouter produits associés</a></td>
                 </td>
+               
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">il n'y a pas des produits disponible</td>
             </tr>
         {% endfor %}
         </tbody>

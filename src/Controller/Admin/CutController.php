@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/cut')]
+#[Route('/admin/cut')]
 class CutController extends AbstractController
 {
     #[Route('/', name: 'app_cut_index', methods: ['GET'])]

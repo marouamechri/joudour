@@ -1,33 +1,68 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
-{% block title %}ProductColor index{% endblock %}
+{% block title %}Ajout coleur
+{% endblock %}
 
 {% block body %}
-    <h1>ProductColor index</h1>
+	<h1>Gestion de Produit Assossiée</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product_color in product_colors %}
-            <tr>
-                <td>{{ product_color.id }}</td>
-                <td>
-                    <a href="{{ path('app_product_color_show', {'id': product_color.id}) }}">show</a>
-                    <a href="{{ path('app_product_color_edit', {'id': product_color.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="2">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table table-striped text-center">
+		<thead>
+			<tr>
+				<th>Produis</th>
+				<th>Photo</th>
+				<th scope="col">actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+			{% for product in products %}
+				<tr>
+					<td>{{ product.nameProduct}}</td>
+					 <td><img  class="imgCol" src="{{asset('/upload/images/product/' ~ product.firstImage)}}"><td>
+					<td>{{product.id}}</td>
+                    <td colspan="3"><a href="{{ path('app_product_color_new', {'id': product.id}) }}">ajouter produit couleur</a></td>
+					<td><a href="{{ path('app_product_show', {'id': product.id}) }}">Fiche Produit</a></td>
 
-    <a href="{{ path('app_product_color_new') }}">Create new</a>
+					{% for  color in product.productColors %}
+						<tr>
+							<td style="background-color:{{ color}}"></td>
+							<td>{{color.id}}</td>
+							<td>
+								<a href="{{ path('app_product_color_edit', {'id': color.id}) }}">Modifier</a>
+							</td>
+							<td>
+								{{ include('product_color/_delete_form.html.twig') }}
+							</td>
+                            <td>
+								<a href="{{ path('app_product_cut_new', {'id': color.id}) }}">Ajouter taille Assossiée</a>
+							</td>
+						</tr>
+						{% for productcut in color.productCuts %}
+							<tr>
+								<td>{{productcut.cut.cutValue}}</td>
+								<td>{{productcut.cut.id}}</td>
+								<td><a href="{{ path('app_product_cut_edit', {'id':productcut.cut.id}) }}">Modifier</td>
+								<td> {{ include('product_cut/_delete_form.html.twig') }}</td>
+								<td><a href="{{ path('app_historique_prices_new', {'id': productcut.id}) }}">Ajouter une promotion</a></td>
+								{% for histoPrices in productcut.historiquePrices %}
+									<tr>
+										<td>{{histoPrices ? histoPrices|date('Y-m-d H:i:s') : ''}}</td>
+									</tr>	
+								{% endfor %}
+							</tr>
+						{% endfor %}
+
+					{% endfor %}
+				</tr>
+				{# {% endfor %} #}
+			{% else %}
+				<tr>
+					<td colspan="5">Liste des couleur est vide</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{# <a href="{{ path('app_product_color_new', {'id': product_color.product}) }}">Ajouter un nouveau couleur</a> #}
 {% endblock %}

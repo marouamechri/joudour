@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Color;
+use App\Entity\Colors;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,10 +18,10 @@ class ColorRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Color::class);
+        parent::__construct($registry, Colors::class);
     }
 
-    public function add(Color $entity, bool $flush = false): void
+    public function add(Colors $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ColorRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Color $entity, bool $flush = false): void
+    public function remove(Colors $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 

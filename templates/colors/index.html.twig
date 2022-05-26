@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Color index{% endblock %}
 
@@ -8,30 +8,27 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>RefColor</th>
-                <th>NameColor</th>
+                <th>Couleur</th>
+                <th>Nom</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for color in colors %}
             <tr>
-                <td>{{ color.id }}</td>
-                <td>{{ color.refColor }}</td>
+                <td style="background-color:{{ color.refColor }}"></td>
                 <td>{{ color.nameColor }}</td>
                 <td>
-                    <a href="{{ path('app_color_show', {'id': color.id}) }}">show</a>
-                    <a href="{{ path('app_color_edit', {'id': color.id}) }}">edit</a>
+                     <a href="{{ path('app_color_edit', {'id': color.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">liste des couleurs est vide</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_color_new') }}">Create new</a>
+    <a href="{{ path('app_color_new') }}">Ajouter un couleur</a>
 {% endblock %}

@@ -8,20 +8,20 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ColorRepository::class)]
-class Color
+class Colors
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 7)]
+    #[ORM\Column(type: 'string', length: 20)]
     private $refColor;
 
     #[ORM\Column(type: 'string', length: 20)]
     private $nameColor;
 
-    #[ORM\OneToMany(mappedBy: 'color', targetEntity: ProductColor::class)]
+    #[ORM\OneToMany(mappedBy: 'color', targetEntity: ProductColor::class, orphanRemoval:true)]
     private $productColors;
 
     public function __construct()
@@ -87,4 +87,11 @@ class Color
 
         return $this;
     }
+    public function __toString()
+    {
+        return '';
+        
+    }
+    
+    
 }

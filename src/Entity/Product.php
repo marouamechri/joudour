@@ -30,11 +30,9 @@ class Product
     #[ORM\Column(type: 'datetime')]
     private $modifiedAt;
 
-    #[ORM\Column(type: 'boolean')]
-    private $lease;
+    #[ORM\Column(type: 'string')]
+    private $action;
 
-    #[ORM\Column(type: 'boolean')]
-    private $sale;
 
     #[ORM\ManyToOne(targetEntity: Option::class, inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
@@ -43,8 +41,11 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductColor::class)]
     private $productColors;
 
-    #[ORM\Column(type: 'string', length: 15)]
+    #[ORM\Column(type: 'string', length: 40)]
     private $firstImage;
+
+    #[ORM\Column(type: 'boolean')]
+    private $active;
 
     public function __construct()
     {
@@ -116,29 +117,18 @@ class Product
         return $this;
     }
 
-    public function isLease(): ?bool
+    public function getAction(): ?string
     {
-        return $this->lease;
+        return $this->action;
     }
 
-    public function setLease(bool $lease): self
+    public function setAction(string $action): self
     {
-        $this->lease = $lease;
+        $this->action = $action;
 
         return $this;
     }
 
-    public function isSale(): ?bool
-    {
-        return $this->sale;
-    }
-
-    public function setSale(bool $sale): self
-    {
-        $this->sale = $sale;
-
-        return $this;
-    }
 
     public function getTypeProduct(): ?Option
     {
@@ -190,6 +180,18 @@ class Product
     public function setFirstImage(string $firstImage): self
     {
         $this->firstImage = $firstImage;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

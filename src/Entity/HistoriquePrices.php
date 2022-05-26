@@ -19,22 +19,18 @@ class HistoriquePrices
     #[ORM\Column(type: 'float')]
     private $amountHTVA;
 
+    #[ORM\ManyToOne(targetEntity: ProductCut::class, inversedBy: 'historiquePrices')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $productCut;
+
+    #[ORM\Column(type: 'datetime')]
+    private $endDatePricesSaleHTVA;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEndDatePricesSaleHTVA(): ?\DateTimeInterface
-    {
-        return $this->endDatePricesSaleHTVA;
-    }
-
-    public function setEndDatePricesSaleHTVA(\DateTimeInterface $endDatePricesSaleHTVA): self
-    {
-        $this->endDatePricesSaleHTVA = $endDatePricesSaleHTVA;
-
-        return $this;
-    }
 
     public function getAmountHTVA(): ?float
     {
@@ -66,5 +62,33 @@ class HistoriquePrices
         $this->startDatePricesSaleHTVA = $startDatePricesSaleHTVA;
 
         return $this;
+    }
+
+    public function getProductCut(): ?ProductCut
+    {
+        return $this->productCut;
+    }
+
+    public function setProductCut(?ProductCut $productCut): self
+    {
+        $this->productCut = $productCut;
+
+        return $this;
+    }
+
+    public function getEndDatePricesSaleHTVA(): ?\DateTimeInterface
+    {
+        return $this->endDatePricesSaleHTVA;
+    }
+
+    public function setEndDatePricesSaleHTVA(\DateTimeInterface $endDatePricesSaleHTVA): self
+    {
+        $this->endDatePricesSaleHTVA = $endDatePricesSaleHTVA;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->id;
     }
 }

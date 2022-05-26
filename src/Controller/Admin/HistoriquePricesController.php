@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/historique/prices')]
+#[Route('/admin/product/cut/historique/')]
 class HistoriquePricesController extends AbstractController
 {
     #[Route('/', name: 'app_historique_prices_index', methods: ['GET'])]
@@ -31,7 +31,7 @@ class HistoriquePricesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $historiquePricesRepository->add($historiquePrice, true);
 
-            return $this->redirectToRoute('app_historique_prices_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('historique_prices/new.html.twig', [

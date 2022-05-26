@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
-{% block title %}New ProductColor{% endblock %}
+{% block title %}Ajout couleur de produit{% endblock %}
 
 {% block body %}
-    <h1>Create new ProductColor</h1>
+    <h1>Ajouter un couleur assossiée</h1>
 
     {{ include('product_color/_form.html.twig') }}
 
-    <a href="{{ path('app_product_color_index') }}">back to list</a>
+    <a href="{{ path('app_product_color_index') }}">Retour à la Liste</a>
 {% endblock %}

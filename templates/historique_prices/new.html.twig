@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}New HistoriquePrices{% endblock %}
 
@@ -7,5 +7,5 @@
 
     {{ include('historique_prices/_form.html.twig') }}
 
-    <a href="{{ path('app_historique_prices_index') }}">back to list</a>
+    <a href="{{ path('app_historique_prices_index') }}">Retour à la liste</a>
 {% endblock %}

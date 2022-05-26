@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Color{% endblock %}
 
@@ -26,5 +26,5 @@
 
     <a href="{{ path('app_color_edit', {'id': color.id}) }}">edit</a>
 
-    {{ include('color/_delete_form.html.twig') }}
+    {{ include('colors/_delete_form.html.twig') }}
 {% endblock %}

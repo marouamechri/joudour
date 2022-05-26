@@ -15,18 +15,18 @@ class ProductColor
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: Color::class, inversedBy: 'productColors')]
+    #[ORM\ManyToOne(targetEntity: Colors::class, inversedBy: 'productColors',cascade:['persist','remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private $color;
 
-    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'productColors')]
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'productColors',cascade:['persist','remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private $product;
 
-    #[ORM\OneToMany(mappedBy: 'productColor', targetEntity: Picture::class)]
+    #[ORM\OneToMany(mappedBy: 'productColor', targetEntity: Picture::class, cascade:['persist','remove'])]
     private $pictures;
 
-    #[ORM\OneToMany(mappedBy: 'productColor', targetEntity: ProductCut::class)]
+    #[ORM\OneToMany(mappedBy: 'productColor', targetEntity: ProductCut::class, cascade:['persist','remove'])]
     private $productCuts;
 
     public function __construct()
@@ -40,12 +40,12 @@ class ProductColor
         return $this->id;
     }
 
-    public function getColor(): ?Color
+    public function getColor(): ?Colors
     {
         return $this->color;
     }
 
-    public function setColor(?Color $color): self
+    public function setColor(?Colors $color): self
     {
         $this->color = $color;
 
@@ -123,4 +123,9 @@ class ProductColor
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->color->getRefColor();
+    }
+    
 }

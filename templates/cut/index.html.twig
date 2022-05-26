@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Cut index{% endblock %}
+{% block title %}Taille{% endblock %}
 
 {% block body %}
-    <h1>Cut index</h1>
+    <h1>Liste des tailles</h1>
 
     <table class="table">
         <thead>
@@ -19,17 +19,17 @@
                 <td>{{ cut.id }}</td>
                 <td>{{ cut.cutValue }}</td>
                 <td>
-                    <a href="{{ path('app_cut_show', {'id': cut.id}) }}">show</a>
-                    <a href="{{ path('app_cut_edit', {'id': cut.id}) }}">edit</a>
+                    <a href="{{ path('app_cut_edit', {'id': cut.id}) }}">Modifier</a>
+                    {{ include('cut/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Liste des tailles est vide</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_cut_new') }}">Create new</a>
+    <a href="{{ path('app_cut_new') }}">Ajouter une taille</a>
 {% endblock %}
