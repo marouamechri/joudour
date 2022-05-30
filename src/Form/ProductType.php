@@ -29,6 +29,16 @@ class ProductType extends AbstractType
                 'label'=>'description de l\'article: ',
                 'required'=>false
             ])
+            ->add('genre',  ChoiceType::class,[
+                'choices' => [
+                    'Femme' => 'Femme',
+                    'Homme' => 'Homme',
+                    'Enfant'=>'Enfant'                 
+                ],
+                'expanded' => true,
+                'multiple' => false,
+                'label'=> 'Genre:'
+            ])
             ->add('amountHTVA', MoneyType::class ,[
                 'label'=>'montant HTVA: ',
                 'required'=>false
@@ -50,6 +60,9 @@ class ProductType extends AbstractType
             ->add('active', CheckboxType::class, [
                 'label'=>'Active'
             ])
+            ->add('newColletion', CheckboxType::class, [
+                'label'=>'Nouvelle collection?'
+            ])
             ->add('typeProduct', EntityType::class, [
                 'class'=> Option::class,
                 'choice_label'=>'nameOption',
@@ -58,6 +71,7 @@ class ProductType extends AbstractType
                 'required'=>false,
                 'label'=>'Type produit'
             ])
+            
         ;
     }
 

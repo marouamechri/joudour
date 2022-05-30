@@ -21,7 +21,7 @@ class Colors
     #[ORM\Column(type: 'string', length: 20)]
     private $nameColor;
 
-    #[ORM\OneToMany(mappedBy: 'color', targetEntity: ProductColor::class, orphanRemoval:true)]
+    #[ORM\OneToMany(mappedBy: 'color', targetEntity: ProductColor::class, orphanRemoval:true, cascade:['remove'])]
     private $productColors;
 
     public function __construct()

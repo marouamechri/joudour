@@ -22,7 +22,7 @@ class Stock
     #[ORM\Column(type: 'integer')]
     private $nbrProduct;
 
-    #[ORM\OneToOne(mappedBy: 'stock', targetEntity: ProductCut::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'stock', targetEntity: ProductCut::class)]
     private $productCut;
 
     public function getId(): ?int
@@ -81,5 +81,9 @@ class Stock
         $this->productCut = $productCut;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return '';
     }
 }

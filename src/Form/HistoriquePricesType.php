@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class HistoriquePricesType extends AbstractType
@@ -16,7 +17,6 @@ class HistoriquePricesType extends AbstractType
         $builder
         ->add('startDatePricesSaleHTVA', DateTimeType::class, [
             'label'=>'Date début de validiter de prix',
-            'mapped'=>false,
             'placeholder' => [
                 'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
                 'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Seconde',
@@ -24,7 +24,6 @@ class HistoriquePricesType extends AbstractType
         ])
         ->add('endDatePricesSaleHTVA', DateTimeType::class, [
             'label'=>'Date fin de validiter de prix',
-            'mapped'=>false,
             'placeholder' => [
                 'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
                 'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Seconde',
@@ -33,9 +32,11 @@ class HistoriquePricesType extends AbstractType
 
         ->add('amountHTVA', MoneyType::class, [
             'label' => 'le prix de vente',
-            'mapped'=>false
-        ]);;
-        ;
+        ])
+        ->add('active', CheckboxType::class, [
+            'label'=>'Etat de prix',
+           
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

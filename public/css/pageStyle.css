@@ -1,0 +1,80 @@
+    .list-swatches {
+        display: inline-block;
+        font-size: 0;
+        letter-spacing: 0;
+        list-style: none;
+        height: 12px;
+        padding: 0;
+    }
+    
+    .list-swatches .swatch {
+        border-radius: 50%;
+        display: block;
+        height: 8px;
+        overflow: hidden;
+        text-indent: -9999px;
+        width: 8px;
+    }
+    
+    .joum-product-item a,
+    a {
+        text-decoration: none;
+    }
+    
+    .joum-product-item a,
+    .link {
+        color: inherit;
+        cursor: pointer;
+        text-decoration: none;
+        text-transform: none;
+    }
+    
+    .list-swatches .item {
+        display: inline-block;
+        margin: 0 4px 0 0;
+    }
+    
+    .joum-product-item li {
+        text-align: -webkit-match-parent;
+    }
+    
+    strong {
+        font-weight: bold;
+    }
+    
+    .joum-product-item .item-details {
+        box-sizing: border-box;
+        position: relative;
+        text-align: left;
+        z-index: 1;
+    }
+    
+    .joum-product-item .item-price .price {
+        display: inline;
+        font-weight: normal;
+        font-size: 13px;
+        letter-spacing: 0px;
+        line-height: 20px;
+        text-overflow: ellipsis;
+        text-transform: none;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    
+    .joum-product-item .item-image {
+        height: auto;
+        position: relative;
+        /* width: 100%; */
+        border: 0;
+    }
+    
+    img {
+        max-width: 100%;
+    }
+    
+    .joum-product-item {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }

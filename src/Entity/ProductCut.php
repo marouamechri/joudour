@@ -19,7 +19,7 @@ class ProductCut
     #[ORM\JoinColumn(nullable: false)]
     private $productColor;
 
-    #[ORM\OneToOne(inversedBy: 'productCut', targetEntity: Stock::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'productCut', targetEntity: Stock::class, orphanRemoval: true, cascade:["persist"])]
     #[ORM\JoinColumn(nullable: false)]
     private $stock;
 
@@ -27,7 +27,7 @@ class ProductCut
     #[ORM\JoinColumn(nullable: false)]
     private $cut;
 
-    #[ORM\OneToMany(mappedBy: 'productCut', targetEntity: HistoriquePrices::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'productCut', targetEntity: HistoriquePrices::class, orphanRemoval: true,cascade:['remove'])]
     private $historiquePrices;
 
     public function __construct()
@@ -107,6 +107,9 @@ class ProductCut
 
         return $this;
     }
-    
+    public function __toString()
+    {
+        return $this->id;
+    }
     
 }

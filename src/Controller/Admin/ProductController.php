@@ -43,14 +43,12 @@ class ProductController extends AbstractController
                 //on stocke le nom de l'image dans BDD
                 $product->setFirstImage($fichier);
             }
-            if($product->getId())
+            if(!$product->getId())
             {
-               
-                $product->setModifiedAt(new \DateTime());
-            }else{
-                 $product->setCreatedAt(new \DateTime());
+                $product->setCreatedAt(new \DateTime());
             }
-
+            $refProduct = md5(uniqid());
+            $product->setRefProduct($refProduct);
             
             
             //on recuper le checkbox valided
@@ -82,10 +80,35 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $image = $form->get('picture')->getData();
+            if ($image) {
+                //on génère un nouveau non du fichier 
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+              
+                //on copie le fichier dans le dossier img/upload
+                $image->move(
+                    $this->getParameter('images_directory_product'),
+                    $fichier
+                );
+                //on stocke le nom de l'image dans BDD
+                $product->setFirstImage($fichier);
+            }
+            if($product->getId())
+            {
+                $product->setModifiedAt(new \DateTime());
+            }
+
+            
+            
+            //on recuper le checkbox valided
+            //$checked = $form->get('actionProduit')->getData();
+
             $productRepository->add($product, true);
 
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
+
 
         return $this->renderForm('product/edit.html.twig', [
             'product' => $product,

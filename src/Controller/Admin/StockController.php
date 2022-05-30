@@ -18,7 +18,7 @@ class StockController extends AbstractController
     {
         return $this->render('stock/index.html.twig', [
             'stocks' => $stockRepository->findAll(),
-        ]);
+    ]);
     }
 
     #[Route('/new', name: 'app_stock_new', methods: ['GET', 'POST'])]

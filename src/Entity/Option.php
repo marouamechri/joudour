@@ -23,7 +23,7 @@ class Option
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
-    #[ORM\OneToMany(mappedBy: 'typeProduct', targetEntity: Product::class)]
+    #[ORM\OneToMany(mappedBy: 'typeProduct', targetEntity: Product::class, cascade:['remove'])]
     private $products;
 
     public function __construct()

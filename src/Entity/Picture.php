@@ -13,12 +13,12 @@ class Picture
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 15)]
+    #[ORM\Column(type: 'string', length: 40)]
     private $pictureName;
 
     #[ORM\ManyToOne(targetEntity: ProductColor::class, inversedBy: 'pictures')]
-    #[ORM\JoinColumn(nullable: false)]
     private $productColor;
+
 
     public function getId(): ?int
     {

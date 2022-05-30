@@ -2,20 +2,21 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\HistoriquePrices;
-use App\Entity\ProductCut;
 use App\Entity\Stock;
+use App\Entity\ProductCut;
 use App\Form\ProductCutType;
+use App\Entity\HistoriquePrices;
+use App\Form\ProductCutEditeType;
 use App\Repository\CutRepository;
-use App\Repository\HistoriquePricesRepository;
-use App\Repository\ProductColorRepository;
-use App\Repository\ProductCutRepository;
-use App\Repository\ProductRepository;
 use App\Repository\StockRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ProductRepository;
+use App\Repository\ProductCutRepository;
+use App\Repository\ProductColorRepository;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\HistoriquePricesRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('admin/product/cut')]
 class ProductCutController extends AbstractController
@@ -63,13 +64,15 @@ class ProductCutController extends AbstractController
             $start = $form->get('startDatePricesSaleHTVA')->getData();
             $end = $form->get('endDatePricesSaleHTVA')->getData();
             $amount = $form->get('amountHTVA')->getData();
+            $active = $form->get('active')->getData();
             //enregistrer les données de stock dans BDD
             $histpPrices->setStartDatePricesSaleHTVA($start);
             $histpPrices->setEndDatePricesSaleHTVA($end);
+            $histpPrices->setActive($active);
             $histpPrices->setAmountHTVA($amount);
             $historiquePricesRepository->add($histpPrices);
             $productCut->addHistoriquePrice($histpPrices);
-
+           
             
             //enregistrer les données de product_cut dans BDD
             $productCut->setProductColor($idProduct);
@@ -94,15 +97,37 @@ class ProductCutController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_product_cut_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ProductCut $productCut, ProductCutRepository $productCutRepository): Response
+    public function edit(Request $request, ProductCut $productCut,HistoriquePricesRepository $histoRepo, ProductCutRepository $productCutRepository): Response
     {
-        $form = $this->createForm(ProductCutType::class, $productCut);
+        $idProduct = $request->query->get("id");
+        $form = $this->createForm(ProductCutEditeType::class, $productCut);
         $form->handleRequest($request);
-
+        $stock = $productCut->getStock();
         if ($form->isSubmitted() && $form->isValid()) {
-            $productCutRepository->add($productCut, true);
 
-            return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);
+           //recuperer de données stock 
+           $min = $form->get('min')->getData();
+           $max = $form->get('max')->getData();
+           $nbProd = $form->get('nbrProd')->getData();
+          
+            //enregistrer les données de stock dans BDD
+           if($min!= NULL)
+           {
+            $stock->setStockMin($min);
+           }
+           if($max!=NULL)
+           {
+                $stock->setStockMax($max);
+           }
+           if($nbProd!=NULL){
+            $stock->setNbrProduct($nbProd);
+           }
+          
+           $productCut->setStock($stock);
+        
+           //enregistrer les données de product_cut dans BDD
+          $productCutRepository->add($productCut, true);
+          return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product_cut/edit.html.twig', [

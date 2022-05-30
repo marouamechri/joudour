@@ -18,7 +18,7 @@ class Category
     #[ORM\Column(type: 'string', length: 20)]
     private $nameCategory;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Option::class)]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Option::class,cascade:['remove'])]
     private $options;
 
     public function __construct()

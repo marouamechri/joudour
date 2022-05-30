@@ -18,7 +18,7 @@ class Cut
     #[ORM\Column(type: 'string', length: 5)]
     private $cutValue;
 
-    #[ORM\OneToMany(mappedBy: 'cut', targetEntity: ProductCut::class)]
+    #[ORM\OneToMany(mappedBy: 'cut', targetEntity: ProductCut::class, cascade:['remove'])]
     private $productCuts;
 
     public function __construct()

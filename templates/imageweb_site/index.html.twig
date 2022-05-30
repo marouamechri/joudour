@@ -1,0 +1,58 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+
+    <h1>Gestion de la page d'accueil</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Poster</th>
+                <th>TitrePoster</th>
+                <th>PosterTextBtn</th>
+                <th>Robe1</th>
+                <th>Robe2</th>
+                <th>Robe3</th>
+                <th>ImgShop1</th>
+                <th>ImgShop2</th>
+                <th>ImgShop3</th>
+                <th>Imgloca1</th>
+                <th>Imgloca2</th>
+                <th>Imgloca3</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for imageweb_site in imageweb_sites %}
+            <tr>
+                <td>{{ imageweb_site.id }}</td>
+                <td>{{ imageweb_site.poster }}</td>
+                <td>{{ imageweb_site.titrePoster }}</td>
+                <td>{{ imageweb_site.posterTextBtn }}</td>
+                <td>{{ imageweb_site.robe1 }}</td>
+                <td>{{ imageweb_site.robe2 }}</td>
+                <td>{{ imageweb_site.robe3 }}</td>
+                <td>{{ imageweb_site.imgShop1 }}</td>
+                <td>{{ imageweb_site.imgShop2 }}</td>
+                <td>{{ imageweb_site.imgShop3 }}</td>
+                <td>{{ imageweb_site.imgloca1 }}</td>
+                <td>{{ imageweb_site.imgloca2 }}</td>
+                <td>{{ imageweb_site.imgloca3 }}</td>
+                <td>
+                    <a href="{{ path('app_imageweb_site_show', {'id': imageweb_site.id}) }}">show</a>
+                    <a href="{{ path('app_imageweb_site_edit', {'id': imageweb_site.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_imageweb_site_new') }}">Create new</a>
+{% endblock %}

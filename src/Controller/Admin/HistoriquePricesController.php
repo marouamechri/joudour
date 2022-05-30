@@ -3,14 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\HistoriquePrices;
+use App\Entity\ProductCut;
 use App\Form\HistoriquePricesType;
 use App\Repository\HistoriquePricesRepository;
+use App\Repository\ProductCutRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/product/cut/historique/')]
+#[Route('/admin/product/cut/historique')]
 class HistoriquePricesController extends AbstractController
 {
     #[Route('/', name: 'app_historique_prices_index', methods: ['GET'])]
@@ -18,17 +20,24 @@ class HistoriquePricesController extends AbstractController
     {
         return $this->render('historique_prices/index.html.twig', [
             'historique_prices' => $historiquePricesRepository->findAll(),
+            
         ]);
     }
 
-    #[Route('/new', name: 'app_historique_prices_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, HistoriquePricesRepository $historiquePricesRepository): Response
+    #[Route('/{id}/new', name: 'app_historique_prices_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, ProductCut $productCut, HistoriquePricesRepository $historiquePricesRepository): Response
     {
+         //on récuper le id de url
+        //  $id = $request->query->get("id");
+         //on recuper le produit de cette id
+        //  $idProductCut = $productCutRepository->find($id);
         $historiquePrice = new HistoriquePrices();
         $form = $this->createForm(HistoriquePricesType::class, $historiquePrice);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $historiquePrice->setProductCut($productCut);
             $historiquePricesRepository->add($historiquePrice, true);
 
             return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);
@@ -57,7 +66,7 @@ class HistoriquePricesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $historiquePricesRepository->add($historiquePrice, true);
 
-            return $this->redirectToRoute('app_historique_prices_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('historique_prices/edit.html.twig', [
@@ -73,6 +82,6 @@ class HistoriquePricesController extends AbstractController
             $historiquePricesRepository->remove($historiquePrice, true);
         }
 
-        return $this->redirectToRoute('app_historique_prices_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);
     }
 }

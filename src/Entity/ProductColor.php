@@ -15,24 +15,26 @@ class ProductColor
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: Colors::class, inversedBy: 'productColors',cascade:['persist','remove'])]
+    #[ORM\ManyToOne(targetEntity: Colors::class, inversedBy: 'productColors')]
     #[ORM\JoinColumn(nullable: false)]
     private $color;
 
-    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'productColors',cascade:['persist','remove'])]
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'productColors')]
     #[ORM\JoinColumn(nullable: false)]
     private $product;
 
-    #[ORM\OneToMany(mappedBy: 'productColor', targetEntity: Picture::class, cascade:['persist','remove'])]
-    private $pictures;
+    
 
-    #[ORM\OneToMany(mappedBy: 'productColor', targetEntity: ProductCut::class, cascade:['persist','remove'])]
+    #[ORM\OneToMany(mappedBy: 'productColor', targetEntity: ProductCut::class,orphanRemoval:true, cascade:['remove'])]
     private $productCuts;
+
+    #[ORM\OneToMany(mappedBy: 'productColor', targetEntity: Picture::class,orphanRemoval:true, cascade:['persist', 'remove'])]
+    private $pictures;
 
     public function __construct()
     {
-        $this->pictures = new ArrayCollection();
         $this->productCuts = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,35 +66,10 @@ class ProductColor
         return $this;
     }
 
-    /**
-     * @return Collection<int, Picture>
-     */
-    public function getPictures(): Collection
-    {
-        return $this->pictures;
-    }
+   
 
-    public function addPicture(Picture $picture): self
-    {
-        if (!$this->pictures->contains($picture)) {
-            $this->pictures[] = $picture;
-            $picture->setProductColor($this);
-        }
-
-        return $this;
-    }
-
-    public function removePicture(Picture $picture): self
-    {
-        if ($this->pictures->removeElement($picture)) {
-            // set the owning side to null (unless already changed)
-            if ($picture->getProductColor() === $this) {
-                $picture->setProductColor(null);
-            }
-        }
-
-        return $this;
-    }
+   
+   
 
     /**
      * @return Collection<int, ProductCut>
@@ -126,6 +103,36 @@ class ProductColor
     public function __toString()
     {
         return $this->color->getRefColor();
+    }
+
+    /**
+     * @return Collection<int, Picture>
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setProductColor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->pictures->removeElement($picture)) {
+            // set the owning side to null (unless already changed)
+            if ($picture->getProductColor() === $this) {
+                $picture->setProductColor(null);
+            }
+        }
+
+        return $this;
     }
     
 }

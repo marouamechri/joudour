@@ -15,12 +15,10 @@ class ProductColorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('color',EntityType::class,[
-
-            ])
+            
             ->add('color', EntityType::class, [
                 'class'=> Colors::class,
-                'choice_label'=>'refColor',
+                'choice_label'=>'nameColor',
                 'multiple'=>false,
                 'mapped'=>true,
                 'required'=>false,

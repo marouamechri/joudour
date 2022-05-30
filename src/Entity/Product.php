@@ -27,7 +27,7 @@ class Product
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: 'datetime',nullable: true)]
     private $modifiedAt;
 
     #[ORM\Column(type: 'string')]
@@ -38,7 +38,7 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private $typeProduct;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductColor::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductColor::class,cascade:['remove'])]
     private $productColors;
 
     #[ORM\Column(type: 'string', length: 40)]
@@ -46,6 +46,15 @@ class Product
 
     #[ORM\Column(type: 'boolean')]
     private $active;
+
+    #[ORM\Column(type: 'string', length: 10)]
+    private $refProduct;
+
+    #[ORM\Column(type: 'string', length: 15)]
+    private $genre;
+
+    #[ORM\Column(type: 'boolean')]
+    private $newColletion;
 
     public function __construct()
     {
@@ -195,4 +204,46 @@ class Product
 
         return $this;
     }
+
+    public function getRefProduct(): ?string
+    {
+        return $this->refProduct;
+    }
+
+    public function setRefProduct(string $refProduct): self
+    {
+        $this->refProduct = $refProduct;
+
+        return $this;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(string $genre): self
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->id;
+    }
+
+    public function isNewColletion(): ?bool
+    {
+        return $this->newColletion;
+    }
+
+    public function setNewColletion(bool $newColletion): self
+    {
+        $this->newColletion = $newColletion;
+
+        return $this;
+    }
+
+
 }

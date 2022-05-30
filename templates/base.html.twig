@@ -19,8 +19,10 @@
 		href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&family=Updock&display=swap" rel="stylesheet">
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		{% block stylesheets %}
-
 			{{ encore_entry_link_tags('app') }}
+			<link rel="stylesheet" href="{{ asset('css/menuPrincipal.css')}}"/>
+			<link rel="stylesheet" href="{{ asset('css/home.css')}}"/>
+			
 
 		{% endblock %}
 
@@ -200,7 +202,7 @@
 			<div class="container-fluid-footer bg-dark">
 				<div class="row mt-5 mb-5 ">
 					<section id="sale-section  text-center" class="pt-5">
-						<h2 class='text-center h_session'>Les collections</h2>
+						<h2 class='text-center h_session'>Joudoure</h2>
 						<div class="text-center">
 							<p class="ph2"><img src="https://promissa.fr/wp-content/themes/promissa/img/fleur_decouvrir.svg" class="fleur-l"></p>
 						</div>

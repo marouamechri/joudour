@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ProductCutType extends AbstractType
@@ -58,13 +59,18 @@ class ProductCutType extends AbstractType
             ->add('amountHTVA', MoneyType::class, [
                 'label' => 'le prix de vente',
                 'mapped'=>false
-            ]);;
+            ])
+            ->add('active', CheckboxType::class, [
+                'label'=>'Etat de prix',
+                'mapped'=>false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => ProductCut::class,
+            
         ]);
     }
 }

@@ -9,46 +9,84 @@
 	<table class="table table-striped text-center">
 		<thead>
 			<tr>
-				<th>Produis</th>
-				<th>Photo</th>
-				<th scope="col">actions</th>
+				<th scope="col">Ref produit</th>
+				<th scope="col">Photo</th>
+				<th class='text-center' scope="col" collapse="5">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			
+
 			{% for product in products %}
 				<tr>
-					<td>{{ product.nameProduct}}</td>
-					 <td><img  class="imgCol" src="{{asset('/upload/images/product/' ~ product.firstImage)}}"><td>
+					<td scope="row">{{ product.nameProduct}}</td>
+					<td><img class="imgCol" src="{{asset('/upload/images/product/' ~ product.firstImage)}}">
+					</td>
+					<td></td>
 					<td>{{product.id}}</td>
-                    <td colspan="3"><a href="{{ path('app_product_color_new', {'id': product.id}) }}">ajouter produit couleur</a></td>
-					<td><a href="{{ path('app_product_show', {'id': product.id}) }}">Fiche Produit</a></td>
-
+					<td colspan="3">
+						<a href="{{ path('app_product_color_new', {'id': product.id}) }}">ajouter produit couleur</a>
+					</td>
+					<td>
+						<a href="{{ path('app_product_show', {'id': product.id}) }}">Detaille</a>
+					</td>
+					{# {% if not product.productColors is empty %} #}
 					{% for  color in product.productColors %}
+						
+							{% set firstcolor = product.productColors|first %}
+							{% if color == firstcolor %}
+							<tr>
+							<th  scope="col">Couleur</th>
+							<th  scope="col">Action</th></tr>		
+							{% endif %}
 						<tr>
-							<td style="background-color:{{ color}}"></td>
+							<td scope="row" style="background-color:{{ color}}"></td>
 							<td>{{color.id}}</td>
+							<td collapse="3">
+								<a href="{{ path('app_product_cut_new', {'id': color.id}) }}">Ajouter les taille Assossiée</a>
+							</td>
 							<td>
 								<a href="{{ path('app_product_color_edit', {'id': color.id}) }}">Modifier</a>
 							</td>
 							<td>
 								{{ include('product_color/_delete_form.html.twig') }}
 							</td>
-                            <td>
-								<a href="{{ path('app_product_cut_new', {'id': color.id}) }}">Ajouter taille Assossiée</a>
+							<td>
+								<a href="{{ path('app_product_color_show', {'id': color.id}) }}">Detaille</a>
 							</td>
 						</tr>
 						{% for productcut in color.productCuts %}
+							{% set firstproductCut = color.productCuts|first %}
+							{% if productcut == firstproductCut %}
 							<tr>
-								<td>{{productcut.cut.cutValue}}</td>
-								<td>{{productcut.cut.id}}</td>
-								<td><a href="{{ path('app_product_cut_edit', {'id':productcut.cut.id}) }}">Modifier</td>
-								<td> {{ include('product_cut/_delete_form.html.twig') }}</td>
-								<td><a href="{{ path('app_historique_prices_new', {'id': productcut.id}) }}">Ajouter une promotion</a></td>
+							<th  scope="col">Taille</th>
+							<th  scope="col">Action</th></tr>		
+							{% endif %}
+							<tr>
+								<td scope="row">{{productcut.cut.cutValue}}</td>
+								<td>{{productcut.id}}</td>
+								<td>
+									<a href="{{ path('app_product_cut_edit', {'id':productcut.id}) }}">Modifier</td>
+								</td>
+								<td>
+									{{ include('product_cut/_delete_form.html.twig') }}</td>
+								<td collapse="2">
+									<a href="{{ path('app_historique_prices_new', {'id': productcut.id}) }}">Ajouter une promotion</a>
+								</td>
 								{% for histoPrices in productcut.historiquePrices %}
+									{% set firsthistoPrices = productcut.historiquePrices|first %}
+									{% if histoPrices == firsthistoPrices %}
 									<tr>
-										<td>{{histoPrices ? histoPrices|date('Y-m-d H:i:s') : ''}}</td>
-									</tr>	
+									<th scope="col">Date début de promo</td>
+									<th scope="col">Date de fin de promo</td>
+									</tr>		
+									{% endif %}
+									<tr>
+										<td scope="row" collapse="3">{{histoPrices.startDatePricesSaleHtva ? histoPrices.startDatePricesSaleHtva|date('Y-m-d H:i:s') : ''}}</td>
+										<td collapse="3">{{histoPrices.endDatePricesSaleHTVA ? histoPrices.endDatePricesSaleHTVA|date('Y-m-d H:i:s') : ''}}</td>
+										<td>{{histoPrices.id}}</td>
+										<td><a href="{{ path('app_historique_prices_edit', {'id': histoPrices.id}) }}">Modifier</a></td>
+										<td>{{ include('historique_prices/_delete_form.html.twig') }}</td>
+									</tr>
 								{% endfor %}
 							</tr>
 						{% endfor %}
