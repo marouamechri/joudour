@@ -1,0 +1,64 @@
+{% block body %}
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-6 p-0 mt-3 mb-2">
+								<h4 class="text-center">Mon panier</h4>
+							</div>
+						</div>
+						<div class="row">
+							{% for element in items %}
+								<div class="col-lg-12 m-2 mt-1">
+									<div class="shopping-cart-item bg-light">
+										<div class="row ">
+											<div class="col-lg-3 shopping-cart-img">
+												<a href="{{ path('app_show_product', {'id': element.parent.id, 'productColor': element.productColor.id})}}" title="{{ element.parent.nameProduct }}">
+												{# afficher la premier image de la liste des photos #}
+													{% set firstpicture = element.productColor.pictures|first %}
+													<img src="{{ asset('/upload/images/product/' ~ firstpicture.pictureName)}}" alt="{{element.parent.nameProduct}}" class="w-100"/>
+												</a>
+											</div>
+
+											<div class="col-lg-9 shopping-cart-item-data text-start">
+												<div>{{element.parent.nameProduct}}</div>
+												<div>Couleur: {{element.productColor.color.nameColor}}</div>
+												<div>Taille: {{element.product.cut}}</div>
+												<div class="text-end">
+													{{element.parent.amountHTVA| number_format(0, ',' , ' ') }}€
+												</div>
+												<div>
+													Quantité: {{element.quantite}}
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							{% else %}
+								<div class="col-lg-12  mt-4 text-center">
+									<h4>Votre panier est vide</h4>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+						<div class="row">
+							<div class="col-lg-12 text-start">
+								<hr>
+								<p>Articles({{nbProduct}})</p>
+								<p>Frais de livraison: 4.50 €</p>
+								<hr>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<h5>TOTAL:</h5>
+							</div>
+							<div class="col-lg-6 text-end">
+								<strong>{{total| number_format(0, ',' , ' ') }}€</strong>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

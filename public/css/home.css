@@ -51,7 +51,7 @@ body {
     **
     **---------------------------------------------------------------------**/
 
-img .fleur-l {
+.fleur-l {
     max-width: inherit !important;
     width: 70px;
     height: 70px;

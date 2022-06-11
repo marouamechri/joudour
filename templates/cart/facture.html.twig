@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!
+{% endblock %}
+{% block body %}
+	<div class="contenair product-list-block">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="row">
+					<div class="col-lg-12 cart"></div>
+				</div>
+                {% for element in items %}
+                <div class="row">
+					<div class="col-lg-4 shopping-cart-img"></div>
+                    <div class="col-lg-8 shopping-cart-item-data">
+                    <div>{{element.parent.nameProduct}}</div>
+						<div>{{element.productColor.color.nameColor}}</div>
+						<div>{{element.product.cut}}</div>
+						<div class="text-end">
+							{{element.parent.amountHTVA| number_format(0, ',' , ' ') }}€</div>
+						</div>
+                    </div>
+				</div>
+                {% endfor %}
+			</div>
+			{# gauche #}
+			<div class="col-lg-6"></div>
+
+		</div>
+	</div>
+
+{% endblock %}
+{# {% block body %}
+		<section class="bg-light p-3 text-center">
+			<h1>Votre Panier</h1>
+		</section>
+		<table class='table'>
+			<thead>
+				<tr>
+					<th>Ref Produit</th>
+					<th>Produit</th>
+					<th>Couleur</th>
+					<th>Taille</th>
+					<th>Prix</th>
+					<th>Quantité</th>
+					<th>Total</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for element in items %}
+					<tr>
+	
+						<td>{{element.parent.refProduct}}</td>
+						<td>{{element.parent.nameProduct}}</td>
+						<td>{{element.productColor.color.nameColor}}</td>
+						<td>{{element.product.cut}}</td>
+						<td class="text-end">
+							{{element.parent.amountHTVA| number_format(0, ',' , ' ') }}€</td>
+						<td>
+							<a href="{{path('cart_remove', {'id' : element.product.id})}}">
+								<i class="fa fa-caret-left"></i>
+							</a>
+							{{element.quantite}}
+							<a href="{{path('cart_add', {'id' : element.product.id})}}">
+								<i class="fa fa-caret-right"></i>
+								
+							</a>
+	
+	
+						</td>
+	
+						<td class='text-end'>{{element.quantite * element.parent.amountHTVA| number_format(0, ',' , ' ') }}€</td>
+						<td>
+							
+							<a href="{{path('cart_delete', {'id' : element.product.id})}}">Supprimer</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan='8' class="text-center">Votre panier est vide</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="6">Toltal</td>
+					<td class="text-end">{{total| number_format(0, ',' , ' ') }}€
+					</td>
+					<td colspan="2"></td>
+				</tr>
+			</tfoot>
+		</table>
+	
+	
+	{% endblock %} #}

@@ -134,5 +134,9 @@ class ProductColor
 
         return $this;
     }
+    public function __toSting()
+    {
+        return $this->id;
+    }
     
 }

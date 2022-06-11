@@ -30,9 +30,13 @@ class ProductCut
     #[ORM\OneToMany(mappedBy: 'productCut', targetEntity: HistoriquePrices::class, orphanRemoval: true,cascade:['remove'])]
     private $historiquePrices;
 
+    #[ORM\OneToMany(mappedBy: 'productCut', targetEntity: OrderLine::class, orphanRemoval: true)]
+    private $orderLines;
+
     public function __construct()
     {
         $this->historiquePrices = new ArrayCollection();
+        $this->orderLines = new ArrayCollection();
     }
 
 
@@ -110,6 +114,36 @@ class ProductCut
     public function __toString()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Collection<int, OrderLine>
+     */
+    public function getOrderLines(): Collection
+    {
+        return $this->orderLines;
+    }
+
+    public function addOrderLine(OrderLine $orderLine): self
+    {
+        if (!$this->orderLines->contains($orderLine)) {
+            $this->orderLines[] = $orderLine;
+            $orderLine->setProductCut($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderLine(OrderLine $orderLine): self
+    {
+        if ($this->orderLines->removeElement($orderLine)) {
+            // set the owning side to null (unless already changed)
+            if ($orderLine->getProductCut() === $this) {
+                $orderLine->setProductCut(null);
+            }
+        }
+
+        return $this;
     }
     
 }

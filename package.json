@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "autoprefixer": "^10.4.7",
+        "maildev": "^2.0.5",
         "postcss-loader": "^7.0.0"
     }
 }
