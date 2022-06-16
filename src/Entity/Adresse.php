@@ -15,14 +15,14 @@ class Adresse
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\Column(type: 'string', length: 250)]
+    private $fullname;
+
+    #[ORM\Column(type: 'string', length: 250)]
+    private $tel;
+
     #[ORM\Column(type: 'string', length: 150)]
-    private $street;
-
-    #[ORM\Column(type: 'integer')]
-    private $number;
-
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $apartement;
+    private $adresse;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $message;
@@ -49,41 +49,42 @@ class Adresse
         return $this->id;
     }
 
-    public function getStreet(): ?string
+    public function getFullname(): ?string
     {
-        return $this->street;
+        return $this->fullname;
     }
 
-    public function setStreet(string $street): self
+    public function setFullname(string $fullname): self
     {
-        $this->street = $street;
+        $this->fullname = $fullname;
 
         return $this;
     }
 
-    public function getNumber(): ?int
+    public function getTel(): ?string
     {
-        return $this->number;
+        return $this->tel;
     }
 
-    public function setNumber(int $number): self
+    public function setTel(string $tel): self
     {
-        $this->number = $number;
+        $this->tel = $tel;
 
         return $this;
     }
 
-    public function getApartement(): ?int
+    public function getAdresse(): ?string
     {
-        return $this->apartement;
+        return $this->adresse;
     }
 
-    public function setApartement(?int $apartement): self
+    public function setAdresse(string $adresse): self
     {
-        $this->apartement = $apartement;
+        $this->adresse = $adresse;
 
         return $this;
     }
+
 
     public function getMessage(): ?string
     {
@@ -161,5 +162,17 @@ class Adresse
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        //spr permet de mettre un espace sans mettre une balise que php ne peut interpréter
+        $result = $this->fullname . "[spr]";
+        $result .= $this->adresse . "[spr]";
+        if ($this->message) {
+            $result .= $this->message . "[spr]";
+        }
+        $result .= $this->country_code . "-" . $this->city . "[spr]";
+
+        return $result. "[spr]";
     }
 }

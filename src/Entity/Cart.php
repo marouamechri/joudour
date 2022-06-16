@@ -2,26 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
+use App\Repository\CartRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: OrderRepository::class)]
-#[ORM\Table(name: '`order`')]
-class Order
+#[ORM\Entity(repositoryClass: CartRepository::class)]
+class Cart
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
-
-    #[ORM\Column(type: 'datetime')]
-    private $creatAt;
-
-
-    #[ORM\OneToMany(mappedBy: 'idorder', targetEntity: OrderLine::class, orphanRemoval: true)]
-    private $orderLines;
 
     #[ORM\Column(type: 'string', length: 100)]
     private $fullname;
@@ -38,7 +30,7 @@ class Order
     #[ORM\Column(type: 'text')]
     private $adresseLivraison;
 
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: 'text',nullable: true)]
     private $moreInformation;
 
     #[ORM\Column(type: 'boolean')]
@@ -56,62 +48,27 @@ class Order
     #[ORM\Column(type: 'float')]
     private $subTotalTTC;
 
+    #[ORM\Column(type: 'datetime')]
+    private $creatAt;
+
     #[ORM\Column(type: 'string', length: 255)]
     private $reference;
 
+    #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartLine::class)]
+    private $cartLines;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'carts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
 
     public function __construct()
     {
-        $this->orderLines = new ArrayCollection();
+        $this->cartLines = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCreatAt(): ?\DateTimeInterface
-    {
-        return $this->creatAt;
-    }
-
-    public function setCreatAt(\DateTimeInterface $creatAt): self
-    {
-        $this->creatAt = $creatAt;
-
-        return $this;
-    }
-
-    
-
-    /**
-     * @return Collection<int, OrderLine>
-     */
-    public function getOrderLines(): Collection
-    {
-        return $this->orderLines;
-    }
-
-    public function addOrderLine(OrderLine $orderLine): self
-    {
-        if (!$this->orderLines->contains($orderLine)) {
-            $this->orderLines[] = $orderLine;
-            $orderLine->setIdorder($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrderLine(OrderLine $orderLine): self
-    {
-        if ($this->orderLines->removeElement($orderLine)) {
-            // set the owning side to null (unless already changed)
-            if ($orderLine->getIdorder() === $this) {
-                $orderLine->setIdorder(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getFullname(): ?string
@@ -179,7 +136,7 @@ class Order
         return $this->moreInformation;
     }
 
-    public function setMoreInformation(?string $moreInformation): self
+    public function setMoreInformation(string $moreInformation): self
     {
         $this->moreInformation = $moreInformation;
 
@@ -246,6 +203,18 @@ class Order
         return $this;
     }
 
+    public function getCreatAt(): ?\DateTimeInterface
+    {
+        return $this->creatAt;
+    }
+
+    public function setCreatAt(\DateTimeInterface $creatAt): self
+    {
+        $this->creatAt = $creatAt;
+
+        return $this;
+    }
+
     public function getReference(): ?string
     {
         return $this->reference;
@@ -258,5 +227,45 @@ class Order
         return $this;
     }
 
-   
+    /**
+     * @return Collection<int, CartLine>
+     */
+    public function getCartLines(): Collection
+    {
+        return $this->cartLines;
+    }
+
+    public function addCartLine(CartLine $cartLine): self
+    {
+        if (!$this->cartLines->contains($cartLine)) {
+            $this->cartLines[] = $cartLine;
+            $cartLine->setCart($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCartLine(CartLine $cartLine): self
+    {
+        if ($this->cartLines->removeElement($cartLine)) {
+            // set the owning side to null (unless already changed)
+            if ($cartLine->getCart() === $this) {
+                $cartLine->setCart(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }

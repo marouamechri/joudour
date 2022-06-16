@@ -92,12 +92,12 @@ class Product
 
     public function getAmountHTVA(): ?float
     {
-        return $this->amountHTVA;
+        return $this->amountHTVA /100;
     }
 
     public function setAmountHTVA(float $amountHTVA): self
     {
-        $this->amountHTVA = $amountHTVA;
+        $this->amountHTVA = $amountHTVA *100;
 
         return $this;
     }

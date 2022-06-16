@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class AdresseType extends AbstractType
@@ -18,27 +19,27 @@ class AdresseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            
-            ->add('street',TextareaType::class,[
+            ->add('fullname',TextType::class,[
+                'required'=> true,
+                'label'=>'Nom , Prenom',
+                'attr' => [
+                    'placeholder' => 'Nom , Prenom'
+                ],
+            ])
+            ->add('tel', TelType::class,[
+                'label'=> 'Téléphone',
+                'attr' => [
+                    'placeholder'=>'Téléphone'
+                ]
+            ])
+            ->add('adresse',TextareaType::class,[
                 'required'=> true,
                 'label'=>'Adresse',
                 'attr' => [
                     'placeholder' => 'Adresse'
                 ],
             ])
-            ->add('number', IntegerType::class,[
-                'required'=> true,
-                'label'=>'Numéro',
-                'attr' => [
-                    'placeholder' => 'Numéro'
-                ],
-            ])
-            ->add('apartement', IntegerType::class,[
-                'label'=>'Appartement',
-                'attr' => [
-                    'placeholder' => 'Appartement'
-                ],
-            ])
+           
             ->add('message', TextareaType::class,[
                 'label'=>'Message',
                 'required'=>false,

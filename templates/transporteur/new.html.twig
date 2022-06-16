@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Ajout Transporteur{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un transporteur</h1>
+
+    {{ include('transporteur/_form.html.twig') }}
+
+    <a href="{{ path('app_transporteur_index') }}">Retoure à la liste</a>
+{% endblock %}

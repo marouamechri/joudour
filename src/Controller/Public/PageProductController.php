@@ -33,8 +33,7 @@ class PageProductController extends AbstractController
         //recupere le get color
         $idProductColor =  $request->query->get("productColor");
         $productColor = $productColorRepository->find($idProductColor);
-        $productCut = new ProductCut;
-        $form = $this->createForm(ListeCutType::class, $productCut );
+        $form = $this->createForm(ListeCutType::class, null, ['productColor'=>$productColor] );
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -44,6 +43,8 @@ class PageProductController extends AbstractController
            
             'id'=>$idproductCut->getId(),           
         ], Response::HTTP_SEE_OTHER);
+        }else{
+            
         }
         //recupérer les taille de product color
         // $cuts = $productColor->getProductCuts();

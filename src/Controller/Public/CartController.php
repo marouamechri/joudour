@@ -13,10 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/cart')]
+#[Route('/cart1111')]
 class CartController extends AbstractController
 {
-    #[Route('/', name: 'cart_index')]
+    #[Route('/', name: 'cart_index1')]
     public function index(SessionInterface $session, ProductCutRepository $productCutRepository): Response
     {
         $panier = $session->get("panier", []);
@@ -24,7 +24,9 @@ class CartController extends AbstractController
 
         $dataPanier = [];
         $total = 0;
-        $i=0;
+        $tva = 0.2;
+        $quantity_cart=0;
+
         foreach ($panier as $id => $quantite) {
             //on recuper le produitCut
             $productCut = $productCutRepository->find($id);
@@ -38,18 +40,19 @@ class CartController extends AbstractController
                 "parent" => $parent
 
             ];
-            $total += $parent->getAmountHTVA() * $quantite + 4.5;
-            $i++;
+            $total += $parent->getAmountHTVA() * $quantite;
+            $quantity_cart++;
         }
         return $this->render('cart/index.html.twig', [
             'items' => $dataPanier,
             'total' => $total,
-            'nbProduct'=>$i
-            
+            'nbProduct'=>$quantity_cart,
+            'taxe'=> round($total*$this->tva,2),
+            'subTotalTTC'=> round(($total + ($total*$this->tva)),2)
 
         ]);
     }
-    #[Route('/add/{id}', name: 'cart_add')]
+    #[Route('/add/{id}', name: 'cart_add11')]
     public function add(ProductCut $productCut, SessionInterface $session)
     {
         //on récupère le panier actuel
@@ -70,7 +73,7 @@ class CartController extends AbstractController
             'product' => $id,
         ], Response::HTTP_SEE_OTHER);
     }
-    #[Route('/remove/{id}', name: 'cart_remove')]
+    #[Route('/remove/{id}', name: 'cart_remove11')]
     public function remove(ProductCut $productCut, SessionInterface $session)
     {
         //on récupère le panier actuel
@@ -89,9 +92,9 @@ class CartController extends AbstractController
         }
         //on sauvgarde dans la session
         $session->set("panier", $panier);
-        return $this->redirectToRoute("cart_index");
+        return $this->redirectToRoute("cart_index11");
     }
-    #[Route('/delete/{id}', name: 'cart_delete')]
+    #[Route('/delete/{id}', name: 'cart_delete11')]
     public function delete(ProductCut $productCut, SessionInterface $session)
     {
         //on récupère le panier actuel
