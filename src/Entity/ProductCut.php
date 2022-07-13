@@ -33,6 +33,9 @@ class ProductCut
     #[ORM\OneToMany(mappedBy: 'productCut', targetEntity: OrderLine::class, orphanRemoval: true)]
     private $orderLines;
 
+    #[ORM\Column(type: 'boolean')]
+    private $active;
+
     public function __construct()
     {
         $this->historiquePrices = new ArrayCollection();
@@ -142,6 +145,18 @@ class ProductCut
                 $orderLine->setProductCut(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

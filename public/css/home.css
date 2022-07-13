@@ -51,8 +51,35 @@ body {
     **
     **---------------------------------------------------------------------**/
 
+.carousel-dim {
+    width: 100%;
+    height: 30em;
+}
+
+
+/* .col-product {
+    height: 500px;
+    width: 100%;
+} */
+
+.img-carousel {
+    max-width: 100%;
+    height: 20em;
+}
+
+.col-product.img-carousel {
+    object-fit: contain;
+}
+
+
+/*-------------------------------------------------------------------*
+    **  
+                                sale-section
+    **
+    **---------------------------------------------------------------------**/
+
 .fleur-l {
-    max-width: inherit !important;
+    /* max-width: inherit !important; */
     width: 70px;
     height: 70px;
 }

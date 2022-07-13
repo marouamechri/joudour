@@ -54,7 +54,7 @@ class Cart
     #[ORM\Column(type: 'string', length: 255)]
     private $reference;
 
-    #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartLine::class)]
+    #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartLine::class,  cascade:['remove'])]
     private $cartLines;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'carts')]

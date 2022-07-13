@@ -58,10 +58,12 @@ class ProductType extends AbstractType
                 'required'=>false
             ])
             ->add('active', CheckboxType::class, [
-                'label'=>'Active'
+                'label'=>'Active',
+                'required'=>false
             ])
             ->add('newColletion', CheckboxType::class, [
-                'label'=>'Nouvelle collection?'
+                'label'=>'Nouvelle collection?',
+                'required'=>false
             ])
             ->add('typeProduct', EntityType::class, [
                 'class'=> Option::class,

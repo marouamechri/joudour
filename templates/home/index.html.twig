@@ -9,9 +9,9 @@
 	<link rel="stylesheet" href="{{ asset('css/home.css')}}"/>
 {% endblock %}
 {% block body %}
-	
+
 	{% if imageweb %}
-{% set fierstimageweb = imageweb|first %}
+		{% set fierstimageweb = imageweb|first %}
 		<section class="py-5 text-white">
 			<div class="container py-4">
 				<div class="row">
@@ -23,7 +23,7 @@
 								</div>
 								<div class="slide__content carousel-caption d-none d-md-block">
 									<h5 class="slides__title">{{fierstimageweb.titrePoster}}</h5>
-									<a href="#" class="slides__btn btn">{{fierstimageweb.posterTextBtn}}</a>
+									<a href={{path('app_page_product',{'collection' : 'new'} )}} class="slides__btn btn">{{fierstimageweb.posterTextBtn}}</a>
 								</div>
 							</div>
 						</div>
@@ -55,113 +55,79 @@
 						<div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
 
 							<div class="carousel-inner">
-								<div class="carousel-item active">
+								<div class="carousel-item carousel-dim active">
 									<div class="row">
+										{% for collection in listeNewCollection_1 %}
+											{% set productColor = collection.productColors|first %}
 
-										<div class="col-md-4 mb-3">
-											<div class="card">
-												<img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">
-												<div class="card-body">
-													<h4 class="card-title">Special title treatment</h4>
-													<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+											<div class="col-md-4 mb-3 col-product">
+												<div class="card">
+													<img class="img-carousel" src="{{ asset('upload/images/product/' ~ collection.firstImage)}}">
+													<div class="card-body">
+														<a href="{{ path('app_show_product', {'id': collection.id, 'productColor': productColor.id})}}" title="{{ collection.nameProduct }}" class="item-link">
 
-												</div>
-
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card">
-												<img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">
-												<div class="card-body">
-													<h4 class="card-title">Special title treatment</h4>
-													<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+															<h4 class="card-title text-center">{{collection.nameProduct}}</h4>
+														</a>
+														<p class="card-text text-center">
+															Prix :
+															<strong class="text-danger">{{collection.amountHTVA+((collection.amountHTVA)*0.2)| number_format(0, ',' , ' ') }}€</strong>
+														</p>
+													</div>
 
 												</div>
 											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card">
-												<img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
-												<div class="card-body">
-													<h4 class="card-title">Special title treatment</h4>
-													<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-												</div>
-											</div>
-										</div>
-
+										{% endfor %}
 									</div>
 								</div>
-								<div class="carousel-item">
+								<div class="carousel-item carousel-dim">
 									<div class="row">
+										{% for collection in listeNewCollection_2 %}
+											{% set productColor = collection.productColors|first %}
 
-										<div class="col-md-4 mb-3">
-											<div class="card">
-												<img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3f317c1f7a16116dec454fbc267dd8e4">
-												<div class="card-body">
-													<h4 class="card-title">Special title treatment</h4>
-													<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+											<div class="col-md-4 mb-3 col-product">
+												<div class="card">
+													<img class=" img-carousel" src="{{ asset('upload/images/product/' ~ collection.firstImage)}}">
+													<div class="card-body">
+														<a href="{{ path('app_show_product', {'id': collection.id, 'productColor': productColor.id})}}" title="{{ collection.nameProduct }}" class="item-link">
 
-												</div>
+															<h4 class="card-title text-center">{{collection.nameProduct}}</h4>
+														</a>
+														<p class="card-text text-center">
+															Prix :
+															<strong class="text-danger">{{collection.amountHTVA+((collection.amountHTVA)*0.2)| number_format(0, ',' , ' ') }}€</strong>
+														</p>
 
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card">
-												<img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532715088550-62f09305f765?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ebadb044b374504ef8e81bdec4d0e840">
-												<div class="card-body">
-													<h4 class="card-title">Special title treatment</h4>
-													<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card">
-												<img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=0754ab085804ae8a3b562548e6b4aa2e">
-												<div class="card-body">
-													<h4 class="card-title">Special title treatment</h4>
-													<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+													</div>
 
 												</div>
 											</div>
-										</div>
-
+										{% endfor %}
 									</div>
 								</div>
-								<div class="carousel-item">
+								<div class="carousel-item carousel-dim">
 									<div class="row">
+										{% for collection in listeNewCollection_3 %}
+											{% set productColor = collection.productColors|first %}
 
-										<div class="col-md-4 mb-3">
-											<div class="card">
-												<img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23">
-												<div class="card-body">
-													<h4 class="card-title">Special title treatment</h4>
-													<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+											<div class="col-md-4 mb-3 ">
+												<div class="card col-product">
+													<img class="img-carousel" src="{{ asset('upload/images/product/' ~ collection.firstImage)}}">
+													<div class="card-body">
+														<a href="{{ path('app_show_product', {'id': collection.id, 'productColor': productColor.id})}}" title="{{ collection.nameProduct }}" class="item-link">
+
+															<h4 class="card-title text-center">{{collection.nameProduct}}</h4>
+														</a>
+														<p class="card-text text-center">
+															Prix :
+															<strong class="text-danger">{{collection.amountHTVA+((collection.amountHTVA)*0.2)| number_format(0, ',' , ' ') }}€</strong>
+														</p>
+
+													</div>
 
 												</div>
+											</div>
+										{% endfor %}
 
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card">
-												<img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
-												<div class="card-body">
-													<h4 class="card-title">Special title treatment</h4>
-													<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card">
-												<img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6">
-												<div class="card-body">
-													<h4 class="card-title">Special title treatment</h4>
-													<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-												</div>
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -189,7 +155,7 @@
 							<h2 class='text-center h_session_s'>Robe de mariée</h2>
 							<div class="text-center">
 								<p class="ph2_s"><img src="https://promissa.fr/wp-content/themes/promissa/img/fleur_robe_mariee_w.svg" class="fleur-l"></p>
-								<a class="btn btn-lg btn-light" href="#">Voir les collections</a>
+								<a class="btn btn-lg btn-light" href={{path('app_page_product',{'type':'Robe de mariee' , 'genre' :'Femme'} )}}>Voir les collections</a>
 							</div>
 						</div>
 					</div>
@@ -210,7 +176,7 @@
 							<h2 class='text-center h_session_s'>Achat</h2>
 							<div class="text-center">
 								<p class="ph2_s"><img src="https://promissa.fr/wp-content/themes/promissa/img/fleur_robe_mariee_w.svg" class="fleur-l"></p>
-								<a class="btn btn-lg btn-light" href="#">Voir les offrets</a>
+								<a class="btn btn-lg btn-light" href={{path('app_page_product')}}>Voir les offrets</a>
 							</div>
 						</div>
 					</div>
@@ -240,13 +206,11 @@
 			</div>
 		</section>
 		<!-- Carousel wrapper -->
-
 	{% endif %}
 {% endblock %}
 {% block javascripts %}
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
 	{{ encore_entry_script_tags('app') }}
 {% endblock %}

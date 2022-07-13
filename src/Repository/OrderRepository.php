@@ -38,6 +38,15 @@ class OrderRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    // public function findBySessionSprite(String $id):array
+    // {
+    //     return $this->createQueryBuilder('o')
+    //        ->andWhere('o.StripeCheckoutSessionId = :val')
+    //        ->setParameter('val', $id)
+    //        ->getQuery()
+    //        ->getResult()
+    //    ;
+    // }
 
 //    /**
 //     * @return Order[] Returns an array of Order objects

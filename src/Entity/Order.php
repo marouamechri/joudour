@@ -59,6 +59,13 @@ class Order
     #[ORM\Column(type: 'string', length: 255)]
     private $reference;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'orders')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $StripeCheckoutSessionId;
+
 
     public function __construct()
     {
@@ -258,5 +265,29 @@ class Order
         return $this;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getStripeCheckoutSessionId(): ?string
+    {
+        return $this->StripeCheckoutSessionId;
+    }
+
+    public function setStripeCheckoutSessionId(?string $StripeCheckoutSessionId): self
+    {
+        $this->StripeCheckoutSessionId = $StripeCheckoutSessionId;
+
+        return $this;
+    }
+    
    
 }

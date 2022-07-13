@@ -104,9 +104,8 @@
         position: absolute;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
     } */
-    
-    .liste {
+    /* .liste {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-    }
+    } */

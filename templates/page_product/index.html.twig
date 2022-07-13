@@ -5,9 +5,20 @@
 {% block stylesheets %}
 	{{ encore_entry_link_tags('app') }}
 	<link rel="stylesheet" href="{{ asset('css/pageStyle.css')}}"/>
+	<link rel="stylesheet" href="{{ asset('css/menuPrincipal.css')}}"/>
+	<link rel="stylesheet" href="{{ asset('css/home.css')}}"/>
+
+
+	<style>
+		.joum-product-item {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+	</style>
 {% endblock %}
 {% block body %}
-	<article class="joum-product-item">
+	<article class="joum-product-item mt-5 ms-2 100%vh">
 		{% for product in products %}
 			<ul class="products-listing small">
 				<li class="product-item">

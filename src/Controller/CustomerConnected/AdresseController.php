@@ -60,7 +60,7 @@ class AdresseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $adresseRepository->add($adresse, true);
 
-            return $this->redirectToRoute('adresse_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_compte_user', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('adresse/edit.html.twig', [
@@ -76,6 +76,6 @@ class AdresseController extends AbstractController
             $adresseRepository->remove($adresse, true);
         }
 
-        return $this->redirectToRoute('app_checkout', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_compte_user', [], Response::HTTP_SEE_OTHER);
     }
 }

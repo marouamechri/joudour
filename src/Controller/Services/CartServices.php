@@ -1,6 +1,8 @@
 <?php
 namespace App\Services;
 
+use App\Entity\Product;
+use App\Entity\ProductCut;
 use App\Repository\ProductCutRepository;
 use  Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -8,8 +10,10 @@ class CartServices{
     private $tva = 0.2;
     //ajouter un article dans le panier
     public function addToCart($id,SessionInterface $session,ProductCutRepository $productCutRepository){
-        //recupérer la session cart
-        $cart = $this->getCart($session);
+       
+         //recupérer la session cart
+         $cart = $this->getCart($session);
+         
         if(isset($cart[$id])){
             //produit est déjà dans le panier
             $cart[$id]++;
@@ -19,6 +23,7 @@ class CartServices{
         }
         //modifier la session cart
         $this->updateCart($cart,$session,$productCutRepository);
+    
     }
 
     //supprimer un article dan le panier
@@ -47,7 +52,9 @@ class CartServices{
         }
     }
 
-    
+    public function deleteCart($cart,SessionInterface $session,ProductCutRepository $productCutRepository){
+        $this->updateCart($cart, $session, $productCutRepository);
+    }
     //mettre a jour le panier
     public function updateCart($cart,SessionInterface $session,ProductCutRepository $productCutRepository){
         $session->set('cart', $cart);

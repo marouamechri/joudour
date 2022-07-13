@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Product;
 use App\Entity\ProductColor;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<ProductColor>
@@ -39,18 +40,31 @@ class ProductColorRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * fonction permet de recuperer la liste des produits colorer grouper par produit
-     *
-     * @return array
-     */
-    public function findGroupByProduct(): array
+    public function findByRefColor(string $ref, Product $product):array
     {
         return $this->createQueryBuilder('p')
-        ->groupBy('p.product')
-        ->orderBy('p.id', 'DESC')
+        ->join('p.color', 'b')
+        ->andWhere('b.refColor = :color')
+        ->setParameter('color', $ref)
+        ->andWhere('p.product = :product')
+        ->setParameter('product', $product)
         ->getQuery()
-        ->getResult();}
+        ->getResult();
+
+    }
+
+    // /**
+    //  * fonction permet de recuperer la liste des produits colorer grouper par produit
+    //  *
+    //  * @return array
+    //  */
+    // public function findGroupByProduct(): array
+    // {
+    //     return $this->createQueryBuilder('p')
+    //     ->groupBy('p.product')
+    //     ->orderBy('p.id', 'DESC')
+    //     ->getQuery()
+    //     ->getResult();}
 
     //    /**
     //     * @return ProductColor[] Returns an array of ProductColor objects

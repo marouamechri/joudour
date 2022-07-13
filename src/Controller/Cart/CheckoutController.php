@@ -80,7 +80,6 @@ class CheckoutController extends AbstractController
                 $session->set('checkout_data',$data);
             }
             
-              
             $adresse = $data['adresse'];
             $transport = $data['transporteur'];
             $information = $data['informations'];
@@ -92,10 +91,10 @@ class CheckoutController extends AbstractController
             $reference = $orderServices->saveCart($cart,$user);
             return $this->render('checkout/confirm.html.twig', [
                 'cart'=>$cart,
-                'address' =>$adresse,
-                'transporteurs' =>$transport,
-                'informations' =>$information,
-               // 'reference' =>$reference,
+                'adresse' =>$adresse,
+                'transporteur' =>$transport,
+                'information' =>$information,
+               'reference' =>$reference,
                 'checkout'=>$form->createView()
             ]);
         }

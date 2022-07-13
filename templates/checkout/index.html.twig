@@ -1,81 +1,39 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>
-			{% block title %}{% endblock %}
-		</title>
+{% extends 'baseChekout.html.twig' %}
 
-		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
-			<link rel="stylesheet" href="{{ asset('css/stepDelevred.css')}}"/>
-		{% endblock %}
+{% block title %}Checkout
+{% endblock %}
+
+{% block body %}
 
 
-	</head>
-	<body>
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-12  text-center p-0 mt-3 mb-2">
-					<ul id="progressbar">
-						<li class="active" id="step1">
-							<strong>Livraison
-							</strong>
-						</li>
-						<li id="step2">
-							<strong>Paiement
-							</strong>
-						</li>
-						<li id="step3">
-							<strong>Facturation</strong>
-						</li>
-						<li id="step4">
-							<strong>Terminer</strong>
-						</li>
-					</ul>
+	<div class="row">
+		<div class="col-lg-6  mt-5 ">
+			{{ form_start( checkout,{action: path('checkoutConfirm')} )}}
+
+			<div class="page bg-light p-2" id="box1">
+				<h2 class="text-center">Vos adresse de livraison</h2>
+				<div
+					class="blok 50 content">
+					<!--raw permet l'interprétation de l'html -->
+					<div>{{ form_widget(checkout.adresse)  | replace({'[spr]' : '<br>'}) | raw}}</div>
+				</div>
+				<a href="{{ path('adresse_new') }}" class="btn btn-fill-out btn-block mt-1">Nouvelle adresse</a>
+			</div>
+
+			<div class="page bg-light mt-5" id="box2">
+				<h2 class="text-center">Entreprises de livraison</h2>
+				<div class="content">
+					{{ form_widget(checkout.transporteur)| replace({'[spr]' : '<br>'})| raw}}
+				</div>
+				<div>
+					<h4>Informations pour le livreur</h4>
+					<div class="form-group mb-0">
+						{{ form_widget(checkout.informations) }}
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-6  mt-5 ">
-					{{ form_start( checkout,{action: path('checkoutConfirm')} )}}
-
-					<div class="page bg-light p-2" id="box1">
-						<h2 class="text-center">Vos adresse de livreaison</h2>
-						<div
-							class="blok 50 content">
-							<!--raw permet l'interprétation de l'html -->
-							<div>{{ form_widget(checkout.adresse)  | replace({'[spr]' : '<br>'}) | raw}}</div>
-						</div>
-						<a href="{{ path('adresse_new') }}" class="btn btn-fill-out btn-block mt-1">Nouvelle adresse</a>
-					</div>
-
-					<div class="page bg-light mt-5" id="box2">
-						<h2 class="text-center">Entreprises de livraison</h2>
-						<div class="content">
-							{{ form_widget(checkout.transporteur)| replace({'[spr]' : '<br>'})| raw}}
-						</div>
-						<div>
-							<h4>Informations pour le livreur</h4>
-							<div class="form-group mb-0">
-								{{ form_widget(checkout.informations) }}
-							</div>
-					    </div>
-					</div>
-                </div>
-						<div class="col-lg-6 p-3">{{ include('checkout/_order.html.twig') }}</div>
-                        {{ form_end(checkout) }}
-					</div>
-				</div>
-			</body>
-			{% block javascripts %}
-				<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-				<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-				<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-				{{ encore_entry_script_tags('app') }}
-				<script type="text/javascript" src="{{ asset('js/progressebar.js')}}"></script>
-			{% endblock %}
-		</html>
-	</body>
-</html>
+		</div>
+		<div class="col-lg-6 p-3">{{ include('checkout/_order.html.twig') }}</div>
+		{{ form_end(checkout) }}
+	</div>
+</div></body>{% endblock %}

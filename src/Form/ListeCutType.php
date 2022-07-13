@@ -27,8 +27,9 @@ class ListeCutType extends AbstractType
                 'query_builder' =>function(EntityRepository $er)use($productColor){
                     return $er->createQueryBuilder('a')
                     ->andWhere('a.productColor = :productColor')
-                    ->setParameter('productColor', $productColor);
-                 
+                    ->setParameter('productColor', $productColor)
+                    ->andWhere('a.active = :active')
+                    ->setParameter('active', true);
                 },
                 'multiple' => false,
                 'mapped' => false,

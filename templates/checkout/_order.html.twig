@@ -1,7 +1,7 @@
 {% block body %}
 	<div class="container">
 		<div class="row">
-		<h2 class="text-center">Votre cpmmande</h2>
+		<h2 class="text-center">Votre commande</h2>
 			{% for element in cart.products %}
 				<div class="col-lg-12 m-2 mt-1">
 					<div class="shopping-cart-item bg-light">
@@ -64,11 +64,11 @@
 				<strong>{{cart.data.subTotalTTC| number_format(0, ',' , ' ') }}€</strong>
 			</div>
 		</div>
-		<div class="row">
+		{# <div class="row">
 			<div class="col-lg-12">
-				<h2>Paiment</h2>
+				<h2></h2>
 			</div>
-		</div>
-		<button type="submit" id="checkout" class="btn bg-success">Paiement</button>
+		</div> #}
+		<button type="submit" id="checkout" class="btn bg-success">Confirmer</button>
 	</div>
 {% endblock %}

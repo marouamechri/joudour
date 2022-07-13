@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Entity\Cart;
 use App\Entity\Order;
-use App\Entity\ProductCut;
 use App\Entity\CartLine;
 use App\Entity\OrderLine;
 use App\Repository\ProductCutRepository;
@@ -21,52 +20,53 @@ class OrderServices
         $this->repoProductCut = $repoProductCut;
     }
 
-    // public function createOrder($cart)
-    // {
+    public function createOrder($cart)
+    {
 
-    //     $order = new Orders();//remplissage  table orders
-    //     $order->setReference($cart->getReference())
-    //     ->setFullname($cart->getFullName())
-    //         ->setTransportName($cart->getTransportName())
-    //         ->setTransportPrice($cart->getTransportPrice())
-    //         ->setLivraisonAdresse($cart->getLivraisonAdresse())
-    //         ->setQuantity($cart->getQuantity())
-    //         ->setSubTotalHT($cart->getSubTotalHT())
-    //         ->setTaxe($cart->getTaxe())
-    //         ->setSubTotalTTC($cart->getSubTotalTTC())
-    //         ->setUser($cart->getUser());
-    //     $this->manager->persist($order);
+        $order = new Order();//remplissage  table orders
+        $order->setReference($cart->getReference())
+            ->setFullname($cart->getFullName())
+            ->setEmail($cart->getEmail())
+            ->setTransportName($cart->getTransportName())
+            ->setTransportPrice($cart->getTransportPrice())
+            ->setAdresseLivraison($cart->getAdresseLivraison())
+            ->setQuantityPanier($cart->getQuantityPanier())
+            ->setSubTotalHT($cart->getSubTotalHT())
+            ->setTaxe($cart->getTaxe())
+            ->setSubTotalTTC($cart->getSubTotalTTC())
+            ->setUser($cart->getUser()) 
+            ->setCreatAt(new \DateTime())
+            ->setIsPaid(false)
+            ->setMoreInformation($cart->getmoreInformation());
 
-    //     $products = $cart->getCartLines()->getValues();
+        $this->manager->persist($order);
 
-    //     foreach ($products as $cart_product) {
-    //         $orderDetails = new OrderDetails();//remplissage table orderDetails
-    //         $orderDetails->setProductName($cart_product->getProductName())
-    //                      ->setProductPrice($cart_product->getProductPrice())
-    //                      ->setProductQuantity($cart_product->getProductQuantity())
-    //                      ->setSubtotalHt($cart_product->getSubTotalHt())
-    //                      ->setTaxe($cart_product->getTaxe())
-    //                      ->setSubTotalTtc($cart_product->getSubTotalTtc())
-    //                      ->setLienOrder($order);
+        $products = $cart->getCartLines()->getValues();
 
-    //         $this->manager->persist($orderDetails);
-    //     }
+        foreach ($products as $cart_line) {
+            $orderLine = new OrderLine();//remplissage table orderDetails
+            $orderLine->setProductName($cart_line->getProductName())
+                         ->setProductPrice($cart_line->getProductPrice())
+                         ->setProductQuantity($cart_line->getProductQuantity())
+                         ->setSubTotalProductHt($cart_line->getSubTotalProductHt())
+                         ->setTaxeProduct($cart_line->getTaxeProduct())
+                         ->setSubToltalProductTTC($cart_line->getsubToltalProductTTC())
+                         ->setIdorder($order);                      
 
-    //     $this->manager->flush();
+            $this->manager->persist($orderLine);
+        }
 
-    //     return $order;
-    // }
+        $this->manager->flush();
+
+        return $order;
+    }
     public function saveCart($data, $user)
     {
         /*$data est un tableau
            [
             'products' => ['quantity', 'product'],//tous les produits du panier
             'data' => [],//sous-total, taxe, totalTTC
-            'checkout' => [
-                'address' => objet,
-                'transporteurs' => objet,
-                'informations' => sdfsfn
-            ]
+            'checkout' => ['address' ,'transporteurs','informations' ]
         ]*/
         $cart = new Cart(); //remplissage de la table cart
         $reference = $this->generateUuid();
@@ -85,7 +85,7 @@ class OrderServices
             ->setQuantityPanier($data['data']['quantity_cart']) //voir dans CartServices.php
             ->setSubTotalHT($data['data']['subTotalHT'])
             ->setTaxe($data['data']['Taxe'])
-            ->setSubTotalTTC($data['data']['subTotalTTC'] + $transport->getPricesTransport() / 100)
+            ->setSubTotalTTC($data['data']['subTotalTTC'] + $transport->getPricesTransport())
             ->setUser($user)
             ->setIsPaid(false);
         if ($informations) {
@@ -107,7 +107,7 @@ class OrderServices
                 ->setProductQuantity($products['quantity'])
                 ->setSubTotalProductHt($subtotal)
                 ->setTaxeProduct(round($subtotal * 0.2), 2)
-                ->setSubToltalProductTTC(round($subtotal * 0.2), 2);
+                ->setSubToltalProductTTC($subtotal + round($subtotal * 0.2), 2);
 
             $this->manager->persist($cartLine);
             $cart_lines_array[] = $cartLine;
@@ -118,30 +118,28 @@ class OrderServices
     }
     public function getLineItems($cart)
     {
-        $cartDetails = $cart->getCartLines();
+        $cartLines = $cart->getCartLines();
         $transportName = $cart->getTransportName();
         $transportPrice = $cart->getTransportPrice();
         $taxe = $cart->getTaxe();
         $line_items = [];
-        foreach ($cartDetails as $details) {
-            //$produit = $this->repoProduct->findOneByName($details->getProductName());//ne fonctionne pas
-
+        foreach ($cartLines as $line) {
             $line_items[] = [
                 'price_data' => [
                     'currency' => 'eur',
-                    'unit_amount' => $details->getProductPrice(),
+                    'unit_amount' => $line->getProductPrice()*100,
                     'product_data' => [
-                        'name' => $details->getProductName(),
+                        'name' => $line->getProductName(),
                     ],
                 ],
-                'quantity' =>  $details->getProductQuantity(),
+                'quantity' =>  $line->getProductQuantity(),
             ];
         }
         //transport
         $line_items[] = [
             'price_data' => [
                 'currency' => 'eur',
-                'unit_amount' => $transportPrice,
+                'unit_amount' => $transportPrice*100,
                 'product_data' => [
                     'name' => 'Transport ( ' . $transportName . ' )',
                 ],
@@ -152,7 +150,7 @@ class OrderServices
         $line_items[] = [
             'price_data' => [
                 'currency' => 'eur',
-                'unit_amount' => $taxe,
+                'unit_amount' => $taxe*100,
                 'product_data' => [
                     'name' => 'TVA (20%)',
                 ],

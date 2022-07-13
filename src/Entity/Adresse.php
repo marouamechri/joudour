@@ -28,7 +28,7 @@ class Adresse
     private $message;
 
     #[ORM\Column(type: 'integer')]
-    private $country_code;
+    private $countryCode;
 
     #[ORM\Column(type: 'string', length: 100)]
     private $city;
@@ -100,12 +100,12 @@ class Adresse
 
     public function getCountryCode(): ?int
     {
-        return $this->country_code;
+        return $this->countryCode;
     }
 
-    public function setCountryCode(int $country_code): self
+    public function setCountryCode(int $countryCode): self
     {
-        $this->country_code = $country_code;
+        $this->countryCode = $countryCode;
 
         return $this;
     }
@@ -171,7 +171,7 @@ class Adresse
         if ($this->message) {
             $result .= $this->message . "[spr]";
         }
-        $result .= $this->country_code . "-" . $this->city . "[spr]";
+        $result .= $this->countryCode . "-" . $this->city . "[spr]";
 
         return $result. "[spr]";
     }

@@ -142,9 +142,10 @@ h2 {
     height: 20px
 }
 
-.progress-bar {
+
+/* .progress-bar {
     background-color: #2F8D46
-}
+} */
 
 .blok {
     display: flex;

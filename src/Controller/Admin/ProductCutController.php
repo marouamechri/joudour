@@ -76,6 +76,12 @@ class ProductCutController extends AbstractController
             
             //enregistrer les données de product_cut dans BDD
             $productCut->setProductColor($idProduct);
+            if($nbProd>0)
+            {
+                $productCut->setActive(true);
+            }else{
+                $productCut->setActive(false);
+            }
            $productCutRepository->add($productCut, true);
 
             return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);
@@ -124,7 +130,13 @@ class ProductCutController extends AbstractController
            }
           
            $productCut->setStock($stock);
-        
+           //le produit est active ou pas
+           if($nbProd>0)
+           {
+                $productCut->setActive(true);
+           }else{
+            $productCut->setActive(false);
+           }
            //enregistrer les données de product_cut dans BDD
           $productCutRepository->add($productCut, true);
           return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);

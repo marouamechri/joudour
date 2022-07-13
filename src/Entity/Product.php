@@ -27,7 +27,7 @@ class Product
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\Column(type: 'datetime',nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private $modifiedAt;
 
     #[ORM\Column(type: 'string')]
@@ -38,13 +38,13 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private $typeProduct;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductColor::class,cascade:['remove'])]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductColor::class, cascade: ['remove'])]
     private $productColors;
 
     #[ORM\Column(type: 'string', length: 40)]
     private $firstImage;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean', nullable: true)]
     private $active;
 
     #[ORM\Column(type: 'string', length: 10)]
@@ -53,7 +53,7 @@ class Product
     #[ORM\Column(type: 'string', length: 15)]
     private $genre;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean', nullable: true)]
     private $newColletion;
 
     public function __construct()
@@ -92,12 +92,12 @@ class Product
 
     public function getAmountHTVA(): ?float
     {
-        return $this->amountHTVA /100;
+        return $this->amountHTVA / 100;
     }
 
     public function setAmountHTVA(float $amountHTVA): self
     {
-        $this->amountHTVA = $amountHTVA *100;
+        $this->amountHTVA = $amountHTVA * 100;
 
         return $this;
     }
@@ -228,10 +228,7 @@ class Product
 
         return $this;
     }
-    public function __toString()
-    {
-        return $this->id;
-    }
+
 
     public function isNewColletion(): ?bool
     {
@@ -244,6 +241,8 @@ class Product
 
         return $this;
     }
-
-
+    public function __toString()
+    {
+        return $this->id;
+    }
 }

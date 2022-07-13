@@ -5,19 +5,21 @@
 {% block stylesheets %}
 	{{ encore_entry_link_tags('app') }}
 	<link rel="stylesheet" href="{{ asset('css/pageStyle.css')}}"/>
-
+	<link rel="stylesheet" href="{{ asset('css/pageStyle.css')}}"/>
+	<link rel="stylesheet" href="{{ asset('css/menuPrincipal.css')}}"/>
+	<link rel="stylesheet" href="{{ asset('css/home.css')}}"/>
 {% endblock %}
 
 
 {% block body %}
-	<div class="container">
+	<div class="container mt-5">
 		<div class="row">
-			<div class="col-lg-8 col-md-12 col-sm-12">
+			<div class="col-lg-6 col-md-12 col-sm-12">
 				<div class="ecommerce-gallery" data-mdb-auto-height="true">
 					<div
 						class="row py-3 shadow-5">
 						{# galerie des images produit #}
-						<div class="col-8 mb-1">
+						<div class="col-12 mb-1">
 							<div class="box">
 								{% set firstpicture = productColor.pictures|first %}
 								<img src="{{ asset('/upload/images/product/' ~ firstpicture.pictureName)}}" alt="{{product.nameProduct}}" class="ecommerce-gallery-main-img  active w-100"/>
@@ -33,17 +35,17 @@
 					</div>
 				</div>
 			</div>
-			<div class='col-lg-4 col-md-12 col-sm-12'>
+			<div class='col-lg-6 col-md-12 col-sm-12 px-5'>
 				<div
 					class='row'>
 					{# afficher le nom de produit #}
 					<h1>{{product.nameProduct}}</h1>
 					{# afficher le prix de produit #}
-					<div id='product-price'>
+					<div id='product-price mt-2 mb-2'>
 						<span>{{ product.amountHTVA| number_format(0, ',' , ' ') }}€</span>
 					</div>
 					{# liste de coleur disponible #}
-					<div class='product-color'>
+					<div class='product-color  mt-2 mb-2'>
 						<ul class="list-swatches">
 							{% for colorProduct in product.productColors %}
 								<li class="item">
@@ -53,68 +55,42 @@
 							{% endfor %}
 						</ul>
 					</div>
-					{# liste des taille disponible #}
+
+
 					<div>
-						<div>
-							{# afficher le description de produit #}
-							<strong>
-								Description:
-							</strong>
-							<p>{{product.descriptionProduct}}</p>
+						{# afficher le description de produit #}
+						<strong>
+							Description:
+						</strong>
+						<p>{{product.descriptionProduct|raw}}</p>
+					</div>
+					{# liste des taille disponible #}
+					{{ form_start(form) }}
+					 {{ form_widget(form) }}
+					    <div class="text-center">
+						<button class="btn btn-success text-center">
+							<i class="fa fa-shopping-cart"></i>Ajouter</button>
 						</div>
-						{{ form_start(form) }}
-						<div>
-							{# <select class="form-select" name="cut" aria-label="Default select example">
-								<option selected >Choisissez votre taille</option>
-								{% set i = 0 %}
-								{% for cut in cuts %}
-									{% for all in allcuts %}
-										{% if cut.id == all.id %}
-											<option value="{{i + 1}}">
-												{{all.cutValue}}
-											</option>
-										{% endif %}
-									{% endfor %}
-								{% endfor %}
-							</select> #}
-							{# {{path("cart_add", {id:product.id, 'productColor':, 'productCut': })}} #}
-							<button class="btn btn-success">
-								<i class="fa fa-shopping-cart"></i>Ajouter</button>
-						</div>
-						{{ form_end(form) }}
-						{# <select class="form-select" name="cut" aria-label="Default select example">
-																				<option selected>Choisissez votre taille</option>
-																				{% set i = 0 %}
-																				{% for cut in cuts %}
-																					{% for all in allcuts %}
-																						{% if cut.id == all.id %}
-																							<option value="{{i + 1}}">
-																								{{all.cutValue}}
-																							</option>
-																						{% endif %}
-																					{% endfor %}
-																				{% endfor %}
-																			</select>
-												                         #}
-
-
+					{{ form_end(form) }}
+						
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('js/carousel.js')}}"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script>
 
-		{% endblock %}
-		{% block javascripts %}
-			<script type="text/javascript" src="{{ asset('js/carousel.js')}}"></script>
-			<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-			<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-			<script>
-
-				// fonction permet d'afficher le image dans le box
+		// fonction permet d'afficher le image dans le box
 function affiche(img) {
 console.log(img);
 document.querySelector('.box img').src = "../../upload/images/product/" + img;
 }
-			</script>
-		{% endblock %}
+	</script>
+{% endblock %}

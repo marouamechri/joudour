@@ -34,11 +34,11 @@
 						
 							{% set firstcolor = product.productColors|first %}
 							{% if color == firstcolor %}
-							<tr>
+							<tr class="productColor">
 							<th  scope="col">Couleur</th>
 							<th  scope="col">Action</th></tr>		
 							{% endif %}
-						<tr>
+						<tr class="productColor">
 							<td scope="row" style="background-color:{{ color}}"></td>
 							<td>{{color.id}}</td>
 							<td collapse="3">
@@ -57,11 +57,11 @@
 						{% for productcut in color.productCuts %}
 							{% set firstproductCut = color.productCuts|first %}
 							{% if productcut == firstproductCut %}
-							<tr>
+							<tr class="productCut">
 							<th  scope="col">Taille</th>
 							<th  scope="col">Action</th></tr>		
 							{% endif %}
-							<tr>
+							<tr class="productCut">
 								<td scope="row">{{productcut.cut.cutValue}}</td>
 								<td>{{productcut.id}}</td>
 								<td>

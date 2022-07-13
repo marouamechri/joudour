@@ -13,16 +13,9 @@ class OrderLine
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $quantity;
-
     #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderLines')]
     #[ORM\JoinColumn(nullable: false)]
     private $idorder;
-
-    #[ORM\ManyToOne(targetEntity: ProductCut::class, inversedBy: 'orderLines')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $productCut;
 
     #[ORM\OneToOne(mappedBy: 'order_line', targetEntity: DeleveryLine::class, cascade: ['persist', 'remove'])]
     private $deleveryLine;
@@ -42,21 +35,12 @@ class OrderLine
     #[ORM\Column(type: 'float')]
     private $taxeProduct;
 
+    #[ORM\Column(type: 'float')]
+    private $subToltalProductTTC;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getQuantity(): ?int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): self
-    {
-        $this->quantity = $quantity;
-
-        return $this;
     }
 
     public function getIdorder(): ?Order
@@ -67,18 +51,6 @@ class OrderLine
     public function setIdorder(?Order $idorder): self
     {
         $this->idorder = $idorder;
-
-        return $this;
-    }
-
-    public function getProductCut(): ?ProductCut
-    {
-        return $this->productCut;
-    }
-
-    public function setProductCut(?ProductCut $productCut): self
-    {
-        $this->productCut = $productCut;
 
         return $this;
     }
@@ -156,6 +128,18 @@ class OrderLine
     public function setTaxeProduct(float $taxeProduct): self
     {
         $this->taxeProduct = $taxeProduct;
+
+        return $this;
+    }
+
+    public function getSubToltalProductTTC(): ?float
+    {
+        return $this->subToltalProductTTC;
+    }
+
+    public function setSubToltalProductTTC(float $subToltalProductTTC): self
+    {
+        $this->subToltalProductTTC = $subToltalProductTTC;
 
         return $this;
     }
