@@ -28,6 +28,7 @@ class CartController extends AbstractController
     {
         //recuperer le contenu du panier
         $cart = $this->cartServices->getFullCart($session,$productCutRepository);
+ 
         if (!isset($cart['products'])){
             return $this->redirectToRoute("home");
         }
@@ -42,9 +43,8 @@ class CartController extends AbstractController
     #[Route('/cart/add/{id}', name: 'cart_add')]
     public function addToCart($id,SessionInterface $session,ProductCutRepository $productCutRepository): Response{
     
-        
-         $this->cartServices->addToCart($id, $session, $productCutRepository);
-        
+        $this->cartServices->addToCart($id, $session, $productCutRepository);
+
         return $this->redirectToRoute("app_cart");
     }
 

@@ -28,18 +28,17 @@
 				</div>
 				<div class="row">
 					{% for element in cart.products %}
-
 						<div class="col-lg-12 m-4 mt-1">
 							<div class="shopping-cart-item bg-light">
 								<div class="row ">
 									<div class="col-lg-3 shopping-cart-img">
-										<a href="{{ path('app_show_product', {'id': element.parent.id, 'productColor': element.productColor.id})}}" title="{{ element.parent.nameProduct }}">
-
+										<a href="{{ path('app_show_product', {'id': element.parent.id, 'productColor': element.productColor.id})}}" 
+										title="{{ element.parent.nameProduct }}">
 											{% set firstpicture = element.productColor.pictures|first %}
-											<img src="{{ asset('/upload/images/product/' ~ firstpicture.pictureName)}}" alt="{{element.parent.nameProduct}}" class="w-100"/>
+											<img src="{{ asset('/upload/images/product/' ~ firstpicture.pictureName)}}"
+											 alt="{{element.parent.nameProduct}}" class="w-100"/>
 										</a>
 									</div>
-
 									<div class="col-lg-9 shopping-cart-item-data">
 										<div>{{element.parent.nameProduct}}</div>
 										<div>{{element.productColor.color.nameColor}}</div>
@@ -48,16 +47,16 @@
 											{{element.parent.amountHTVA | number_format(0, ',' , ' ') }}€
 										</div>
 										<div>
-											<a href="{{path('cart_Delete', {'id' : element.product.id})}}" class="text-decoration-none" type="button" value="-" class="minus"> - </a>
-												{# <i class="fa fa-caret-left"></i>
-											</a> #}
+										{% set stock = element.product.stock.nbrProduct %}
+											<a href="{{path('cart_Delete', {'id' : element.product.id})}}" class="text-decoration-none" type="button"
+											 value="-" class="minus"> - </a>
 											{{element.quantity}}
-											<a href="{{path('cart_add', {'id' : element.product.id})}}" class="text-decoration-none" type="button" value="+" class="plus"> + </a>
-												{# <i class="fa fa-caret-right"></i>
-
-											</a> #}
-
-
+											{% if (stock - element.quantity)> 0 %}
+											<a href="{{path('cart_add', {'id' : element.product.id})}}" class="text-decoration-none" 
+											type="button" value="+" class="plus"> + </a>
+											{% else %}
+												<a href="" class="text-decoration-none" type="button" value="+" class="plus"> + </a>
+											{% endif %}	
 										</div>
 										<div class="text-end">
 											<a href="{{path('cart_Delete_All', {'id' : element.product.id})}}" class="text-decoration-none">Supprimer</a>

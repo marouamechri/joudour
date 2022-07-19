@@ -1,33 +1,31 @@
 window.onload = () => {
-    //charger des bouttons "Supprimer"
-    let links = document.querySelectorAll("[data-delete]");
-    //consol.log(links);
+    // Gestion des boutons "Supprimer"
+    let links = document.querySelectorAll("[data-delete]")
 
-    //on boucle sur links
-
+    // On boucle sur links
     for (link of links) {
-        //on ecoute le clic
+        // On écoute le clic
         link.addEventListener("click", function(e) {
-            //on empéche la navigation
-            e.preventDefault();
-            //on demande confirmation
-            if (confirm("Voulez vous supprimer cette image?")) {
-                //on envoi une requete Ajax vers le href du lien avec la méthode delete
+            // On empêche la navigation
+            e.preventDefault()
+
+            // On demande confirmation
+            if (confirm("Voulez-vous supprimer cette image ?")) {
+                // On envoie une requête Ajax vers le href du lien avec la méthode DELETE
                 fetch(this.getAttribute("href"), {
-                    method: 'DELETE',
+                    method: "DELETE",
                     headers: {
                         "X-Requested-With": "XMLHttpRequest",
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({ "_token": this.dataset.token })
                 }).then(
-                    //on récupère la reponce en JSON
+                    // On récupère la réponse en JSON
                     response => response.json()
                 ).then(data => {
-                    if (data.success) {
-                        //on supprime le div qui contien l'image
+                    if (data.success)
                         this.parentElement.remove()
-                    } else
+                    else
                         alert(data.error)
                 }).catch(e => alert(e))
             }

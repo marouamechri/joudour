@@ -6,6 +6,7 @@ use App\Entity\Picture;
 use App\Entity\ProductColor;
 use App\Form\ProductColorType;
 use App\Repository\ColorRepository;
+use App\Repository\PictureRepository;
 use App\Repository\ProductRepository;
 use App\Repository\ProductColorRepository;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
@@ -139,22 +140,23 @@ class ProductColorController extends AbstractController
     }
 
     #[Route('/supprimer/image/{id}', name: 'delete_image', methods: ['DELETE'])]
-    public function deleteImage(Picture $image, Request $request, ManagerRegistry $manager)
+    public function deleteImage(Picture $image, Request $request, PictureRepository $pictureRepository)
     {
 
         $data = Json_decode($request->getContent(), true);
         //on verifier si le token est valide
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {
-
             //on récupère le nom de l'image
             $nom = $image->getPictureName();
+            //dd($nom);
             //on supprime le fichier
             unlink($this->getParameter('images_directory_product') . '/' . $nom);
-
+            
             //on supprime l'entrée de la base
-            $entityManager = $manager->getManager();
-            $entityManager->remove($image);
-            $entityManager->flush();
+            $pictureRepository->remove($image, true);
+            // $entityManager = $manager->getManager();
+            // $entityManager->remove($image);
+            // $entityManager->flush();
 
             //on répont en Json_decode
             return new JsonResponse(['success' => 1]);

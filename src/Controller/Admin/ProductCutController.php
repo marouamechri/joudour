@@ -61,17 +61,17 @@ class ProductCutController extends AbstractController
             $productCut->setStock($stock);
             
             //recuperer les données de Historique de prix
-            $start = $form->get('startDatePricesSaleHTVA')->getData();
-            $end = $form->get('endDatePricesSaleHTVA')->getData();
-            $amount = $form->get('amountHTVA')->getData();
-            $active = $form->get('active')->getData();
+            // $start = $form->get('startDatePricesSaleHTVA')->getData();
+            // $end = $form->get('endDatePricesSaleHTVA')->getData();
+            // $amount = $form->get('amountHTVA')->getData();
+            // $active = $form->get('active')->getData();
             //enregistrer les données de stock dans BDD
-            $histpPrices->setStartDatePricesSaleHTVA($start);
-            $histpPrices->setEndDatePricesSaleHTVA($end);
-            $histpPrices->setActive($active);
-            $histpPrices->setAmountHTVA($amount);
-            $historiquePricesRepository->add($histpPrices);
-            $productCut->addHistoriquePrice($histpPrices);
+            // $histpPrices->setStartDatePricesSaleHTVA($start);
+            // $histpPrices->setEndDatePricesSaleHTVA($end);
+            // $histpPrices->setActive($active);
+            // $histpPrices->setAmountHTVA($amount);
+            // $historiquePricesRepository->add($histpPrices);
+            // $productCut->addHistoriquePrice($histpPrices);
            
             
             //enregistrer les données de product_cut dans BDD
@@ -103,7 +103,7 @@ class ProductCutController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_product_cut_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ProductCut $productCut,HistoriquePricesRepository $histoRepo, ProductCutRepository $productCutRepository): Response
+    public function edit(Request $request, ProductCut $productCut, ProductCutRepository $productCutRepository): Response
     {
         $idProduct = $request->query->get("id");
         $form = $this->createForm(ProductCutEditeType::class, $productCut);

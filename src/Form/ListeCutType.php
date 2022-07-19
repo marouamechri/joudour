@@ -2,9 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Product;
 use App\Entity\ProductCut;
-use App\Entity\ProductColor;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

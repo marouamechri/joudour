@@ -80,11 +80,22 @@
         /* width: 100%; */
         border: 0;
     }
+    
+    .contener-form {
+        width: 600px;
+        height: auto;
+        margin: 20px;
+        margin-left: 30%;
+        justify-content: center;
+        border: solid;
+        border-radius: 30px;
+        box-shadow: 10px 10px 10px rgb(97, 96, 96);
+    }
     /* .joum-product-item {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: flex-start;
+        justify-content: flex-start;s
     } */
     /**
             page show

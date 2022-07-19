@@ -56,7 +56,7 @@ class ProductController extends AbstractController
 
             $productRepository->add($product, true);
 
-            return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/new.html.twig', [
@@ -106,7 +106,7 @@ class ProductController extends AbstractController
 
             $productRepository->add($product, true);
 
-            return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);
         }
 
 
@@ -123,6 +123,6 @@ class ProductController extends AbstractController
             $productRepository->remove($product, true);
         }
 
-        return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_product_color_index', [], Response::HTTP_SEE_OTHER);
     }
 }

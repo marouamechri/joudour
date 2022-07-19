@@ -38,32 +38,32 @@ class ProductCutType extends AbstractType
             ->add('nbrProd', NumberType::class, [
                 'label' => 'Quantite des Produits',
                 'mapped' => false
-            ])
-            ->add('startDatePricesSaleHTVA', DateTimeType::class, [
-                'label'=>'Date début de validiter de prix',
-                'mapped'=>false,
-                'placeholder' => [
-                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
-                    'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Seconde',
-                ],
-            ])
-            ->add('endDatePricesSaleHTVA', DateTimeType::class, [
-                'label'=>'Date fin de validiter de prix',
-                'mapped'=>false,
-                'placeholder' => [
-                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
-                    'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Seconde',
-                ],
-            ])
-
-            ->add('amountHTVA', MoneyType::class, [
-                'label' => 'le prix de vente',
-                'mapped'=>false
-            ])
-            ->add('active', CheckboxType::class, [
-                'label'=>'Etat de prix',
-                'mapped'=>false
             ]);
+            // ->add('startDatePricesSaleHTVA', DateTimeType::class, [
+            //     'label'=>'Date début de validiter de prix',
+            //     'mapped'=>false,
+            //     'placeholder' => [
+            //         'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+            //         'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Seconde',
+            //     ],
+            // ])
+            // ->add('endDatePricesSaleHTVA', DateTimeType::class, [
+            //     'label'=>'Date fin de validiter de prix',
+            //     'mapped'=>false,
+            //     'placeholder' => [
+            //         'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+            //         'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Seconde',
+            //     ],
+            // ])
+
+            // ->add('amountHTVA', MoneyType::class, [
+            //     'label' => 'le prix de vente',
+            //     'mapped'=>false
+            // ])
+            // ->add('active', CheckboxType::class, [
+            //     'label'=>'Etat de prix',
+            //     'mapped'=>false
+            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

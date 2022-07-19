@@ -22,12 +22,6 @@ class CkeckoutType extends AbstractType
                 'class' => Adresse::class,
                 'required' => true,
                 'choices' => $user->getAdresses(),
-                // 'query_builder' =>function(EntityRepository $er)use($user){
-                //     return $er->createQueryBuilder('a')
-                //     ->andWhere('a.user = :user')
-                //     ->setParameter('user', $user);
-
-                // },
                 'multiple' => false,
                 'expanded' => true //design un checkbox
             ])

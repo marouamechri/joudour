@@ -135,6 +135,35 @@
 				<script type="text/javascript" src="{{ asset('js/menuAdmin.js')}}"></script>
 				<script type="text/javascript" src="{{ asset('js/images.js')}}"></script>
 
+<script>
+function showProductColor(id) {
+	//preparation de nom class 
+	let classThProductColor = ".thProductColor"+id;
+	let classProductColor=".productColor"+id;
+	
+	let thProductColor = document.querySelector(classThProductColor);
+	let productColor = document.querySelector(classThProductColor)
+	//afficher le contenu
+	thProductColor.classList.remove = "d-none";
+	productColor..classList.remove = "d-none";
+} 
+function showProductCut(id)
+{
+	let classThProductCut = ".ThProductCut"+id;
+	let classProductColor = ".productColor"+id;
+
+	let ThProductCut = document.querySelector(classThProductCut);
+	let productColor = document.querySelector(productColor);
+
+	ThProductCut.ClassList.remove= "d-none";
+	productColor.style.display = "d-none";
+
+}
+</script>
+
+
+
+
 			{% endblock %}
 		</body>
 	</html>

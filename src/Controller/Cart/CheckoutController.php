@@ -23,7 +23,8 @@ class CheckoutController extends AbstractController
     }
 
     #[Route('/checkout', name: 'app_checkout')]
-    public function index(Request $request,SessionInterface $session,UserInterface $userConncet, ProductCutRepository $productCutRepository, UserRepository $userRepo): Response
+    public function index(Request $request,SessionInterface $session,UserInterface $userConncet,
+     ProductCutRepository $productCutRepository, UserRepository $userRepo): Response
     {
         $user = $userRepo->find($userConncet);
         $cart = $this->cartServices->getFullCart($session,$productCutRepository);

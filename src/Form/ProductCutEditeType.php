@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Cut;
 use App\Entity\ProductCut;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -23,24 +24,24 @@ class ProductCutEditeType extends AbstractType
                 'choice_label' => 'cutValue',
                 'multiple' => false,
                 'mapped' => true,
-                'required' => false,
+                'required' => True,
 
             ])
             
             ->add('min', NumberType::class, [
                 'label' => 'Stock Min',
                 'mapped' => false,
-                'required' => true
+                'required' => false
             ])
             ->add('max', NumberType::class, [
                 'label' => 'Stock Max',
                 'mapped' => false,
-                'required' => true
+                'required' => false
             ])
             ->add('nbrProd', NumberType::class, [
                 'label' => 'Quantite des Produits',
                 'mapped' => false,
-                'required' => true
+                'required' => false
             ])
         
             

@@ -44,7 +44,6 @@ class PageProductController extends AbstractController
                 $productCuts= $productColor->getProductCuts();
                 foreach ($productCuts as $productCut) {
                     $stock  = $productCut->getStock();
-                    dump($stock->getNbrProduct());
                     if($stock->getNbrProduct()>0){
                         $productCut->setActive(true);
                     }else {
@@ -62,7 +61,8 @@ class PageProductController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_show_product')]
-    public function show(Request $request, Product $product, CutRepository $cutRepository, ProductColorRepository $productColorRepository): Response
+    public function show(Request $request, Product $product,
+     ProductColorRepository $productColorRepository): Response
     {
         //recupere le get color
         $ProductColor =  $request->query->get("productColor");
