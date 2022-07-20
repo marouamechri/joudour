@@ -26,6 +26,7 @@ class PageProductController extends AbstractController
         (string)$type = $request->query->get("type");
         (string)$genre =  $request->query->get("genre");
         (string)$collection =  $request->query->get("new");
+        //(string)$orderPrice = $request->query->get("order");
 
         if ($type && $genre) {
             $products = $productRepository->FindProductType($type, $genre);

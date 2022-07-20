@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Option index{% endblock %}
 
@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>NameOption</th>
                 <th>actions</th>
             </tr>
@@ -16,20 +15,19 @@
         <tbody>
         {% for option in options %}
             <tr>
-                <td>{{ option.id }}</td>
                 <td>{{ option.nameOption }}</td>
                 <td>
-                    <a href="{{ path('app_option_show', {'id': option.id}) }}">show</a>
-                    <a href="{{ path('app_option_edit', {'id': option.id}) }}">edit</a>
+                    <a href="{{ path('app_option_show', {'id': option.id}) }}">Consulter</a>
+                    <a href="{{ path('app_option_edit', {'id': option.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="2">liste vide</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_option_new') }}">Create new</a>
+    <a href="{{ path('app_option_new') }}">Ajouter</a>
 {% endblock %}

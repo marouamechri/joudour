@@ -78,6 +78,26 @@ class ProductRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    // public function orderPrices(String $order):array
+    // {
+    //     $query = $this->createQueryBuilder('b');
+
+    //     if($order == 'DESC')
+    //     {
+    //         $query->select('b')
+    //             ->orderBy('b.amountHTVA', $order) ;
+    //         $order = 'ASC';
+    //     }
+    //     else{
+    //         $query->select('b')
+    //         ->orderBy('b.amountHTVA', $order) ;
+    //         $order = 'DESC';
+    //     }
+
+    //     return $query->getQuery()->getResult();
+
+    // }
+
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */

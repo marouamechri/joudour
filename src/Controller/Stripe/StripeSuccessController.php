@@ -39,7 +39,6 @@ class StripeSuccessController extends AbstractController
             $stock->setNbrProduct($stockAct);
             $stockRepository->add($stock, true);
         }
-        // $cartServices->deleteCart($cart,$session, $productCutRepository);
        
         if(!$order->isIsPaid()){
             //commande est payée
@@ -47,7 +46,7 @@ class StripeSuccessController extends AbstractController
             //dd($order);
             $manager->flush();
 
-            $cartServices->deleteCart($cart,$session, $productCutRepository);
+            //$cartServices->deleteCart($cart,$session, $productCutRepository);
            
             
         }

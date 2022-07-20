@@ -5,15 +5,17 @@ namespace App\Controller\Admin;
 use App\Entity\ImagewebSite;
 use App\Form\ImagewebSiteType;
 use App\Repository\ImagewebSiteRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/imageweb')]
 class ImagewebSiteController extends AbstractController
 {
     #[Route('/', name: 'app_imageweb_site_index', methods: ['GET'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function index(ImagewebSiteRepository $imagewebSiteRepository): Response
     {
         return $this->render('imageweb_site/index.html.twig', [
@@ -22,6 +24,7 @@ class ImagewebSiteController extends AbstractController
     }
 
     #[Route('/new', name: 'app_imageweb_site_new', methods: ['GET', 'POST'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function new(Request $request, ImagewebSiteRepository $imagewebSiteRepository): Response
     {
         $website = $imagewebSiteRepository->findAll();
@@ -124,6 +127,7 @@ class ImagewebSiteController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_imageweb_site_show', methods: ['GET'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function show(ImagewebSite $imagewebSite): Response
     {
         return $this->render('imageweb_site/show.html.twig', [
@@ -132,6 +136,7 @@ class ImagewebSiteController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_imageweb_site_edit', methods: ['GET', 'POST'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function edit(Request $request, ImagewebSite $imagewebSite, ImagewebSiteRepository $imagewebSiteRepository): Response
     {
         $form = $this->createForm(ImagewebSiteType::class, $imagewebSite);
@@ -150,6 +155,7 @@ class ImagewebSiteController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_imageweb_site_delete', methods: ['POST'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function delete(Request $request, ImagewebSite $imagewebSite, ImagewebSiteRepository $imagewebSiteRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $imagewebSite->getId(), $request->request->get('_token'))) {

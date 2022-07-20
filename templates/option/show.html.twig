@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Option{% endblock %}
 
@@ -12,15 +12,15 @@
                 <td>{{ option.id }}</td>
             </tr>
             <tr>
-                <th>NameOption</th>
+                <th>Option</th>
                 <td>{{ option.nameOption }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_option_index') }}">back to list</a>
+    <a href="{{ path('app_option_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('app_option_edit', {'id': option.id}) }}">edit</a>
+    <a href="{{ path('app_option_edit', {'id': option.id}) }}">Modifier</a>
 
     {{ include('option/_delete_form.html.twig') }}
 {% endblock %}

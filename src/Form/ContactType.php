@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ContactType extends AbstractType
 {
@@ -33,7 +34,7 @@ class ContactType extends AbstractType
                     new Email(['message'=>'Votre email ne semble pas valide'])
                 ]
             ])
-            ->add('message',TextType::class,[
+            ->add('message',TextareaType::class,[
                 'label'=>'Message',
                 'mapped'=>false,
                 'attr' => [

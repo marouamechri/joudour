@@ -5,15 +5,17 @@ namespace App\Controller\Admin;
 use App\Entity\Cut;
 use App\Form\CutType;
 use App\Repository\CutRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/cut')]
 class CutController extends AbstractController
 {
     #[Route('/', name: 'app_cut_index', methods: ['GET'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function index(CutRepository $cutRepository): Response
     {
         return $this->render('cut/index.html.twig', [
@@ -22,6 +24,7 @@ class CutController extends AbstractController
     }
 
     #[Route('/new', name: 'app_cut_new', methods: ['GET', 'POST'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function new(Request $request, CutRepository $cutRepository): Response
     {
         $cut = new Cut();
@@ -41,6 +44,7 @@ class CutController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_cut_show', methods: ['GET'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function show(Cut $cut): Response
     {
         return $this->render('cut/show.html.twig', [
@@ -49,6 +53,7 @@ class CutController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_cut_edit', methods: ['GET', 'POST'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function edit(Request $request, Cut $cut, CutRepository $cutRepository): Response
     {
         $form = $this->createForm(CutType::class, $cut);
@@ -67,6 +72,7 @@ class CutController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_cut_delete', methods: ['POST'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function delete(Request $request, Cut $cut, CutRepository $cutRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$cut->getId(), $request->request->get('_token'))) {

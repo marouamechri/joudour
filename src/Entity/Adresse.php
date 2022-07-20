@@ -36,13 +36,6 @@ class Adresse
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'adresses')]
     private $user;
 
-    #[ORM\OneToMany(mappedBy: 'adress', targetEntity: Delivery::class, orphanRemoval: true)]
-    private $deliveries;
-
-    public function __construct()
-    {
-        $this->deliveries = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -134,35 +127,8 @@ class Adresse
         return $this;
     }
 
-    /**
-     * @return Collection<int, Delivery>
-     */
-    public function getDeliveries(): Collection
-    {
-        return $this->deliveries;
-    }
-
-    public function addDelivery(Delivery $delivery): self
-    {
-        if (!$this->deliveries->contains($delivery)) {
-            $this->deliveries[] = $delivery;
-            $delivery->setAdress($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDelivery(Delivery $delivery): self
-    {
-        if ($this->deliveries->removeElement($delivery)) {
-            // set the owning side to null (unless already changed)
-            if ($delivery->getAdress() === $this) {
-                $delivery->setAdress(null);
-            }
-        }
-
-        return $this;
-    }
+   
+    
     public function __toString()
     {
         //spr permet de mettre un espace sans mettre une balise que php ne peut interpréter

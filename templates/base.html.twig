@@ -42,14 +42,17 @@
 						</button>
 						<div class="dropdown-menu">
 							{% if app.user %}
-								<a class="dropdown-item" href="{{path('app_compte_user')}}">Mon compte</a>
-
+								{% if is_granted("ROLE_ADMIN") %}
+								<a class="dropdown-item" href="{{path('app_home_admin')}}">Administration</a>
+								{% else %}
+									<a class="dropdown-item" href="{{path('app_compte_user')}}">Mon compte</a>
+								{% endif %}
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="{{path('app_logout')}}">Déconnection</a>
-
 							</div>
 						{% else %}
 							<a class="dropdown-item" href="{{path('app_login_home')}}">Connexion</a>
+						</div>
 						{% endif %}
 					</div>
 					<div class="ms-2">
@@ -86,10 +89,10 @@
 													<h6 class="font-weight-bold text-uppercase">Femme</h6>
 													<ul class="list-unstyled">
 														<li class="nav-item">
-															<a href="{{path('app_page_product',{'type':'Robe', 'genre' :'Femme'})}}" class="nav-link text-small pb-0 ">Robe</a>
+															<a href="{{path('app_page_product',{'type':'Robe soiree', 'genre' :'Femme'})}}" class="nav-link text-small pb-0 ">Robe de soirée</a>
 														</li>
 														<li class="nav-item">
-															<a href="{{path('app_page_product',{'type':'Robe de mariee' , 'genre' :'Femme'})}}" class="nav-link text-small pb-0 ">Robe de mariée</a>
+															<a href="{{path('app_page_product',{'type':'Robe mariee' , 'genre' :'Femme'})}}" class="nav-link text-small pb-0 ">Robe de mariée</a>
 														</li>
 														<li class="nav-item">
 															<a href="{{path('app_page_product',{'type':'Bas', 'genre' :'Femme' })}}" class="nav-link text-small pb-0 ">bas</a>

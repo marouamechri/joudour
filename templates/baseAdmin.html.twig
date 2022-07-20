@@ -49,20 +49,49 @@
 							Produits
 						</a>
 						<div class='dashboard-nav-dropdown-menu'>
-							<a href="{{ path('app_product_index') }}" class="dashboard-nav-dropdown-item">les produit</a>
-							<a href="{{ path('app_product_color_index') }}" class="dashboard-nav-dropdown-item">Produit Assossiées</a>
+							<a href="{{ path('app_product_color_index') }}" class="dashboard-nav-dropdown-item">Gestion produit</a>
 							<a href="#" class="dashboard-nav-dropdown-item">Archive</a>
 							{# <a href="#" class="dashboard-nav-dropdown-item">Video</a> #}
 						</div>
 					</div>
 					<div class='dashboard-nav-dropdown'>
 						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
-							<i class="fas fa-users"></i>
+							<i class="fas fa-edit"></i>
 							Transporteur
 						</a>
 						<div class='dashboard-nav-dropdown-menu'>
-							<a href="{{ path('app_transporteur_index') }}" class="dashboard-nav-dropdown-item">Transpoteur</a>
+							<a href="{{ path('app_transporteur_index') }}" class="dashboard-nav-dropdown-item">Liste</a>
 							<a href="{{ path('app_transporteur_new') }}" class="dashboard-nav-dropdown-item">Ajouter</a>
+						</div>
+					</div>
+					<div class='dashboard-nav-dropdown'>
+						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+							<i class="fas fa-edit"></i>
+							Couleurs
+						</a>
+						<div class='dashboard-nav-dropdown-menu'>
+							<a href="{{ path('app_color_index') }}" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="{{ path('app_color_new') }}" class="dashboard-nav-dropdown-item">Ajouter</a>
+						</div>
+					</div>
+					<div class='dashboard-nav-dropdown'>
+						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+							<i class="fas fa-edit"></i>
+							Categories
+						</a>
+						<div class='dashboard-nav-dropdown-menu'>
+							<a href="{{ path('app_category_index') }}" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="{{ path('app_category_new') }}" class="dashboard-nav-dropdown-item">Ajouter</a>
+						</div>
+					</div>
+					<div class='dashboard-nav-dropdown'>
+						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+							<i class="fas fa-edit"></i>
+							Options
+						</a>
+						<div class='dashboard-nav-dropdown-menu'>
+							<a href="{{ path('app_option_index') }}" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="{{ path('app_option_new') }}" class="dashboard-nav-dropdown-item">Ajouter</a>
 						</div>
 					</div>
 					<div class='dashboard-nav-dropdown'>
@@ -71,37 +100,29 @@
 							Users
 						</a>
 						<div class='dashboard-nav-dropdown-menu'>
-							<a href="#" class="dashboard-nav-dropdown-item">All</a>
-							<a href="#" class="dashboard-nav-dropdown-item">Subscribed</a>
-							<a href="#" class="dashboard-nav-dropdown-item">Non-subscribed</a>
-							<a href="#" class="dashboard-nav-dropdown-item">Banned</a>
-							<a href="#" class="dashboard-nav-dropdown-item">New</a>
+							<a href="#" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="#" class="dashboard-nav-dropdown-item">Ajouter</a>
 						</div>
 					</div>
 					<div class='dashboard-nav-dropdown'>
 						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
-							<i class="fas fa-money-check-alt"></i>
-							Payments
+							<i class="fas fa-cogs"></i>
+							Settings
 						</a>
 						<div class='dashboard-nav-dropdown-menu'>
-							<a href="#" class="dashboard-nav-dropdown-item">All</a>
-							<a href="#" class="dashboard-nav-dropdown-item">Recent</a>
-							<a href="#" class="dashboard-nav-dropdown-item">
-								Projections</a>
+							<a href="{{ path('app_imageweb_site_index') }}" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="{{ path('app_imageweb_site_new') }}" class="dashboard-nav-dropdown-item">Ajouter</a>
 						</div>
 					</div>
-					<a href="{{ path('app_imageweb_site_index') }}" class="dashboard-nav-item">
-						<i class="fas fa-cogs"></i>
-						Settings
-					</a>
+
 					<a href="#" class="dashboard-nav-item">
 						<i class="fas fa-user"></i>
 						Profile
 					</a>
 					<div class="nav-item-divider"></div>
-					<a href="#" class="dashboard-nav-item">
+					<a href="{{path('app_logout')}}" class="dashboard-nav-item">
 						<i class="fas fa-sign-out-alt"></i>
-						Logout
+						Déconnexion
 					</a>
 				</nav>
 			</div>
@@ -115,55 +136,31 @@
 					<div class='container'>
 						<div class='card'>
 							<div class='card-header'>
-								<h1>Welcome back Jim</h1>
+								{% if app.user %}
+									<h1>{{app.user.nom}}
+										{{app.user.prenom}}</h1>
+								{% endif %}
 							</div>
-							<div class='card-body'> {% block body %}{% endblock %}
+						</div>
+						<div class='card-body'> {% block body %}{% endblock %}
 
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			<!-- JavaScript Bundle with Popper -->
-				{% block javascripts %}<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"> </script>
-				<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-				<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-				{{ encore_entry_script_tags('app') }}
-				<script type="text/javascript" src="{{ asset('js/menuAdmin.js')}}"></script>
-				<script type="text/javascript" src="{{ asset('js/images.js')}}"></script>
-
-<script>
-function showProductColor(id) {
-	//preparation de nom class 
-	let classThProductColor = ".thProductColor"+id;
-	let classProductColor=".productColor"+id;
-	
-	let thProductColor = document.querySelector(classThProductColor);
-	let productColor = document.querySelector(classThProductColor)
-	//afficher le contenu
-	thProductColor.classList.remove = "d-none";
-	productColor..classList.remove = "d-none";
-} 
-function showProductCut(id)
-{
-	let classThProductCut = ".ThProductCut"+id;
-	let classProductColor = ".productColor"+id;
-
-	let ThProductCut = document.querySelector(classThProductCut);
-	let productColor = document.querySelector(productColor);
-
-	ThProductCut.ClassList.remove= "d-none";
-	productColor.style.display = "d-none";
-
-}
-</script>
-
-
-
-
-			{% endblock %}
 		</body>
 	</html>
+</div>
+
+<!-- JavaScript Bundle with Popper -->
+{% block javascripts %}
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	{{ encore_entry_script_tags('app') }}
+	<script type="text/javascript" src="{{ asset('js/menuAdmin.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('js/images.js')}}"></script>
+
+{% endblock %}</body></html>

@@ -5,15 +5,17 @@ namespace App\Controller\Admin;
 use App\Entity\Picture;
 use App\Form\PictureType;
 use App\Repository\PictureRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/picture')]
 class PictureController extends AbstractController
 {
     #[Route('/', name: 'app_picture_index', methods: ['GET'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function index(PictureRepository $pictureRepository): Response
     {
         return $this->render('picture/index.html.twig', [
@@ -22,6 +24,7 @@ class PictureController extends AbstractController
     }
 
     #[Route('/new', name: 'app_picture_new', methods: ['GET', 'POST'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function new(Request $request, PictureRepository $pictureRepository): Response
     {
         $picture = new Picture();
@@ -41,6 +44,7 @@ class PictureController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_picture_show', methods: ['GET'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function show(Picture $picture): Response
     {
         return $this->render('picture/show.html.twig', [
@@ -49,6 +53,7 @@ class PictureController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_picture_edit', methods: ['GET', 'POST'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function edit(Request $request, Picture $picture, PictureRepository $pictureRepository): Response
     {
         $form = $this->createForm(PictureType::class, $picture);
@@ -67,6 +72,7 @@ class PictureController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_picture_delete', methods: ['POST'])]
+    #[IsGranted(data: 'ROLE_USER', message: "Vous n'avez pas les autorisations nécessaires", statusCode: 403)]
     public function delete(Request $request, Picture $picture, PictureRepository $pictureRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {

@@ -17,8 +17,6 @@ class OrderLine
     #[ORM\JoinColumn(nullable: false)]
     private $idorder;
 
-    #[ORM\OneToOne(mappedBy: 'order_line', targetEntity: DeleveryLine::class, cascade: ['persist', 'remove'])]
-    private $deleveryLine;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $productName;
@@ -51,23 +49,6 @@ class OrderLine
     public function setIdorder(?Order $idorder): self
     {
         $this->idorder = $idorder;
-
-        return $this;
-    }
-
-    public function getDeleveryLine(): ?DeleveryLine
-    {
-        return $this->deleveryLine;
-    }
-
-    public function setDeleveryLine(DeleveryLine $deleveryLine): self
-    {
-        // set the owning side of the relation if necessary
-        if ($deleveryLine->getOrderLine() !== $this) {
-            $deleveryLine->setOrderLine($this);
-        }
-
-        $this->deleveryLine = $deleveryLine;
 
         return $this;
     }
