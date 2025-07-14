@@ -36,25 +36,23 @@
 ```bash
 git clone https://github.com/marouamechri/joudour.git
 cd joudour
-2. Configurer l’environnement
+
+### 2. Configurer l’environnement
 Créer un fichier .env.local avec les paramètres personnalisés :
 
-ini
-Copier
-Modifier
+```bash
 # Exemple de variables (à adapter)
 DATABASE_URL="mysql://root:root@db:3306/joudour?serverVersion=8.0"
 STRIPE_SECRET_KEY=sk_test_xxxxxxx
 MAILER_DSN=smtp://mailhog:1025
-3. Démarrer Docker
-bash
-Copier
-Modifier
+
+### 3. Démarrer Docker
+```bash
 docker-compose up -d --build
-4. Installer les dépendances PHP et JS
-bash
-Copier
-Modifier
+
+### 4. Installer les dépendances PHP et JS
+
+```bash
 docker exec -it php bash
 composer install
 exit
