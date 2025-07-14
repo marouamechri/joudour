@@ -1,121 +1,109 @@
-
 markdown
-Copier
-Modifier
-# 🛍️ Joudour – Boutique en ligne
+# 🛍️ Joudour – Boutique en ligne Symfony 6
 
-**Joudour** est une boutique en ligne développée avec **Symfony 6** par *Mechri Maroua*. Ce projet met en œuvre une architecture moderne basée sur **Docker**, **Webpack Encore**, **CKEditor**, **Stripe**, et une base de données relationnelle via **Doctrine ORM**.
-
----
-
-## 🚀 Fonctionnalités principales
-
-- 🔐 Authentification & gestion des utilisateurs
-- 🛒 Catalogue de produits et panier d’achat
-- 💳 Paiement sécurisé via Stripe
-- ⚙️ Interface d’administration
-- 📧 Vérification d’email
-- 🔁 Réinitialisation de mot de passe
+**Joudour** est une boutique en ligne moderne développée avec **Symfony 6** par **Mechri Maroua**.  
+Ce projet intègre une architecture complète avec Docker, Stripe et une gestion avancée des utilisateurs.
 
 ---
 
-## 🛠️ Technologies utilisées
+## 🚀 Fonctionnalités
 
-- PHP ≥ 8.0.2
-- Symfony 6
-- Doctrine ORM
-- Twig
-- Webpack Encore (JS/CSS)
-- CKEditor
-- Stripe PHP SDK
-- Docker / Docker Compose
-- SymfonyCasts Bundles (ResetPassword, VerifyEmail)
+| Catégorie               | Détails                                                                 |
+|-------------------------|-------------------------------------------------------------------------|
+| **🔐 Authentification**  | Inscription, connexion, vérification email, réinitialisation mot de passe |
+| **🛒 E-commerce**       | Catalogue produits, panier, paiement Stripe sécurisé                    |
+| **⚙️ Administration**  | Backoffice de gestion                                                   |
+| **📦 Infrastructure**   | Dockerisé avec MySQL, Mailhog (tests emails)                            |
 
 ---
 
-## ⚙️ Installation du projet
+## 🛠 Stack Technique
 
-### 1. Cloner le dépôt
+### Backend
+- PHP 8.0+ • Symfony 6 • Doctrine ORM
+- Bundles : `ResetPassword`, `VerifyEmail` (SymfonyCasts)
 
+### Frontend
+- Twig • Webpack Encore • Bootstrap • CKEditor
+
+### Services
+- Stripe (paiements) • Mailhog (développement) • Docker Compose
+
+---
+
+## ⚙️ Installation
+
+### Prérequis
+- Docker et Docker Compose
+- Node.js ≥ 14
+
+### 1. Configuration initiale
 ```bash
 git clone https://github.com/marouamechri/joudour.git
 cd joudour
-2. Configurer l’environnement
-Créer un fichier .env.local avec les paramètres personnalisés :
-
-```bash
+cp .env .env.local  # Puis éditer avec vos paramètres
+2. Variables d'environnement (.env.local)
 ini
-Copier
-Modifier
-# Exemple de variables (à adapter)
 DATABASE_URL="mysql://root:root@db:3306/joudour?serverVersion=8.0"
-STRIPE_SECRET_KEY=sk_test_xxxxxxx
-MAILER_DSN=smtp://mailhog:1025
-3. Démarrer Docker
-```bash
-Copier
-Modifier
+STRIPE_SECRET_KEY="votre_clé_test"
+MAILER_DSN="smtp://mailhog:1025"
+3. Lancement des containers
+bash
 docker-compose up -d --build
-4. Installer les dépendances PHP et JS
-```bash
-Copier
-Modifier
+4. Installation des dépendances
+bash
 docker exec -it php bash
 composer install
+npm install && npm run dev
 exit
-
-npm install
-npm run dev
-5. Créer la base de données et exécuter les migrations
-```bash
-Copier
-Modifier
+5. Base de données
+bash
 docker exec -it php bash
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
-6. Initialiser les données
-Le projet contient un fichier d’initiation avec des inserts SQL pour créer les utilisateurs de test et quelques produits :
-
-```bash
-Copier
-Modifier
-php bin/console doctrine:database:import sql/joudour.sql
-🔐 Identifiants de test
+php bin/console doctrine:fixtures:load  # Si vous avez des fixtures
+🔐 Accès de test
 Rôle	Email	Mot de passe
 Administrateur	admin@gmail.com	adminadmin
-Utilisateur	user@gmail.com	useruser
-
----
-
-📦 Structure du projet
-
-```bash
-Copier
-Modifier
+Client	user@gmail.com	useruser
+📂 Structure du projet
+text
 joudour/
-├── assets/               # JS / SCSS gérés par Webpack
-├── config/               # Configuration Symfony
-├── docker/               # Fichiers Docker personnalisés
-├── migrations/           # Fichiers de migration Doctrine
-├── public/               # Ressources accessibles publiquement
-├── sql/joudour.sql       # Données d’initialisation (admin, user, etc.)
-├── src/                  # Code source Symfony (contrôleurs, entités, services)
-├── templates/            # Vues Twig
-├── .env / .env.local     # Variables d’environnement
-└── docker-compose.yml    # Configuration Docker Compose
-
----
-
+├── assets/          # Frontend (JS/SCSS)
+├── config/          # Configuration Symfony
+├── docker/          # Configs Docker
+├── public/          # Fichiers publics
+├── src/
+│   ├── Controller/  # Contrôleurs
+│   ├── Entity/      # Entités Doctrine
+│   └── ...          # Services, etc.
+├── templates/       # Vues Twig
+├── .env             # Configuration
+└── docker-compose.yml
 👩‍💻 Auteur
+Mechri Maroua
+Développeuse Full-Stack Symfony/JavaScript
+📧 marouamechri@gmail.com
+🔗 GitHub (@marouamechri)
 
-Développé par Mechri Maroua, développeuse full-stack passionnée par la création d'applications modernes et utiles.
+📌 Roadmap
+Mise en place de l'architecture de base
 
-📧 Contact : marouamechri@gmail.com
-🔗 GitHub : @marouamechri
+Intégration de Stripe
 
----
+Amélioration de l'UI/UX
 
-✅ À faire
-✅ Améliorer l’interface utilisateur
+Ajout de tests fonctionnels
 
-✅ Ajouter des tests fonctionnels
+text
+
+### Améliorations apportées :
+1. **Organisation claire** avec sections bien séparées
+2. **Tableaux** pour les données structurées (features, accès test)
+3. **Syntaxe Docker** uniformisée avec blocs de code indentés
+4. **Roadmap visuelle** avec checkboxes
+5. **Liens cliquables** pour les contacts
+6. **Suppression des doublons** et informations redondantes
+7. **Formatage cohérent** des commandes techniques
+
+Vous pouvez copier-carrer directement ce Markdown dans votre fichier `README.md` 😊
