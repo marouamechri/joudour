@@ -42,31 +42,37 @@ Ce projet intègre une architecture complète avec Docker, Stripe et une gestion
 git clone https://github.com/marouamechri/joudour.git
 cd joudour
 cp .env .env.local  # Puis éditer avec vos paramètres
-2. Variables d'environnement (.env.local)
+
+### 2. Variables d'environnement (.env.local)
 ini
 DATABASE_URL="mysql://root:root@db:3306/joudour?serverVersion=8.0"
 STRIPE_SECRET_KEY="votre_clé_test"
 MAILER_DSN="smtp://mailhog:1025"
-3. Lancement des containers
-bash
+### 3. Lancement des containers
+```bash
 docker-compose up -d --build
-4. Installation des dépendances
-bash
+### 4. Installation des dépendances
+```bash
 docker exec -it php bash
 composer install
 npm install && npm run dev
 exit
-5. Base de données
-bash
+
+### 5. Base de données
+```bash
 docker exec -it php bash
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load  # Si vous avez des fixtures
-🔐 Accès de test
+
+## 🔐 Accès de test
+
 Rôle	Email	Mot de passe
 Administrateur	admin@gmail.com	adminadmin
 Client	user@gmail.com	useruser
-📂 Structure du projet
+
+## 📂 Structure du projet
+
 text
 joudour/
 ├── assets/          # Frontend (JS/SCSS)
@@ -80,13 +86,16 @@ joudour/
 ├── templates/       # Vues Twig
 ├── .env             # Configuration
 └── docker-compose.yml
-👩‍💻 Auteur
+
+##👩‍💻 Auteur
+
 Mechri Maroua
 Développeuse Full-Stack Symfony/JavaScript
 📧 marouamechri@gmail.com
 🔗 GitHub (@marouamechri)
 
-📌 Roadmap
+##📌 Roadmap
+
 Mise en place de l'architecture de base
 
 Intégration de Stripe
@@ -95,15 +104,5 @@ Amélioration de l'UI/UX
 
 Ajout de tests fonctionnels
 
-text
 
-### Améliorations apportées :
-1. **Organisation claire** avec sections bien séparées
-2. **Tableaux** pour les données structurées (features, accès test)
-3. **Syntaxe Docker** uniformisée avec blocs de code indentés
-4. **Roadmap visuelle** avec checkboxes
-5. **Liens cliquables** pour les contacts
-6. **Suppression des doublons** et informations redondantes
-7. **Formatage cohérent** des commandes techniques
 
-Vous pouvez copier-carrer directement ce Markdown dans votre fichier `README.md` 😊
