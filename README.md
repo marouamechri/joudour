@@ -43,6 +43,7 @@ cd joudour
 2. Configurer l’environnement
 Créer un fichier .env.local avec les paramètres personnalisés :
 
+```bash
 ini
 Copier
 Modifier
@@ -51,12 +52,12 @@ DATABASE_URL="mysql://root:root@db:3306/joudour?serverVersion=8.0"
 STRIPE_SECRET_KEY=sk_test_xxxxxxx
 MAILER_DSN=smtp://mailhog:1025
 3. Démarrer Docker
-bash
+```bash
 Copier
 Modifier
 docker-compose up -d --build
 4. Installer les dépendances PHP et JS
-bash
+```bash
 Copier
 Modifier
 docker exec -it php bash
@@ -66,7 +67,7 @@ exit
 npm install
 npm run dev
 5. Créer la base de données et exécuter les migrations
-bash
+```bash
 Copier
 Modifier
 docker exec -it php bash
@@ -75,7 +76,7 @@ php bin/console doctrine:migrations:migrate
 6. Initialiser les données
 Le projet contient un fichier d’initiation avec des inserts SQL pour créer les utilisateurs de test et quelques produits :
 
-bash
+```bash
 Copier
 Modifier
 php bin/console doctrine:database:import sql/joudour.sql
@@ -84,8 +85,11 @@ Rôle	Email	Mot de passe
 Administrateur	admin@gmail.com	adminadmin
 Utilisateur	user@gmail.com	useruser
 
+---
+
 📦 Structure du projet
-bash
+
+```bash
 Copier
 Modifier
 joudour/
@@ -99,11 +103,17 @@ joudour/
 ├── templates/            # Vues Twig
 ├── .env / .env.local     # Variables d’environnement
 └── docker-compose.yml    # Configuration Docker Compose
+
+---
+
 👩‍💻 Auteur
+
 Développé par Mechri Maroua, développeuse full-stack passionnée par la création d'applications modernes et utiles.
 
 📧 Contact : marouamechri@gmail.com
 🔗 GitHub : @marouamechri
+
+---
 
 ✅ À faire
 ✅ Améliorer l’interface utilisateur
