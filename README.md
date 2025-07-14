@@ -1,16 +1,19 @@
+# 🛍️ Joudour – Boutique en ligne
 
-# Joudour – Boutique en ligne
+**Joudour** est une boutique en ligne développée avec **Symfony 6** par *Mechri Maroua*. Ce projet met en œuvre une architecture moderne basée sur **Docker**, **Webpack Encore**, **CKEditor**, **Stripe**, et une base de données relationnelle via **Doctrine ORM**.
 
-**Joudour** est une boutique en ligne développée avec Symfony 6 par Mechri Maroua. Ce projet met en œuvre une architecture moderne avec Docker, Webpack Encore, CKEditor, Stripe, et une base de données relationnelle via Doctrine ORM.
+---
 
-## 🚀 Fonctionnalités
+## 🚀 Fonctionnalités principales
 
-- Gestion des utilisateurs et authentification
-- Catalogue de produits
-- Intégration du panier et des paiements via Stripe
-- Interface d’administration
-- Réinitialisation du mot de passe
-- Vérification d’adresse e-mail
+- 🔐 Authentification & gestion des utilisateurs
+- 🛒 Catalogue de produits et panier d’achat
+- 💳 Paiement sécurisé via Stripe
+- ⚙️ Interface d’administration
+- 📧 Vérification d’email
+- 🔁 Réinitialisation de mot de passe
+
+---
 
 ## 🛠️ Technologies utilisées
 
@@ -22,66 +25,83 @@
 - CKEditor
 - Stripe PHP SDK
 - Docker / Docker Compose
-- SymfonyCasts Bundles (Reset Password, Verify Email)
+- SymfonyCasts Bundles (ResetPassword, VerifyEmail)
+
+---
 
 ## ⚙️ Installation du projet
 
-1. **Cloner le dépôt** :
-   ```bash
-   git clone https://github.com/votre-utilisateur/joudour.git
-   cd joudour
-Créer le fichier .env.local avec vos paramètres personnalisés (base de données, Stripe, mailer, etc.).
+### 1. Cloner le dépôt
 
-Démarrer l'environnement Docker :
+```bash
+git clone https://github.com/marouamechri/joudour.git
+cd joudour
+2. Configurer l’environnement
+Créer un fichier .env.local avec les paramètres personnalisés :
 
+ini
+Copier
+Modifier
+# Exemple de variables (à adapter)
+DATABASE_URL="mysql://root:root@db:3306/joudour?serverVersion=8.0"
+STRIPE_SECRET_KEY=sk_test_xxxxxxx
+MAILER_DSN=smtp://mailhog:1025
+3. Démarrer Docker
 bash
 Copier
 Modifier
 docker-compose up -d --build
-Installer les dépendances PHP et JS :
-
+4. Installer les dépendances PHP et JS
 bash
 Copier
 Modifier
 docker exec -it php bash
 composer install
 exit
+
 npm install
 npm run dev
-Créer la base de données et les migrations :
-
+5. Créer la base de données et exécuter les migrations
 bash
 Copier
 Modifier
 docker exec -it php bash
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
-Accéder à l’application :
-Rendez-vous sur http://localhost dans votre navigateur.
+6. Initialiser les données
+Le projet contient un fichier d’initiation avec des inserts SQL pour créer les utilisateurs de test et quelques produits :
 
-🔐 Identifiants de test (exemple)
+bash
+Copier
+Modifier
+php bin/console doctrine:database:import sql/joudour.sql
+🔐 Identifiants de test
 Rôle	Email	Mot de passe
-Administrateur	admin@joudour.com	admin123
-Utilisateur	user@joudour.com	user123
+Administrateur	admin@gmail.com	pw : adminadmin
+Utilisateur	user@gmail.com	     pw : useruser
 
 📦 Structure du projet
-src/ : code source Symfony
+bash
+Copier
+Modifier
+joudour/
+├── assets/               # JS / SCSS gérés par Webpack
+├── config/               # Configuration Symfony
+├── docker/               # Fichiers Docker personnalisés
+├── migrations/           # Fichiers de migration Doctrine
+├── public/               # Ressources accessibles publiquement
+├── sql/joudour.sql       # Données d’initialisation (admin, user, etc.)
+├── src/                  # Code source Symfony (contrôleurs, entités, services)
+├── templates/            # Vues Twig
+├── .env / .env.local     # Variables d’environnement
+└── docker-compose.yml    # Configuration Docker Compose
+👩‍💻 Auteur
+Développé par Mechri Maroua, développeuse full-stack passionnée par la création d'applications modernes et utiles.
 
-templates/ : vues Twig
+📧 Contact : marwa.mechri@gmil.com
+🔗 GitHub : @marouamechri
 
-public/ : fichiers accessibles publiquement
+✅ À faire
+✅ Améliorer l’interface utilisateur
 
-assets/ : JS / SCSS gérés par Webpack
-
-config/ : configuration Symfony
-
-docker-compose.yml : environnement Docker
-
-migrations/ : fichiers de migration Doctrine
-
-🧑‍💻 Auteur
-Développé par Mechri Maroua, développeuse full-stack passionnée par la création d'applications modernes.
-
-📜 Licence
-Ce projet est proposé à des fins d’apprentissage. Toute réutilisation est permise sous condition de mentionner l’autrice.
-
+✅ Ajouter des tests fonctionnels
