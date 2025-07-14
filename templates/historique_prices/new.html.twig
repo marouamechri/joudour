@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New HistoriquePrices{% endblock %}
+
+{% block body %}
+    <h1>Create new HistoriquePrices</h1>
+
+    {{ include('historique_prices/_form.html.twig') }}
+
+    <a href="{{ path('app_historique_prices_index') }}">Retour à la liste</a>
+{% endblock %}

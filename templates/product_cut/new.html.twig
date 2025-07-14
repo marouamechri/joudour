@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Ajouter{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un nouveau taille</h1>
+
+    {{ include('product_cut/_form.html.twig') }}
+
+    <a href="{{ path('app_product_color_index') }}">Retour à la liste</a>
+{% endblock %}

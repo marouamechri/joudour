@@ -1,0 +1,39 @@
+{% extends 'baseChekout.html.twig' %}
+
+{% block title %}Checkout
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="row">
+		<div class="col-lg-6  mt-5 ">
+			{{ form_start( checkout,{action: path('checkoutConfirm')} )}}
+
+			<div class="page bg-light p-2" id="box1">
+				<h2 class="text-center">Vos adresse de livraison</h2>
+				<div
+					class="blok 50 content">
+					<!--raw permet l'interprétation de l'html -->
+					<div>{{ form_widget(checkout.adresse)  | replace({'[spr]' : '<br>'}) | raw}}</div>
+				</div>
+				<a href="{{ path('adresse_new') }}" class="btn btn-fill-out btn-block mt-1">Nouvelle adresse</a>
+			</div>
+
+			<div class="page bg-light mt-5" id="box2">
+				<h2 class="text-center">Entreprises de livraison</h2>
+				<div class="content">
+					{{ form_widget(checkout.transporteur)| replace({'[spr]' : '<br>'})| raw}}
+				</div>
+				<div>
+					<h4>Informations pour le livreur</h4>
+					<div class="form-group mb-0">
+						{{ form_widget(checkout.informations) }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6 p-3">{{ include('checkout/_order.html.twig') }}</div>
+		{{ form_end(checkout) }}
+	</div>
+</div></body>{% endblock %}

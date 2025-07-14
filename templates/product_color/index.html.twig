@@ -1,0 +1,121 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Gestion de produit
+{% endblock %}
+
+{% block body %}
+	<h1>Gestion de Produit Assossiée</h1>
+	<a href="{{ path('app_product_new') }}">Ajouter un produit</a>
+	<table class="table text-center">
+		<thead>
+			<tr class="product">
+				<th scope="col">Ref produit</th>
+				<th scope="col" colspan="2" class="text-center">Photo</th>
+				<th class='text-center' scope="col" colspan="6">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			{% for product in products %}
+				<tr id="product{{product.id}}" onclick="showProductColor('{{product.id}}')" class="bg-dark">
+					<td scope="row" class="text-white">{{ product.refProduct}}</td>
+					<td colspan="2" class="text-center"><img class="imgCol" src="{{asset('/upload/images/product/' ~ product.firstImage)}}">
+					</td>
+					<td colspan="2" class="text-center" class="text-white">
+						<a href="{{ path('app_product_color_new', {'id': product.id}) }}" class="text-decoration-none">Ajouter une couleur</a>
+					</td>
+					<td colspan="2" class="text-center">
+						<a href="{{ path('app_product_show', {'id': product.id}) }}" class="text-decoration-none">Fiche produit
+						</a>
+					</td>
+					<td>
+						<a href="{{ path('app_product_edit', {'id': product.id}) }}">
+							<i class="fa-solid fa-pen-to-square"></i>
+						</a>
+					</td>
+					<td>{{ include('product/_delete_form.html.twig') }}</td>
+					{% for  color in product.productColors %}
+						{% set firstcolor = product.productColors|first %}
+						{% if color == firstcolor %}
+							<tr class="thProductColor{{product.id}} d-none">
+								<th scope="col">Couleur</th>
+								<th scope="col" class="text-center" colspan="8">Action</th>
+							</tr>
+						{% endif %}
+						<tr class="productColor{{product.id}} d-none" onclick="showProductCut('{{color.id}}')">
+							<td scope="row" style="background-color:{{ color}}"></td>
+							<td colspan="3">
+								<a href="{{ path('app_product_cut_new', {'id': color.id}) }}" class="text-decoration-none">Ajouter les taille Assossiée</a>
+							</td>
+							<td colspan="3">
+								<a href="{{ path('app_product_color_show', {'id': color.id}) }}" class="text-decoration-none">Plus des détailles</a>
+							</td>
+
+							<td>
+								<a href="{{ path('app_product_color_edit', {'id': color.id}) }}" class="text-decoration-none">
+									<i class="fa-solid fa-pen-to-square"></i>
+								</a>
+							</td>
+							<td>
+								{{ include('product_color/_delete_form.html.twig') }}
+							</td>
+						</tr>
+						{% for productcut in color.productCuts %}
+							{% set firstproductCut = color.productCuts|first %}
+							{% if productcut == firstproductCut %}
+								<tr class="ThProductCut{{color.id}} d-none bg-light">
+									<th scope="col">Taille</th>
+									<th scope="col" colspan="8" class="text-center">Action</th>
+								</tr>
+							{% endif %}
+							{% set min = productcut.stock.stockMin %}
+							{% set max = productcut.stock.stockMax %}
+							{% set nbPiece = productcut.stock.nbrProduct %}
+							{% set moyen = max // 3 %}
+							{# alert de stock #}
+
+							{% if nbPiece < min %}
+								{% set bg = '#cc1e1e5d' %}
+							{% else %}
+								{% set bg = '#1ecc5865' %}
+							{% endif %}
+
+							{% if (nbPiece < moyen)  %}
+								{% if nbPiece > min %}
+									{% set bg = '#f0790a65' %}
+								{% endif %}
+							{% endif %}
+
+							<tr class="productCut{{color.id}} d-none" style="background-color:{{bg}}">
+								<td scope="row">{{productcut.cut.cutValue}}</td>
+								<td colspan="3">
+									<a href="{{ path('app_historique_prices_new', {'id': productcut.id}) }}" class="text-decoration-none">Ajouter une promotion</a>
+								</td>
+								<td colspan="3">
+									<a href="{{ path('app_product_color_show', {'id': color.id}) }}" class="text-decoration-none">Plus des détailles</a>
+								</td>
+								<td>
+									<a href="{{ path('app_product_cut_edit', {'id':productcut.id}) }}" class="text-decoration-none">
+										<i class="fa-solid fa-pen-to-square"></i>
+									</td>
+								</td>
+								<td>
+									{{ include('product_cut/_delete_form.html.twig') }}
+								</td>
+							</tr>
+						{% endfor %}
+
+					{% endfor %}
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">Liste des couleur est vide</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('js/tableauProduct.js')}}"></script>
+{% endblock %}

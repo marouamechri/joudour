@@ -1,0 +1,74 @@
+{% block body %}
+	<div class="container">
+		<div class="row">
+		<h2 class="text-center">Votre commande</h2>
+			{% for element in cart.products %}
+				<div class="col-lg-12 m-2 mt-1">
+					<div class="shopping-cart-item bg-light">
+						<div class="row ">
+							<div class="col-lg-3 shopping-cart-img">
+								<a
+									href="{{ path('app_show_product', {'id': element.parent.id, 'productColor': element.productColor.id})}}" title="{{ element.parent.nameProduct }}">
+									{# afficher la premier image de la liste des photos #}
+									{% set firstpicture = element.productColor.pictures|first %}
+									<img src="{{ asset('/upload/images/product/' ~ firstpicture.pictureName)}}" alt="{{element.parent.nameProduct}}" class="w-100"/>
+								</a>
+							</div>
+
+							<div class="col-lg-9 shopping-cart-item-data text-start">
+								<div>{{element.parent.nameProduct}}</div>
+								<div>Couleur:
+									{{element.productColor.color.nameColor}}</div>
+								<div>Taille:
+									{{element.product.cut}}</div>
+									<div>Quantité:
+									{{element.quantity}}</div>
+								<div class="text-end">
+									{{element.parent.amountHTVA| number_format(0, ',' , ' ') }}€
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			{% else %}
+				<div class="col-lg-12  mt-4 text-center">
+					<h4>Votre panier est vide</h4>
+				</div>
+			{% endfor %}
+		</div>
+
+
+		<div class="row">
+			<div class="col-lg-6">
+				<h5>TOTAL HTVA:</h5>
+			</div>
+			<div class="col-lg-6 text-end">
+				{{cart.data.subTotalHT| number_format(0, ',' , ' ') }}€
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<h5>TVA:</h5>
+			</div>
+			<div class="col-lg-6 text-end">
+				{{cart.data.Taxe| number_format(0, ',' , ' ') }}€
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<h5>TOTAL TTC:</h5>
+			</div>
+			<div class="col-lg-6 text-end">
+				<strong>{{cart.data.subTotalTTC| number_format(0, ',' , ' ') }}€</strong>
+			</div>
+		</div>
+		{# <div class="row">
+			<div class="col-lg-12">
+				<h2></h2>
+			</div>
+		</div> #}
+		<button type="submit" id="checkout" class="btn bg-success">Confirmer</button>
+	</div>
+{% endblock %}

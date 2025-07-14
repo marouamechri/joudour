@@ -1,0 +1,39 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Historique de prix{% endblock %}
+
+{% block body %}
+    <h1>Liste de historique de prix</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Start_date_prices_sale_htva</th>
+                <th>EndDatePricesSaleHTVA</th>
+                <th>AmountHTVA</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for historique_price in historique_prices %}
+            <tr>
+                <td>{{ historique_price.id }}</td>
+                <td>{{ historique_price.startDatePricesSaleHtva ? historique_price.startDatePricesSaleHtva|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ historique_price.endDatePricesSaleHTVA ? historique_price.endDatePricesSaleHTVA|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ historique_price.amountHTVA }}</td>
+                <td>
+                    <a href="{{ path('app_historique_prices_show', {'id': historique_price.id}) }}">show</a>
+                    <a href="{{ path('app_historique_prices_edit', {'id': historique_price.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_historique_prices_new') }}">Ajouter un nouveau historique</a>
+{% endblock %}

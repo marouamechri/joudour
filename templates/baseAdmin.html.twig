@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Administration
+			{% endblock %}
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">{# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> #}
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		<!-- CSS only --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
+
+		{% block stylesheets %}
+			<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+			<link rel="stylesheet" href="{{ asset('css/menuAdmin.css')}}"/>
+			<link rel="stylesheet" href="{{ asset('css/adminStyle.css')}}"/>
+			{{ encore_entry_link_tags('app') }}
+
+		{% endblock %}
+	</head>
+	<body>
+
+		<div class='dashboard'>
+			<div class="dashboard-nav">
+				<header>
+					<a href="#!" class="menu-toggle">
+						<i class="fas fa-bars"></i>
+					</a>
+					<a href="#" class="brand-logo">
+						<span>JOUDOUR</span>
+					</a>
+				</header>
+				<nav class="dashboard-nav-list">
+					<a href="#" class="dashboard-nav-item">
+						<i class="fas fa-home"></i>
+						Accueil
+					</a>
+					<a href="#" class="dashboard-nav-item active">
+						<i class="fas fa-tachometer-alt"></i>
+						dashboard
+					</a>
+					<div class='dashboard-nav-dropdown'>
+						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+							<i class="fas fa-photo-video"></i>
+							Produits
+						</a>
+						<div class='dashboard-nav-dropdown-menu'>
+							<a href="{{ path('app_product_color_index') }}" class="dashboard-nav-dropdown-item">Gestion produit</a>
+							<a href="#" class="dashboard-nav-dropdown-item">Archive</a>
+							{# <a href="#" class="dashboard-nav-dropdown-item">Video</a> #}
+						</div>
+					</div>
+					<div class='dashboard-nav-dropdown'>
+						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+							<i class="fas fa-edit"></i>
+							Transporteur
+						</a>
+						<div class='dashboard-nav-dropdown-menu'>
+							<a href="{{ path('app_transporteur_index') }}" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="{{ path('app_transporteur_new') }}" class="dashboard-nav-dropdown-item">Ajouter</a>
+						</div>
+					</div>
+					<div class='dashboard-nav-dropdown'>
+						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+							<i class="fas fa-edit"></i>
+							Couleurs
+						</a>
+						<div class='dashboard-nav-dropdown-menu'>
+							<a href="{{ path('app_color_index') }}" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="{{ path('app_color_new') }}" class="dashboard-nav-dropdown-item">Ajouter</a>
+						</div>
+					</div>
+					<div class='dashboard-nav-dropdown'>
+						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+							<i class="fas fa-edit"></i>
+							Categories
+						</a>
+						<div class='dashboard-nav-dropdown-menu'>
+							<a href="{{ path('app_category_index') }}" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="{{ path('app_category_new') }}" class="dashboard-nav-dropdown-item">Ajouter</a>
+						</div>
+					</div>
+					<div class='dashboard-nav-dropdown'>
+						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+							<i class="fas fa-edit"></i>
+							Options
+						</a>
+						<div class='dashboard-nav-dropdown-menu'>
+							<a href="{{ path('app_option_index') }}" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="{{ path('app_option_new') }}" class="dashboard-nav-dropdown-item">Ajouter</a>
+						</div>
+					</div>
+					<div class='dashboard-nav-dropdown'>
+						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+							<i class="fas fa-users"></i>
+							Users
+						</a>
+						<div class='dashboard-nav-dropdown-menu'>
+							<a href="#" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="#" class="dashboard-nav-dropdown-item">Ajouter</a>
+						</div>
+					</div>
+					<div class='dashboard-nav-dropdown'>
+						<a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+							<i class="fas fa-cogs"></i>
+							Settings
+						</a>
+						<div class='dashboard-nav-dropdown-menu'>
+							<a href="{{ path('app_imageweb_site_index') }}" class="dashboard-nav-dropdown-item">Liste</a>
+							<a href="{{ path('app_imageweb_site_new') }}" class="dashboard-nav-dropdown-item">Ajouter</a>
+						</div>
+					</div>
+
+					<a href="#" class="dashboard-nav-item">
+						<i class="fas fa-user"></i>
+						Profile
+					</a>
+					<div class="nav-item-divider"></div>
+					<a href="{{path('app_logout')}}" class="dashboard-nav-item">
+						<i class="fas fa-sign-out-alt"></i>
+						Déconnexion
+					</a>
+				</nav>
+			</div>
+			<div class='dashboard-app'>
+				<header class='dashboard-toolbar'>
+					<a href="#!" class="menu-toggle">
+						<i class="fas fa-bars"></i>
+					</a>
+				</header>
+				<div class='dashboard-content'>
+					<div class='container'>
+						<div class='card'>
+							<div class='card-header'>
+								{% if app.user %}
+									<h1>{{app.user.nom}}
+										{{app.user.prenom}}</h1>
+								{% endif %}
+							</div>
+						</div>
+						<div class='card-body'> {% block body %}{% endblock %}
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
+</div>
+
+<!-- JavaScript Bundle with Popper -->
+{% block javascripts %}
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	{{ encore_entry_script_tags('app') }}
+	<script type="text/javascript" src="{{ asset('js/menuAdmin.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('js/images.js')}}"></script>
+
+{% endblock %}</body></html>

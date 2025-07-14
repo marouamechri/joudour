@@ -1,0 +1,13 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Edit ImagewebSite{% endblock %}
+
+{% block body %}
+    <h1>Edit ImagewebSite</h1>
+
+    {{ include('imageweb_site/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_imageweb_site_index') }}">back to list</a>
+
+    {{ include('imageweb_site/_delete_form.html.twig') }}
+{% endblock %}

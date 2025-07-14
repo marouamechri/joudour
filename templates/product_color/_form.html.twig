@@ -1,0 +1,46 @@
+{{ form_start(form) }}
+{# {{ form_widget(form) }} #}
+<div class="contenair-fluid">
+	<div class="row">
+		<div class="col-lg-6">
+
+			{{ form_row(form.color)}}</div>
+		{# <select name="product_color[color]" id="product_color_color" clas="form-select">
+						<option value="0">Choisissez votre couleur</option> #}
+		{# {% for color in form.color %}
+							{% set index = color.refColor %} #}
+		{# {% for value in color %} #}
+		{# {% if value.refColor == index %} #}
+		{# <option value="{{value.id}}">
+										<div style="color:{{value.refColor}}">{{value.nameColor}}</div></option> #}
+		{# {{% endif %} #}
+		{# {% endfor %} #}
+		{# {% endfor %}  #}
+		{# </select> #}
+			<div class="col-lg-6 justify-content"> <a href="{{ path('app_color_new')}}">Ajouter une couleur</a>
+		</div>
+	</div>
+	<div>
+		{{ form_row(form.images)}}
+	</div>
+	{% if app.request.attributes.get('_route')=='app_product_color_edit' %}
+		<div>
+			<h2>Images:</h2>
+			<div class="row row-cols-1 row-cols-md-2 g-4">
+				{% for image in product_color.pictures  %}
+					<div class="col">
+						<div class="card h-100">
+							<img src="{{ asset('upload/images/product/' ~ image.pictureName)}}" alt="image" width="100px" height="300px" class="card-img-top">
+							<div
+								class="card-body">
+								{# On ajoute un lien permettant de supprimer une image (sera géré en Ajax) #}
+								<a href="{{ path('delete_image', {id: image.id})}}" data-delete data-token="{{ csrf_token('delete' ~ image.id )}}">Supprimer</a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+	<button class="btn">{{ button_label|default('Enregistrer') }}</button>
+	{{ form_end(form) }}

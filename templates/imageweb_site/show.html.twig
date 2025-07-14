@@ -1,0 +1,70 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}ImagewebSite{% endblock %}
+
+{% block body %}
+    <h1>ImagewebSite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ imageweb_site.id }}</td>
+            </tr>
+            <tr>
+                <th>Poster</th>
+                <td>{{ imageweb_site.poster }}</td>
+            </tr>
+            <tr>
+                <th>TitrePoster</th>
+                <td>{{ imageweb_site.titrePoster }}</td>
+            </tr>
+            <tr>
+                <th>PosterTextBtn</th>
+                <td>{{ imageweb_site.posterTextBtn }}</td>
+            </tr>
+            <tr>
+                <th>Robe1</th>
+                <td>{{ imageweb_site.robe1 }}</td>
+            </tr>
+            <tr>
+                <th>Robe2</th>
+                <td>{{ imageweb_site.robe2 }}</td>
+            </tr>
+            <tr>
+                <th>Robe3</th>
+                <td>{{ imageweb_site.robe3 }}</td>
+            </tr>
+            <tr>
+                <th>ImgShop1</th>
+                <td>{{ imageweb_site.imgShop1 }}</td>
+            </tr>
+            <tr>
+                <th>ImgShop2</th>
+                <td>{{ imageweb_site.imgShop2 }}</td>
+            </tr>
+            <tr>
+                <th>ImgShop3</th>
+                <td>{{ imageweb_site.imgShop3 }}</td>
+            </tr>
+            <tr>
+                <th>Imgloca1</th>
+                <td>{{ imageweb_site.imgloca1 }}</td>
+            </tr>
+            <tr>
+                <th>Imgloca2</th>
+                <td>{{ imageweb_site.imgloca2 }}</td>
+            </tr>
+            <tr>
+                <th>Imgloca3</th>
+                <td>{{ imageweb_site.imgloca3 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_imageweb_site_index') }}">back to list</a>
+
+    <a href="{{ path('app_imageweb_site_edit', {'id': imageweb_site.id}) }}">edit</a>
+
+    {{ include('imageweb_site/_delete_form.html.twig') }}
+{% endblock %}

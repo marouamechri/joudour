@@ -1,0 +1,12 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}modifier le historique{% endblock %}
+
+{% block body %}
+    <h1>Modifier le historique de prix</h1>
+
+    {{ include('historique_prices/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_historique_prices_index') }}">Retour à la liste</a>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Color index{% endblock %}
+
+{% block body %}
+    <h1>Color index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Couleur</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for color in colors %}
+            <tr>
+                <td style="background-color:{{ color.refColor }}"></td>
+                <td>{{ color.nameColor }}</td>
+                <td>
+                <td>
+                     <a href="{{ path('app_color_edit', {'id': color.id}) }}">Modifier</a>
+                </td>
+                <td>
+                {{ include('colors/_delete_form.html.twig') }}
+                </td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">liste des couleurs est vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div><a href="{{ path('app_color_new') }}">Ajouter un couleur</a></div>
+    <div><a href="{{ path('app_product_color_index') }}">Retoure à la page produit</a></div>
+{% endblock %}

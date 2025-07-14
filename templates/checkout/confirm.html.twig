@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> {% block title %}{% endblock %}
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+			<link rel="stylesheet" href="{{ asset('css/stepDelevred.css')}}"/>
+		{% endblock %}
+		<script src="https://js.stripe.com/v3/"></script>
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="row justify-content-center">
+				{{ include('checkout/stepMenu.html.twig') }}
+			</div>
+			<div class="row">
+				<div class="col-lg-6  mt-5 ">
+					<div class="page bg-light p-2" id="box1">
+						<h2 class="text-center">Vos adresse de livreaison</h2>
+						<div
+							class="blok 50 content">
+							<!--raw permet l'interprétation de l'html -->
+							<div>{{adresse | replace({'[spr]' : '<br>'}) | raw}}</div>
+							{# <a href="{{path('address_edit', {'id':address.id})}}" class="btn btn-fill-out  mt-1">Modifier l'adresse</a> #}
+							{# <a href="{{path('checkoutShow')}}" class="btn btn-fill-out  mt-1">Changer choix d'adresse</a> #}
+						</div>
+						<a href="{{ path('adresse_new') }}" class="btn btn-fill-out btn-block mt-1">Nouvelle adresse</a>
+					</div>
+
+					<div class="page bg-light mt-5" id="box2">
+						<h2 class="text-center">Entreprises de livraison</h2>
+						<div class="content">
+							{{ transporteur| replace({'[spr]' : '<br>'})| raw}}
+							{# <a href="{{path('checkoutShow')}}" class="btn btn-fill-out  mt-1">Changer choix transporteur</a> #}
+
+						</div>
+						<div>
+							<h4>Informations pour le livreur</h4>
+							<div class="form-group mb-0">
+								{{ information }}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 p-3">
+					<div class="order_review">
+						<div class="heading_s1">
+							<h4>Votre commande</h4>
+						</div>
+						<div class="table-responsive order_table">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Produit</th>
+										<th>Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for element in cart.products %}
+
+										<tr>
+											<td>
+												{{ element.parent.nameProduct }}
+												<span class="product-qty">x
+													{{ element.quantity }}</span>
+											</td>
+											<td>
+												{{ element.parent.amountHTVA }}
+												€
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>SousTotal HT:
+										</th>
+										<td class="product-subtotal">
+											{{ cart.data.subTotalHT }}€</td>
+									</tr>
+									<tr>
+										<th>Taxe:
+										</th>
+										<td class="product-subtotal">{{ cart.data.Taxe }}€
+										</td>
+									</tr>
+									<tr>
+										<th>Transport:
+											{{transporteur.nameTransport }}</th>
+										<td class="product-subtotal">
+											{{ transporteur.pricesTransport }}€</td>
+									</tr>
+									<tr>
+										<th>Total</th>
+										<td class="product-subtotal">{{ cart.data.subTotalTTC + transporteur.pricesTransport }}€
+										</td>
+									</tr>
+								</tfoot>
+
+							</table>
+						</div>
+						<div class="payment_method">
+							<div class="heading_s1">
+								<h4>Paiement</h4>
+							</div>
+						</div>
+						<button type="submit" id="checkout-button" class="btn btn-success btn-block">Payer (
+							{{ cart.data.subTotalTTC + transporteur.pricesTransport }}€ )</button>
+						<p>Pour le numéro de carte bancaire en mode essai, mettre 4242 4242 4242 4242. Une date quelconque, année > année en cours, code de 3 chiffres au hasard.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+
+	{% block javascripts %}
+	<script type="text/javascript">/*clé public  */
+       var stripe = Stripe('pk_test_51L9cJFHb9qVW5JR3WB4E0nkAsFPOhtbJlnEsNW3bTsQvztbWda0D1OfqXcrEIeSIHtDQsNR0h5Weocj1b93mKNhh00zTKkjtUd');
+       var checkoutButton = document.getElementById("checkout-button");
+// à l'evenement click =>redirection vert create-checkout-session
+    checkoutButton.addEventListener("click", function () {
+      fetch("/create-checkout-session/{{ reference }}", {
+        method: "POST",
+      })
+	  // s'il ya une response.then(function (response) { // on retourne un tableau json de reponse.then(function (response) {
+        .then(function (response) {
+          return response.json();
+        })
+		// et si il y a une session.then(function (session) { // on se rederige vert la formulaire de stripe.then(function (session) {
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+		// Si redirectToCheckout échoue à cause d'un navigateur ou d'un réseau
+		// erreur, vous devez afficher le message d'erreur
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+    </script>
+		
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+		<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		{{ encore_entry_script_tags('app') }}
+		<script type="text/javascript">
+
+			function active() {
+var element = document.getElementById("step2");
+element.classList.add("active");
+}
+active();
+		</script>
+	{% endblock %}
+</html>

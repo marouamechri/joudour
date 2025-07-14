@@ -1,0 +1,21 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}taille produit{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un taille Assossiée</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product_cut.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_product_cut_index') }}">Retoure à la liste</a>
+
+    <a href="{{ path('app_product_cut_edit', {'id': product_cut.id}) }}">Modifier</a>
+
+{% endblock %}

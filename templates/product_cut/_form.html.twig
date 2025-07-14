@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+            <div class="col-lg-6 justify-content">
+				<a href="{{ path('app_cut_new')}}">Ajouter une Taille</a>
+			</div>
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

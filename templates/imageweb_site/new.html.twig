@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New ImagewebSite{% endblock %}
+
+{% block body %}
+    <h1>Mise ajour page home</h1>
+
+    {{ include('imageweb_site/_form.html.twig') }}
+
+    <a href="{{ path('app_imageweb_site_index') }}">Retour à la liste</a>
+{% endblock %}

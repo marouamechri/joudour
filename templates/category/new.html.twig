@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New Category{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une categorie</h1>
+
+    {{ include('category/_form.html.twig') }}
+
+    <a href="{{ path('app_product_color_index') }}">Retour à la liste</a>
+{% endblock %}

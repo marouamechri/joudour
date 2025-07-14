@@ -1,0 +1,123 @@
+#container-navbar {
+    padding-left: 85%;
+}
+
+.megamenu {
+    position: static;
+}
+
+.megamenu .dropdown-menu {
+    background: none;
+    border: none;
+    width: 100%;
+}
+
+body {
+    min-height: 100vh;
+}
+
+code {
+    color: #745eb1;
+    background: #fff;
+    padding: 0.1rem 0.2rem;
+    border-radius: 0.2rem;
+}
+
+.text-uppercase {
+    letter-spacing: 0.08em;
+}
+
+#caintenermegamneu {
+    width: 400px;
+}
+
+#second_nav {
+    margin-right: 20%;
+    margin-left: 20%;
+    border-top: 0.1px solid grey;
+    border-bottom: 0.1px solid grey;
+    margin-top: 2em;
+    display: flex;
+    justify-content: end;
+}
+
+
+/* footer */
+
+.container-fluid-footer {
+    width: 100%;
+}
+
+.white {
+    color: #fff;
+}
+
+
+/* menu Administration */
+
+.sidebar {
+    height: 100%;
+    width: 17%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 16px;
+}
+
+
+/* Style sidebar links */
+
+.sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+}
+
+
+/* Style links on mouse-over */
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+
+/* #main {
+    margin-left: 11.5em;
+    margin-right: 10px
+} */
+
+.user {
+    color: rgb(8, 64, 10);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 20;
+}
+
+
+/* #bloc_article {
+    display: block;
+} */
+
+#btnOption {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+/* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+    .sidebar a {
+        font-size: 18px;
+    }
+}

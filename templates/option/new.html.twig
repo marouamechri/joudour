@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New Option{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une option</h1>
+
+    {{ include('option/_form.html.twig') }}
+
+    <a href="{{ path('app_option_index') }}">Retour à la liste</a>
+{% endblock %}

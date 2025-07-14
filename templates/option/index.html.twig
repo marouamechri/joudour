@@ -1,0 +1,33 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Option index{% endblock %}
+
+{% block body %}
+    <h1>Option index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NameOption</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for option in options %}
+            <tr>
+                <td>{{ option.nameOption }}</td>
+                <td>
+                    <a href="{{ path('app_option_show', {'id': option.id}) }}">Consulter</a>
+                    <a href="{{ path('app_option_edit', {'id': option.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">liste vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_option_new') }}">Ajouter</a>
+{% endblock %}

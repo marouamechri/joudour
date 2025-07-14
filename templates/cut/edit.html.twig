@@ -1,0 +1,13 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %} Modifier taille{% endblock %}
+
+{% block body %}
+    <h1>Modifier le taille</h1>
+
+    {{ include('cut/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_cut_index') }}">Retour à la liste</a>
+
+    {{ include('cut/_delete_form.html.twig') }}
+{% endblock %}

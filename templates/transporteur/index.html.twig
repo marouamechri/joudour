@@ -1,0 +1,40 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Transporteur index{% endblock %}
+
+{% block body %}
+    <h1>Liste des transporteurs</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Transporteur</th>
+                <th>Description</th>
+                <th>coût</th>
+                <th>Crated_At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transporteur in transporteurs %}
+            <tr>
+                <td>{{ transporteur.id }}</td>
+                <td>{{ transporteur.nameTransport }}</td>
+                <td>{{ transporteur.description }}</td>
+                <td>{{ transporteur.pricesTransport }}</td>
+                <td>{{ transporteur.cratedAt ? transporteur.cratedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_transporteur_show', {'id': transporteur.id}) }}">Afficher</a>
+                    <a href="{{ path('app_transporteur_edit', {'id': transporteur.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">la liste est vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_transporteur_new') }}">Ajouter un transporteur</a>
+{% endblock %}

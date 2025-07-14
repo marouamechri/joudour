@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+		<link
+		rel="stylesheet" href="{{ asset('css/menuPrincipal.css')}}"/>
+		{# fonts #}
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link
+		href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&family=Updock&display=swap" rel="stylesheet">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+			<link rel="stylesheet" href="{{ asset('css/menuPrincipal.css')}}"/>
+			<link rel="stylesheet" href="{{ asset('css/home.css')}}"/>
+			<link rel="stylesheet" href="{{ asset('css/pageStyle.css')}}"/>
+		{% endblock %}
+
+
+	</head>
+	<body>
+		{# menu de recherch #}
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid" id="container-navbar">
+				<button class="navbar-toggler text-rigth" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</button>
+						<div class="dropdown-menu">
+							{% if app.user %}
+								{% if is_granted("ROLE_ADMIN") %}
+								<a class="dropdown-item" href="{{path('app_home_admin')}}">Administration</a>
+								{% else %}
+									<a class="dropdown-item" href="{{path('app_compte_user')}}">Mon compte</a>
+								{% endif %}
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{{path('app_logout')}}">Déconnection</a>
+							</div>
+						{% else %}
+							<a class="dropdown-item" href="{{path('app_login_home')}}">Connexion</a>
+						</div>
+						{% endif %}
+					</div>
+					<div class="ms-2">
+						<a class="nav-link" href="{{path('app_cart')}}">
+							<i class="fa-solid fa-cart-shopping white"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		{# div logo #}
+
+		<div class='logo text-center mb-2 mt-2'>
+			<a href="{{path('home')}}"><img src="{{ asset('img/logo.png')}}" width="300"/></a>
+		</div>
+		{# menu principal #}
+		<nav id='second_nav' class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
+			<a href="#" class="navbar-brand font-weight-bold d-block d-lg-none">JOUDOUR</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div id="navbarContent" class="collapse navbar-collapse">
+				<ul class="navbar-nav mx-auto">
+
+					<li class="nav-item dropdown megamenu">
+						<a id="megamneu" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle font-weight-bold text-uppercase">E-shop</a>
+						<div aria-labelledby="megamneu" class="dropdown-menu border-0 p-0 m-0">
+							<div class="container" id='caintenermegamneu'>
+								<div class="row bg-white rounded-0 m-0 shadow-sm">
+									<div class="col-lg-12 col-xl-12">
+										<div class="p-4">
+											<div class="row">
+												<div class="col-lg-6 mb-4">
+													<h6 class="font-weight-bold text-uppercase">Femme</h6>
+													<ul class="list-unstyled">
+														<li class="nav-item">
+															<a href="{{path('app_page_product',{'type':'Robe soiree', 'genre' :'Femme'})}}" class="nav-link text-small pb-0 ">Robe de soirée</a>
+														</li>
+														<li class="nav-item">
+															<a href="{{path('app_page_product',{'type':'Robe mariee' , 'genre' :'Femme'})}}" class="nav-link text-small pb-0 ">Robe de mariée</a>
+														</li>
+														<li class="nav-item">
+															<a href="{{path('app_page_product',{'type':'Bas', 'genre' :'Femme' })}}" class="nav-link text-small pb-0 ">bas</a>
+														</li>
+														<li class="nav-item">
+															<a href="{{path('app_page_product',{'type':'Hauts', 'genre' :'Femme' })}}" class="nav-link text-small pb-0 ">Hauts</a>
+														</li>
+														<li class="nav-item">
+															<a href="{{path('app_page_product',{'type':'Accessoires', 'genre' :'Femme' })}}" class="nav-link text-small pb-0 ">Accessoires</a>
+														</li>
+													</ul>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<h6 class="font-weight-bold text-uppercase">Homme</h6>
+													<ul class="list-unstyled">
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Ensembles</a>
+														</li>
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Bas</a>
+														</li>
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Haut</a>
+														</li>
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
+														</li>
+													</ul>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<h6 class="font-weight-bold text-uppercase">Enfant</h6>
+													<ul class="list-unstyled">
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Fille</a>
+														</li>
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Garçon</a>
+														</li>
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="nav-item dropdown megamenu">
+						<a id="megamneu" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle font-weight-bold text-uppercase">Location</a>
+						<div aria-labelledby="megamneu" class="dropdown-menu border-0 p-0 m-0">
+							<div class="container" id='caintenermegamneu'>
+								<div class="row bg-white rounded-0 m-0 shadow-sm">
+									<div class="col-lg-12 col-xl-12">
+										<div class="p-4">
+											<div class="row">
+												<div class="col-lg-6 mb-4">
+													<h6 class="font-weight-bold text-uppercase">Femme</h6>
+													<ul class="list-unstyled">
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0">Robe mariée</a>
+														</li>
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Robe Soirée</a>
+														</li>
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
+														</li>
+													</ul>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<h6 class="font-weight-bold text-uppercase">Homme</h6>
+													<ul class="list-unstyled">
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Ensembles</a>
+														</li>
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
+														</li>
+													</ul>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<h6 class="font-weight-bold text-uppercase">Enfant</h6>
+													<ul class="list-unstyled">
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Fille</a>
+														</li>
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Garçon</a>
+														</li>
+														<li class="nav-item">
+															<a href="" class="nav-link text-small pb-0 ">Accessoires</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a href="" class="nav-link font-weight-bold text-uppercase">À propos</a>
+					</li>
+					<li class="nav-item">
+						<a href={{path('app_contact')}} class="nav-link font-weight-bold text-uppercase">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+
+		{% block body %}{% endblock %}
+		<footer>
+			<div class="container-fluid-footer bg-dark">
+				<div class="row mt-5 mb-5 ">
+					<section id="sale-section  text-center" class="pt-5">
+						<h2 class='text-center h_session'>Joudoure</h2>
+						<div class="text-center">
+							<p class="ph2"><img src="https://promissa.fr/wp-content/themes/promissa/img/fleur_decouvrir.svg" class="fleur-l"></p>
+						</div>
+					</section>
+				</div>
+				<div class="row mt-5 mb-5 ">
+					<div class="col-lg-6 col-md-12 col-ms-12 text-center text-white">
+						<div class="mb-5">
+							<h2>Notre Catalogue</h2>
+							<ul class="list-group list-group-flush bg-dark">
+								<li class="list-group-item bg-dark text-white">
+									<a href="{{path('app_page_product',{'type':'Robe de mariee' , 'genre' :'Femme'})}}" class="text-decoration-none text-light">Robe de mariée</a>
+								</li>
+							</a>
+						</li>
+						<li class="list-group-item bg-dark text-white">
+							<a href={{path('app_page_product')}} class="text-decoration-none text-light">E-shop</a>
+						</li>
+						<li class="list-group-item bg-dark text-white">Location</li>
+					</ul>
+				</div>
+				<div>
+					<h2>À PROPOS DE NOUS</h2>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item bg-dark text-white">
+							<a href={{path('app_mention_legale')}} class="text-decoration-none text-light">Mentions Légales</a>
+						</li>
+						<li class="list-group-item bg-dark text-white">12 rue du faubourg
+							<br>
+							saint martin 75010 paris</li>
+						<li class="list-group-item bg-dark text-white">01.25.65.45.36</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-12 col-ms-12 text-center">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2627.07360639283!2d2.416745615047427!3d48.81865701145862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e672fcbc7efa2f%3A0x8ba7fc57019657ed!2s12%20Rue%20de%20Paris%2C%2094220%20Charenton-le-Pont!5e0!3m2!1sfr!2sfr!4v1653341290217!5m2!1sfr!2sfr" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			</div>
+
+			{# reseaux sociaux #}
+			<div class="container-fluide text-center">
+				<ul class="wrapper">
+					<li class="icon facebook">
+						<span class="tooltip">Facebook</span>
+						<span>
+							<i class="fab fa-facebook-f"></i>
+						</span>
+					</li>
+					<li class="icon twitter">
+						<span class="tooltip">Twitter</span>
+						<span>
+							<i class="fab fa-twitter"></i>
+						</span>
+					</li>
+					<li class="icon instagram">
+						<span class="tooltip">Instagram</span>
+						<span>
+							<i class="fab fa-instagram"></i>
+						</span>
+					</li>
+					<li class="icon youtube">
+						<span class="tooltip">Youtube</span>
+						<span>
+							<i class="fab fa-youtube"></i>
+						</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html></div></footer>{% block javascripts %}<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script><script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>{{ encore_entry_script_tags('app') }}<script type="text/javascript" src="{{ asset('js/images.js')}}"></script>{% endblock %}</html>

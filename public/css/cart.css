@@ -1,0 +1,10 @@
+.shopping-cart-item {
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
+.nav-cart {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}

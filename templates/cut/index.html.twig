@@ -1,0 +1,36 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Taille{% endblock %}
+
+{% block body %}
+    <h1>Liste des tailles</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CutValue</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cut in cuts %}
+            <tr>
+                <td>{{ cut.id }}</td>
+                <td>{{ cut.cutValue }}</td>
+                <td>
+                    <a href="{{ path('app_cut_edit', {'id': cut.id}) }}">Modifier</a>
+                    {{ include('cut/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Liste des tailles est vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div><a href="{{ path('app_cut_new') }}">Ajouter une taille</a></div>
+    <div><a href="{{ path('app_product_color_index') }}">Retoure à l'ajout d'un produit</a></div>
+{% endblock %}

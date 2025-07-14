@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New Cut{% endblock %}
+
+{% block body %}
+    <h1>Create new Cut</h1>
+
+    {{ include('cut/_form.html.twig') }}
+
+    <a href="{{ path('app_cut_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,216 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Joudour
+{% endblock %}
+{% block stylesheets %}
+	{{ encore_entry_link_tags('app') }}
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{ asset('css/home.css')}}"/>
+{% endblock %}
+{% block body %}
+
+	{% if imageweb %}
+		{% set fierstimageweb = imageweb|first %}
+		<section class="py-5 text-white">
+			<div class="container py-4">
+				<div class="row">
+					<div class="col-lg-12 mx-auto text-center">
+						<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner text-left">
+								<div class="carousel-item active">
+									<img class="d-block w-100" src="{{ asset('upload/images/website/' ~ fierstimageweb.poster)}}" alt="First slide">
+								</div>
+								<div class="slide__content carousel-caption d-none d-md-block">
+									<h5 class="slides__title">{{fierstimageweb.titrePoster}}</h5>
+									<a href={{path('app_page_product',{'collection' : 'new'} )}} class="slides__btn btn">{{fierstimageweb.posterTextBtn}}</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pt-5 pb-5">
+			<div
+				class="container">
+
+				<!-- LES COLLECTIONS -->
+				<div class="row">
+					<div class="col-6">
+						<h3 class="mb-3">La sélection du moment
+						</h3>
+					</div>
+					<div class="col-6 text-right">
+						<a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+							<i class="fa fa-arrow-left"></i>
+						</a>
+						<a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+							<i class="fa fa-arrow-right"></i>
+						</a>
+					</div>
+					<div class="col-12">
+						<div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+
+							<div class="carousel-inner">
+								<div class="carousel-item carousel-dim active">
+									<div class="row">
+										{% for collection in listeNewCollection_1 %}
+											{% set productColor = collection.productColors|first %}
+
+											<div class="col-md-4 mb-3 col-product">
+												<div class="card">
+													<img class="img-carousel" src="{{ asset('upload/images/product/' ~ collection.firstImage)}}">
+													<div class="card-body">
+														<a href="{{ path('app_show_product', {'id': collection.id, 'productColor': productColor.id})}}" title="{{ collection.nameProduct }}" class="item-link">
+
+															<h4 class="card-title text-center">{{collection.nameProduct}}</h4>
+														</a>
+														<p class="card-text text-center">
+															Prix :
+															<strong class="text-danger">{{collection.amountHTVA+((collection.amountHTVA)*0.2)| number_format(0, ',' , ' ') }}€</strong>
+														</p>
+													</div>
+
+												</div>
+											</div>
+										{% endfor %}
+									</div>
+								</div>
+								<div class="carousel-item carousel-dim">
+									<div class="row">
+										{% for collection in listeNewCollection_2 %}
+											{% set productColor = collection.productColors|first %}
+
+											<div class="col-md-4 mb-3 col-product">
+												<div class="card">
+													<img class=" img-carousel" src="{{ asset('upload/images/product/' ~ collection.firstImage)}}">
+													<div class="card-body">
+														<a href="{{ path('app_show_product', {'id': collection.id, 'productColor': productColor.id})}}" title="{{ collection.nameProduct }}" class="item-link">
+
+															<h4 class="card-title text-center">{{collection.nameProduct}}</h4>
+														</a>
+														<p class="card-text text-center">
+															Prix :
+															<strong class="text-danger">{{collection.amountHTVA+((collection.amountHTVA)*0.2)| number_format(0, ',' , ' ') }}€</strong>
+														</p>
+
+													</div>
+
+												</div>
+											</div>
+										{% endfor %}
+									</div>
+								</div>
+								<div class="carousel-item carousel-dim">
+									<div class="row">
+										{% for collection in listeNewCollection_3 %}
+											{% set productColor = collection.productColors|first %}
+
+											<div class="col-md-4 mb-3 ">
+												<div class="card col-product">
+													<img class="img-carousel" src="{{ asset('upload/images/product/' ~ collection.firstImage)}}">
+													<div class="card-body">
+														<a href="{{ path('app_show_product', {'id': collection.id, 'productColor': productColor.id})}}" title="{{ collection.nameProduct }}" class="item-link">
+
+															<h4 class="card-title text-center">{{collection.nameProduct}}</h4>
+														</a>
+														<p class="card-text text-center">
+															Prix :
+															<strong class="text-danger">{{collection.amountHTVA+((collection.amountHTVA)*0.2)| number_format(0, ',' , ' ') }}€</strong>
+														</p>
+
+													</div>
+
+												</div>
+											</div>
+										{% endfor %}
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="row mb-5 mt-5">
+							<section id="sale-section  text-center" class="pt-5">
+								<h2 class='text-center h_session'>Les collections</h2>
+								<div class="text-center">
+									<p class="ph2"><img src="https://promissa.fr/wp-content/themes/promissa/img/fleur_decouvrir.svg" class="fleur-l"></p>
+								</div>
+							</section>
+						</div>
+						<div
+							class="vrapper-section mt-5 row">
+							{# {{asset('uploads/images/' ~ post.image)}} #}
+							<div private $robe1; class='col-lg-4 col-md-12 div-img1' style="background-image: url('{{ asset('upload/images/website/' ~ fierstimageweb.robe1)}}')"></div>
+							<div class='col-lg-3 col-md-12 div-img2' style="background-image: url('{{ asset('upload/images/website/' ~ fierstimageweb.robe2)}}')"></div>
+							<div class='col-lg-4 col-md-12 div-img3' style="background-image: url('{{ asset('upload/images/website/' ~ fierstimageweb.robe3)}}')"></div>
+						</div>
+						<div class='contenaire-section'>
+							<h2 class='text-center h_session_s'>Robe de mariée</h2>
+							<div class="text-center">
+								<p class="ph2_s"><img src="https://promissa.fr/wp-content/themes/promissa/img/fleur_robe_mariee_w.svg" class="fleur-l"></p>
+								<a class="btn btn-lg btn-light" href={{path('app_page_product',{'type':'Robe de mariee' , 'genre' :'Femme'} )}}>Voir les collections</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{# session vente #}
+				<div class="text-center mb-5 mt-5">
+					<p class="ph2"><img src="https://promissa.fr/wp-content/themes/promissa/img/fleur_decouvrir.svg" class="fleur-l"></p>
+				</div>
+				<div class="row mt-5 mb-5">
+					<div class="col-12">
+						<div class="vrapper-section mt-5 row">
+
+							<div class='col-lg-4 col-md-12 div-img1' style="background-image: url('{{ asset('upload/images/website/' ~ fierstimageweb.imgShop1)}}')"></div>
+							<div class='col-lg-3 col-md-12 div-img2' style="background-image: url('{{ asset('upload/images/website/' ~ fierstimageweb.imgShop2)}}')"></div>
+							<div class='col-lg-4 col-md-12 div-img3' style="background-image: url('{{ asset('upload/images/website/' ~ fierstimageweb.imgShop3)}}')"></div>
+						</div>
+						<div class='contenaire-section-r'>
+							<h2 class='text-center h_session_s'>Achat</h2>
+							<div class="text-center">
+								<p class="ph2_s"><img src="https://promissa.fr/wp-content/themes/promissa/img/fleur_robe_mariee_w.svg" class="fleur-l"></p>
+								<a class="btn btn-lg btn-light" href={{path('app_page_product')}}>Voir les offrets</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{# section location #}
+				<div class="text-center mb-5 mt-5">
+					<p class="ph2"><img src="https://promissa.fr/wp-content/themes/promissa/img/fleur_decouvrir.svg" class="fleur-l"></p>
+				</div>
+				<div class="row mt-5 mb-5">
+					<div class="col-12">
+						<div
+							class="vrapper-section mt-5 row">
+							{# {{asset('uploads/images/' ~ post.image)}} #}
+							<div class='col-lg-4  div-img1' style="background-image: url('{{ asset('upload/images/website/' ~ fierstimageweb.imgloca1)}}')"></div>
+							<div class='col-lg-3 div-img2' style="background-image: url('{{ asset('upload/images/website/' ~ fierstimageweb.imgloca2)}}')"></div>
+							<div class='col-lg-4  div-img3' style="background-image: url('{{ asset('upload/images/website/' ~ fierstimageweb.imgloca3)}}')"></div>
+						</div>
+						<div class='contenaire-section'>
+							<h2 class='text-center h_session_s'>Location</h2>
+							<div class="text-center">
+								<p class="ph2_s"><img src="https://promissa.fr/wp-content/themes/promissa/img/fleur_robe_mariee_w.svg" class="fleur-l"></p>
+								<a class="btn btn-lg btn-light" href="#">Voir les Locations</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Carousel wrapper -->
+	{% endif %}
+{% endblock %}
+{% block javascripts %}
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	{{ encore_entry_script_tags('app') }}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}modifier votre adresse{% endblock %}
+
+{% block body %}
+    <h1>Modifier votre adresse</h1>
+
+    {{ include('adresse/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+{% endblock %}
