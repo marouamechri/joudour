@@ -1,3 +1,7 @@
+
+markdown
+Copier
+Modifier
 # 🛍️ Joudour – Boutique en ligne
 
 **Joudour** est une boutique en ligne développée avec **Symfony 6** par *Mechri Maroua*. Ce projet met en œuvre une architecture moderne basée sur **Docker**, **Webpack Encore**, **CKEditor**, **Stripe**, et une base de données relationnelle via **Doctrine ORM**.
@@ -36,23 +40,25 @@
 ```bash
 git clone https://github.com/marouamechri/joudour.git
 cd joudour
-
-### 2. Configurer l’environnement
+2. Configurer l’environnement
 Créer un fichier .env.local avec les paramètres personnalisés :
 
-```bash
+ini
+Copier
+Modifier
 # Exemple de variables (à adapter)
 DATABASE_URL="mysql://root:root@db:3306/joudour?serverVersion=8.0"
 STRIPE_SECRET_KEY=sk_test_xxxxxxx
 MAILER_DSN=smtp://mailhog:1025
-
-### 3. Démarrer Docker
-```bash
+3. Démarrer Docker
+bash
+Copier
+Modifier
 docker-compose up -d --build
-
-### 4. Installer les dépendances PHP et JS
-
-```bash
+4. Installer les dépendances PHP et JS
+bash
+Copier
+Modifier
 docker exec -it php bash
 composer install
 exit
@@ -75,8 +81,8 @@ Modifier
 php bin/console doctrine:database:import sql/joudour.sql
 🔐 Identifiants de test
 Rôle	Email	Mot de passe
-Administrateur	admin@gmail.com	pw : adminadmin
-Utilisateur	user@gmail.com	     pw : useruser
+Administrateur	admin@gmail.com	adminadmin
+Utilisateur	user@gmail.com	useruser
 
 📦 Structure du projet
 bash
@@ -96,7 +102,7 @@ joudour/
 👩‍💻 Auteur
 Développé par Mechri Maroua, développeuse full-stack passionnée par la création d'applications modernes et utiles.
 
-📧 Contact : marwa.mechri@gmil.com
+📧 Contact : marouamechri@gmail.com
 🔗 GitHub : @marouamechri
 
 ✅ À faire
