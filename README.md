@@ -1,4 +1,4 @@
-markdown
+
 # 🛍️ Joudour – Boutique en ligne Symfony 6
 
 **Joudour** est une boutique en ligne moderne développée avec **Symfony 6** par **Mechri Maroua**.  
