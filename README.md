@@ -46,7 +46,7 @@ cp .env .env.local  # Puis éditer avec vos paramètres
 ### 2. Variables d'environnement (.env.local)
 ini
 DATABASE_URL="mysql://root:root@db:3306/joudour?serverVersion=8.0"
-STRIPE_SECRET_KEY="votre_clé_test"
+STRIPE_SECRET_KEY="_key_ stripe"
 MAILER_DSN="smtp://mailhog:1025"
 ### 3. Lancement des containers
 ```bash
@@ -68,8 +68,8 @@ php bin/console doctrine:fixtures:load  # Si vous avez des fixtures
 ## 🔐 Accès de test
 
 Rôle	Email	Mot de passe
-Administrateur	admin@gmail.com	adminadmin
-Client	user@gmail.com	useruser
+Administrateur:	admin@gmail.com	   pw: adminadmin
+Client:	user@gmail.com	           pw: useruser
 
 ## 📂 Structure du projet
 
@@ -90,9 +90,9 @@ joudour/
 ##👩‍💻 Auteur
 
 Mechri Maroua
-Développeuse Full-Stack Symfony/JavaScript
-📧 marouamechri@gmail.com
-🔗 GitHub (@marouamechri)
+Développeuse Full-Stack
+📧 marwa.mechri@gmail.com
+
 
 ##📌 Roadmap
 
